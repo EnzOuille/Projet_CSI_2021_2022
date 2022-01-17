@@ -17,8 +17,8 @@
         </thead>
         <tbody>
         <tr th:each="user: ${users}">
-            <td th:text="${user.abn_nom}"/>
-            <td th:text="${user.abn_prenom}"/>
+            <td th:text="${user.adm_login}"/>
+            <td th:text="${user.adm_mdp}"/>
         </tr>
         </tbody>
     </table>
