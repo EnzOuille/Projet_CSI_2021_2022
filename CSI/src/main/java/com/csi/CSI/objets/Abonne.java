@@ -3,12 +3,13 @@ package com.csi.CSI.objets;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
-@Entity
-@Table(name="abonnee")
 @Data
-public class Abonnee {
+@Entity
+@Table(name="abonne")
+public class Abonne implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,11 +39,11 @@ public class Abonnee {
     @Column
     private boolean abn_conf;
 
-    public Abonnee(){
+    public Abonne(){
 
     }
 
-    public Abonnee(String nom, String prenom, String email, String pseudo, Date date, int news, int news_valid, boolean conf){
+    public Abonne(String nom, String prenom, String email, String pseudo, Date date, int news, int news_valid, boolean conf){
         this.abn_nom = nom;
         this.abn_prenom = prenom;
         this.abn_email = email;
