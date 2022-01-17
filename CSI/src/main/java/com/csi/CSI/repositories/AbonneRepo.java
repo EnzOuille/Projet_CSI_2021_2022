@@ -1,10 +1,9 @@
 package com.csi.CSI.repositories;
 
 import com.csi.CSI.objets.Abonne;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.CrudRepository;
 
-public interface AbonneRepo extends JpaRepository<Abonne, String>, JpaSpecificationExecutor<Abonne> {
+public interface AbonneRepo extends CrudRepository<Abonne, String> {
 
 }
 

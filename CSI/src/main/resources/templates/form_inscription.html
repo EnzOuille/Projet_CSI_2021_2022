@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="#">
     <fieldset>
 
         <!-- Form Name -->
@@ -44,6 +44,15 @@
             <div class="col-md-4">
                 <input id="email" name="email" type="text" placeholder="dupont.jacques@outlook.com" class="form-control input-md" required="">
 
+            </div>
+        </div>
+
+        <!-- Button (Double) -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="submit"></label>
+            <div class="col-md-8">
+                <button id="submit" name="submit" class="btn btn-success">S'inscrire</button>
+                <button id="cancel" name="cancel" class="btn btn-danger">Annuler</button>
             </div>
         </div>
 
