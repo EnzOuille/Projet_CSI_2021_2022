@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d352450f-abf7-4a9b-9cb7-5fde829066fe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/CSI/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/CSI/src/main/resources/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/controller/HomeController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +16,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -84,7 +85,7 @@
       <updated>1642422134552</updated>
       <workItem from="1642422135946" duration="7368000" />
       <workItem from="1642508677166" duration="61000" />
-      <workItem from="1642508743623" duration="878000" />
+      <workItem from="1642508743623" duration="6734000" />
     </task>
     <servers />
   </component>

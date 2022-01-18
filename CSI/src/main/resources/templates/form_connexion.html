@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- See configuration in WebMvConfig.java -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+</head>
+<body>
+<form class="form-horizontal" method="post" action="#">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Connexion</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="pseudo">Saisir pseudo</label>
+            <div class="col-md-4">
+                <input id="pseudo" name="pseudo" type="text" placeholder="XxDupontxX" class="form-control input-md" required="">
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="password">Saisir mot de passe</label>
+            <div class="col-md-4">
+                <input id="password" name="password" type="password" class="form-control input-md" required="">
+            </div>
+        </div>
+
+        <!-- Button (Double) -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="submit"></label>
+            <div class="col-md-8">
+                <button id="submit" name="submit" class="btn btn-success">Se connecter</button>
+                <button id="cancel" name="cancel" class="btn btn-danger">Annuler</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+
+</body>
+</html>
