@@ -2,6 +2,7 @@ package com.csi.CSI.controller;
 
 import com.csi.CSI.objets.Domaine;
 import com.csi.CSI.objets.News;
+import com.csi.CSI.objets.Abonne;
 import com.csi.CSI.repositories.AbonneRepo;
 import com.csi.CSI.repositories.DomaineRepo;
 import com.csi.CSI.repositories.NewsRepo;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -28,9 +30,20 @@ public class HomeController {
     private DomaineRepo domRepo;
 
     @GetMapping("/")
-    public String new_messages(Model model, HttpServletRequest request) {
-        model.addAttribute("users", abnRepo.findAll());
-        return "home";
+    public String getHome(Model model, HttpServletRequest request, HttpSession session) {
+        try {
+            String id = session.getAttribute("abn_id").toString();
+                Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(id));
+                if (abonne.isIs_admin()) {
+                    return "home_admin";
+                } else if (abonne.isIs_confiance()) {
+                    return "home_abonne_conf";
+                } else {
+                    return "home_abonne";
+                }
+        } catch (NullPointerException e) {
+            return "home_internaute";
+        }
     }
 
     @GetMapping("/categories")

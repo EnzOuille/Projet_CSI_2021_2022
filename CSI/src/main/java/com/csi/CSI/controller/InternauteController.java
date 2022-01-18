@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class InternauteController {
@@ -23,7 +24,7 @@ public class InternauteController {
     }
 
     @PostMapping("/inscription")
-    public String postInscription(Model model, HttpServletRequest request) {
+    public RedirectView postInscription(Model model, HttpServletRequest request, HttpSession session) {
         String nom = request.getParameter("nom");
         String prenom = request.getParameter("prenom");
         String pseudo = request.getParameter("pseudo");
@@ -31,8 +32,10 @@ public class InternauteController {
         String mdp = request.getParameter("password");
         Abonne abonne = new Abonne(nom, prenom, email, pseudo, mdp);
         abonneRepo.save(abonne);
-        model.addAttribute("user",abonne);
-        return "result_inscription";
+        session.setAttribute("abn_id",abonne.getAbn_id());
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://localhost:9001/");
+        return redirectView;
     }
 
     @GetMapping("/connexion")
@@ -41,13 +44,13 @@ public class InternauteController {
     }
 
     @PostMapping("/connexion")
-    public RedirectView postConnexion(Model model, HttpServletRequest request) {
+    public RedirectView postConnexion(Model model, HttpServletRequest request, HttpSession session) {
         String pseudo = request.getParameter("pseudo");
         String password = request.getParameter("password");
         Abonne abonne = abonneRepo.getAbonneByLoginMdp(pseudo,password);
-        String url = "http://localhost:9001/?id="+abonne.getAbn_id();
+        session.setAttribute("abn_id",abonne.getAbn_id());
         RedirectView redirectView = new RedirectView();
-        redirectView.setUrl(url);
+        redirectView.setUrl("http://localhost:9001/");
         return redirectView;
     }
 }
