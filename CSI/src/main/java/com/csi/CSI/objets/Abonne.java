@@ -53,7 +53,7 @@ public class Abonne implements Serializable {
 
     }
 
-    public Abonne(long abn_id, String nom, String prenom, String email, String pseudo) {
+    public Abonne(String nom, String prenom, String email, String pseudo, String abn_mdp) {
         java.util.Date utilDate = new java.util.Date();
         this.abn_nom = nom;
         this.abn_prenom = prenom;
@@ -63,7 +63,8 @@ public class Abonne implements Serializable {
         this.abn_nb_news = 0;
         this.abn_nb_news_valid = 0;
         this.abn_conf = false;
-        this.abn_id = abn_id;
+        this.abn_mdp=abn_mdp;
+//        this.abn_id = abn_id;
     }
 
     public long getAbn_id() {

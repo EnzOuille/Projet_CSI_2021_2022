@@ -1,9 +1,7 @@
 package com.csi.CSI.controller;
 
 import com.csi.CSI.objets.Abonne;
-import com.csi.CSI.objets.Evaluateur;
 import com.csi.CSI.repositories.AbonneRepo;
-import com.csi.CSI.repositories.EvaluateurRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +17,6 @@ public class InternauteController {
     @Autowired
     private AbonneRepo abonneRepo;
 
-    @Autowired
-    private EvaluateurRepo evaluateurRepo;
-
     @GetMapping("/inscription")
     public String getInscription(Model model, HttpServletRequest request) {
         return "form_inscription";
@@ -34,9 +29,7 @@ public class InternauteController {
         String pseudo = request.getParameter("pseudo");
         String email = request.getParameter("email");
         String mdp = request.getParameter("password");
-        Evaluateur evaluateur = new Evaluateur();
-        evaluateurRepo.save(evaluateur);
-        Abonne abonne = new Abonne(evaluateur.getEvl_id(),nom, prenom, email, pseudo, mdp);
+        Abonne abonne = new Abonne(nom, prenom, email, pseudo, mdp);
         abonneRepo.save(abonne);
         model.addAttribute("user",abonne);
         return "result_inscription";
