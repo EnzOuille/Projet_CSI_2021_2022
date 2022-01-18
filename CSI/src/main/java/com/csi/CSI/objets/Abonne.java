@@ -59,4 +59,75 @@ public class Abonne implements Serializable {
         this.abn_id=abn_id;
     }
 
+    public long getAbn_id() {
+        return abn_id;
+    }
+
+    public void setAbn_id(long abn_id) {
+        this.abn_id = abn_id;
+    }
+
+    public String getAbn_nom() {
+        return abn_nom;
+    }
+
+    public void setAbn_nom(String abn_nom) {
+        this.abn_nom = abn_nom;
+    }
+
+    public String getAbn_prenom() {
+        return abn_prenom;
+    }
+
+    public void setAbn_prenom(String abn_prenom) {
+        this.abn_prenom = abn_prenom;
+    }
+
+    public String getAbn_email() {
+        return abn_email;
+    }
+
+    public void setAbn_email(String abn_email) {
+        this.abn_email = abn_email;
+    }
+
+    public String getAbn_pseudo() {
+        return abn_pseudo;
+    }
+
+    public void setAbn_pseudo(String abn_pseudo) {
+        this.abn_pseudo = abn_pseudo;
+    }
+
+    public Date getAbn_date_inscrit() {
+        return abn_date_inscrit;
+    }
+
+    public void setAbn_date_inscrit(Date abn_date_inscrit) {
+        this.abn_date_inscrit = abn_date_inscrit;
+    }
+
+    public int getAbn_nb_news() {
+        return abn_nb_news;
+    }
+
+    public void setAbn_nb_news(int abn_nb_news) {
+        this.abn_nb_news = abn_nb_news;
+    }
+
+    public int getAbn_nb_news_valid() {
+        return abn_nb_news_valid;
+    }
+
+    public void setAbn_nb_news_valid(int abn_nb_news_valid) {
+        this.abn_nb_news_valid = abn_nb_news_valid;
+    }
+
+    public boolean isAbn_conf() {
+        return abn_conf;
+    }
+
+    public void setAbn_conf(boolean abn_conf) {
+        this.abn_conf = abn_conf;
+    }
 }
