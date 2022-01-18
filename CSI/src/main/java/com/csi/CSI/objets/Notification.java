@@ -19,4 +19,28 @@ public class Notification {
 
     @Column
     private String ntf_contenu;
+
+    public long getNtf_id() {
+        return ntf_id;
+    }
+
+    public void setNtf_id(long ntf_id) {
+        this.ntf_id = ntf_id;
+    }
+
+    public Abonne getNtf_abn_id() {
+        return ntf_abn_id;
+    }
+
+    public void setNtf_abn_id(Abonne ntf_abn_id) {
+        this.ntf_abn_id = ntf_abn_id;
+    }
+
+    public String getNtf_contenu() {
+        return ntf_contenu;
+    }
+
+    public void setNtf_contenu(String ntf_contenu) {
+        this.ntf_contenu = ntf_contenu;
+    }
 }

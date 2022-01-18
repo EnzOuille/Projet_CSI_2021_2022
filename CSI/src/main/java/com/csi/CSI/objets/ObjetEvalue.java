@@ -13,4 +13,12 @@ public class ObjetEvalue {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long obe_id;
+
+    public long getObe_id() {
+        return obe_id;
+    }
+
+    public void setObe_id(long obe_id) {
+        this.obe_id = obe_id;
+    }
 }
