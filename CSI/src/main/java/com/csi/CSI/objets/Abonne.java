@@ -42,11 +42,14 @@ public class Abonne implements Serializable {
     @Column
     private boolean abn_conf;
 
+    @Column
+    private String abn_mdp;
+
     public Abonne(){
 
     }
 
-    public Abonne(long abn_id, String nom, String prenom, String email, String pseudo){
+    public Abonne(long abn_id, String nom, String prenom, String email, String pseudo, String mdp){
         java.util.Date utilDate = new java.util.Date();
         this.abn_nom = nom;
         this.abn_prenom = prenom;
@@ -57,6 +60,7 @@ public class Abonne implements Serializable {
         this.abn_nb_news_valid = 0;
         this.abn_conf = false;
         this.abn_id=abn_id;
+        this.abn_mdp=mdp;
     }
 
 }
