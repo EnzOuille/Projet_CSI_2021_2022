@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name="domaine")
+@Table(name = "domaine")
 @Data
 public class Domaine {
 

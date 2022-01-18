@@ -14,8 +14,8 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long ntf_id;
 
-    @OneToOne
-    private Abonne ntf_abn_id;
+    @Column
+    private long ntf_abn_id;
 
     @Column
     private String ntf_contenu;
@@ -28,11 +28,11 @@ public class Notification {
         this.ntf_id = ntf_id;
     }
 
-    public Abonne getNtf_abn_id() {
+    public long getNtf_abn_id() {
         return ntf_abn_id;
     }
 
-    public void setNtf_abn_id(Abonne ntf_abn_id) {
+    public void setNtf_abn_id(long ntf_abn_id) {
         this.ntf_abn_id = ntf_abn_id;
     }
 

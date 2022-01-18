@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
-@Table(name="news")
+@Table(name = "news")
 @Data
 public class News implements Serializable {
 
@@ -28,10 +28,20 @@ public class News implements Serializable {
     private long new_abn_id;
 
     @Column
-    private long new_mtc_id;
+    private long new_mtc_1;
+
+    @Column
+    private long new_mtc_2;
+
+    @Column
+    private long new_mtc_3;
 
     @Column
     private long new_dom_id;
+
+    public News() {
+
+    }
 
     public long getNew_id() {
         return new_id;
@@ -73,12 +83,28 @@ public class News implements Serializable {
         this.new_abn_id = new_abn_id;
     }
 
-    public long getNew_mtc_id() {
-        return new_mtc_id;
+    public long getNew_mtc_1() {
+        return new_mtc_1;
     }
 
-    public void setNew_mtc_id(long new_mtc_id) {
-        this.new_mtc_id = new_mtc_id;
+    public void setNew_mtc_1(long new_mtc_1) {
+        this.new_mtc_1 = new_mtc_1;
+    }
+
+    public long getNew_mtc_2() {
+        return new_mtc_2;
+    }
+
+    public void setNew_mtc_2(long new_mtc_2) {
+        this.new_mtc_2 = new_mtc_2;
+    }
+
+    public long getNew_mtc_3() {
+        return new_mtc_3;
+    }
+
+    public void setNew_mtc_3(long new_mtc_3) {
+        this.new_mtc_3 = new_mtc_3;
     }
 
     public long getNew_dom_id() {
@@ -87,9 +113,5 @@ public class News implements Serializable {
 
     public void setNew_dom_id(long new_dom_id) {
         this.new_dom_id = new_dom_id;
-    }
-
-    public News(){
-
     }
 }

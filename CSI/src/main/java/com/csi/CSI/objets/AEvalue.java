@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name="aevalue")
+@Table(name = "aevalue")
 @Data
 public class AEvalue {
 
@@ -14,8 +14,11 @@ public class AEvalue {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long eval_id;
 
-    @OneToOne
-    private Evaluateur evaluateur_id;
+    @Column
+    private long evaluateur_id;
+
+    @Column
+    private long eval_objet;
 
     @Column
     private String eval_justification;
@@ -31,12 +34,20 @@ public class AEvalue {
         this.eval_id = eval_id;
     }
 
-    public Evaluateur getEvaluateur_id() {
+    public long getEvaluateur_id() {
         return evaluateur_id;
     }
 
-    public void setEvaluateur_id(Evaluateur evaluateur_id) {
+    public void setEvaluateur_id(long evaluateur_id) {
         this.evaluateur_id = evaluateur_id;
+    }
+
+    public long getEval_objet() {
+        return eval_objet;
+    }
+
+    public void setEval_objet(long eval_objet) {
+        this.eval_objet = eval_objet;
     }
 
     public String getEval_justification() {

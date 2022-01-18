@@ -1,7 +1,5 @@
 package com.csi.CSI.objets;
 
-import com.csi.CSI.repositories.AbonneRepo;
-import com.csi.CSI.repositories.EvaluateurRepo;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,11 +9,11 @@ import java.sql.Date;
 
 @Data
 @Entity
-@Table(name="abonne")
+@Table(name = "abonne")
 public class Abonne implements Serializable {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long abn_id;
 
     @Column
@@ -31,6 +29,15 @@ public class Abonne implements Serializable {
     private String abn_pseudo;
 
     @Column
+    private String abn_mdp;
+
+    @Column
+    private boolean is_admin;
+
+    @Column
+    private boolean is_confiance;
+
+    @Column
     private java.sql.Date abn_date_inscrit;
 
     @Column
@@ -42,11 +49,11 @@ public class Abonne implements Serializable {
     @Column
     private boolean abn_conf;
 
-    public Abonne(){
+    public Abonne() {
 
     }
 
-    public Abonne(long abn_id, String nom, String prenom, String email, String pseudo){
+    public Abonne(long abn_id, String nom, String prenom, String email, String pseudo) {
         java.util.Date utilDate = new java.util.Date();
         this.abn_nom = nom;
         this.abn_prenom = prenom;
@@ -56,7 +63,7 @@ public class Abonne implements Serializable {
         this.abn_nb_news = 0;
         this.abn_nb_news_valid = 0;
         this.abn_conf = false;
-        this.abn_id=abn_id;
+        this.abn_id = abn_id;
     }
 
     public long getAbn_id() {
@@ -97,6 +104,30 @@ public class Abonne implements Serializable {
 
     public void setAbn_pseudo(String abn_pseudo) {
         this.abn_pseudo = abn_pseudo;
+    }
+
+    public String getAbn_mdp() {
+        return abn_mdp;
+    }
+
+    public void setAbn_mdp(String abn_mdp) {
+        this.abn_mdp = abn_mdp;
+    }
+
+    public boolean isIs_admin() {
+        return is_admin;
+    }
+
+    public void setIs_admin(boolean is_admin) {
+        this.is_admin = is_admin;
+    }
+
+    public boolean isIs_confiance() {
+        return is_confiance;
+    }
+
+    public void setIs_confiance(boolean is_confiance) {
+        this.is_confiance = is_confiance;
     }
 
     public Date getAbn_date_inscrit() {
