@@ -1,11 +1,11 @@
 package com.csi.CSI.controller;
 
-import com.csi.CSI.repositories.AdministrateurRepo;
+import com.csi.CSI.repositories.AbonneRepo;
+import com.csi.CSI.repositories.NewsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,13 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 public class HomeController {
 
     @Autowired
-    private AdministrateurRepo adminRepo;
+    private NewsRepo newsRepo;
+
+    @Autowired
+    private AbonneRepo abnRepo;
 
     @GetMapping("/")
-    public String home(@RequestParam(name="id", required = false) Model model, HttpServletRequest request) {
-//        model.addAttribute("users", adminRepo.findAll());
-
+    public String new_messages(Model model, HttpServletRequest request) {
+        model.addAttribute("users", abnRepo.findAll());
         return "home";
     }
-
 }
