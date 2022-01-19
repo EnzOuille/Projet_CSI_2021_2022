@@ -13,7 +13,7 @@ import java.sql.Date;
 public class Abonne implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long abn_id;
 
     @Column
@@ -32,10 +32,10 @@ public class Abonne implements Serializable {
     private String abn_mdp;
 
     @Column
-    private boolean is_admin;
+    private boolean abn_admin;
 
     @Column
-    private boolean is_confiance;
+    private boolean abn_confiance;
 
     @Column
     private java.sql.Date abn_date_inscrit;
@@ -64,7 +64,6 @@ public class Abonne implements Serializable {
         this.abn_nb_news_valid = 0;
         this.abn_conf = false;
         this.abn_mdp=abn_mdp;
-//        this.abn_id = abn_id;
     }
 
     public long getAbn_id() {
@@ -115,20 +114,20 @@ public class Abonne implements Serializable {
         this.abn_mdp = abn_mdp;
     }
 
-    public boolean isIs_admin() {
-        return is_admin;
+    public boolean isAbn_admin() {
+        return abn_admin;
     }
 
-    public void setIs_admin(boolean is_admin) {
-        this.is_admin = is_admin;
+    public void setAbn_admin(boolean abn_admin) {
+        this.abn_admin = abn_admin;
     }
 
-    public boolean isIs_confiance() {
-        return is_confiance;
+    public boolean isAbn_confiance() {
+        return abn_confiance;
     }
 
-    public void setIs_confiance(boolean is_confiance) {
-        this.is_confiance = is_confiance;
+    public void setAbn_confiance(boolean abn_confiance) {
+        this.abn_confiance = abn_confiance;
     }
 
     public Date getAbn_date_inscrit() {
