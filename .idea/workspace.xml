@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d352450f-abf7-4a9b-9cb7-5fde829066fe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/controller/InternauteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/controller/InternauteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/objets/Abonne.java" beforeDir="false" afterPath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/objets/Abonne.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/repositories/AbonneRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/repositories/AbonneRepo.java" afterDir="false" />
-    </list>
+    <list default="true" id="d352450f-abf7-4a9b-9cb7-5fde829066fe" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,8 +13,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -89,7 +84,7 @@
       <updated>1642422134552</updated>
       <workItem from="1642422135946" duration="7368000" />
       <workItem from="1642508677166" duration="61000" />
-      <workItem from="1642508743623" duration="8975000" />
+      <workItem from="1642508743623" duration="12311000" />
     </task>
     <servers />
   </component>

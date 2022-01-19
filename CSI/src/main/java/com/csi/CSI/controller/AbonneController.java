@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Random;
 
+import org.springframework.web.servlet.view.RedirectView;
+
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class AbonneController {
 
@@ -78,5 +82,13 @@ public class AbonneController {
             List<Abonne> admins = abonneRepo.getAllAdmin();
             return admins.get(rand.nextInt(admins.size())).getAbn_id();
         }
+    }
+
+    @GetMapping("/deconnexion")
+    public RedirectView getDeconnexion(Model model, HttpServletRequest request, HttpSession session) {
+        session.setAttribute("abn_id", null);
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://localhost:9001/");
+        return redirectView;
     }
 }
