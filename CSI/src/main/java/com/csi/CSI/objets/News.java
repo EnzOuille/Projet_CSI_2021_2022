@@ -12,7 +12,6 @@ import java.sql.Date;
 public class News implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long new_id;
 
     @Column
@@ -113,5 +112,18 @@ public class News implements Serializable {
 
     public void setNew_dom_id(long new_dom_id) {
         this.new_dom_id = new_dom_id;
+    }
+
+    public News(long new_id, long abn_id, String texte, long domaine, long motCle, long motCle2, long motCle3) {
+        java.util.Date utilDate = new java.util.Date();
+        this.new_texte = texte;
+        this.new_date_creation = new Date(utilDate.getTime());
+        this.new_etat = "non_validee";
+        this.new_abn_id = abn_id;
+        this.new_mtc_1 = motCle;
+        this.new_mtc_2 = motCle2;
+        this.new_mtc_3 = motCle3;
+        this.new_dom_id = domaine;
+        this.new_id = new_id;
     }
 }

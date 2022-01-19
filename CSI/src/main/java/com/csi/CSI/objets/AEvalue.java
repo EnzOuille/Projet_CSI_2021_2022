@@ -65,4 +65,12 @@ public class AEvalue {
     public void setEval_date_justification(Date eval_date_justification) {
         this.eval_date_justification = eval_date_justification;
     }
+
+    public AEvalue(long evaluateur_id, long new_id) {
+        this.evaluateur_id = evaluateur_id;
+        this.eval_objet = new_id;
+    }
+
+    public AEvalue() {
+    }
 }
