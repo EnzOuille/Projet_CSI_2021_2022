@@ -32,4 +32,11 @@ public class MotCle {
     public void setMtc_nom(String mtc_nom) {
         this.mtc_nom = mtc_nom;
     }
+
+    public MotCle(String texte) {
+        this.mtc_nom = texte;
+    }
+
+    public MotCle() {
+    }
 }
