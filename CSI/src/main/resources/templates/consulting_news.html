@@ -7,5 +7,21 @@
 </head>
 <body>
 <h1 class="text-center">Menu des news</h1>
+<div class="col-6" th:if="${type} == 'internaute'">
+    <th:block th:each="entry, stat : ${last3}">
+        <h3 th:text="${entry.key}"></h3>
+        <div class="card-deck">
+            <th:block th:each="new : ${entry.value}">
+                <h3 th:text="${new.new_id}"></h3>
+<!--                <div class="card">-->
+<!--                    <div class="card-body">-->
+<!--                        <h5 class="card-title" th:text="${new.new_id}"></h5>-->
+<!--                        <p class="card-text" th:text="${new.new_id}"></p>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </th:block>
+        </div>
+    </th:block>
+</div>
 </body>
 </html>
