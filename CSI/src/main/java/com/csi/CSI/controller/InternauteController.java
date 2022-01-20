@@ -47,10 +47,14 @@ public class InternauteController {
     public RedirectView postConnexion(Model model, HttpServletRequest request, HttpSession session) {
         String pseudo = request.getParameter("pseudo");
         String password = request.getParameter("password");
-        Abonne abonne = abonneRepo.getAbonneByLoginMdp(pseudo,password);
-        session.setAttribute("abn_id",abonne.getAbn_id());
         RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("http://localhost:9001/");
+        try {
+            Abonne abonne = abonneRepo.getAbonneByLoginMdp(pseudo, password);
+            session.setAttribute("abn_id", abonne.getAbn_id());
+            redirectView.setUrl("http://localhost:9001/");
+        } catch (NullPointerException e) {
+            redirectView.setUrl("http://localhost:9001/connexion");
+        }
         return redirectView;
     }
 }
