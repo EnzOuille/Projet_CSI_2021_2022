@@ -1,7 +1,9 @@
 package com.csi.CSI.controller;
 
 import com.csi.CSI.objets.Abonne;
+import com.csi.CSI.objets.Domaine;
 import com.csi.CSI.repositories.AbonneRepo;
+import com.csi.CSI.repositories.DomaineRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class InternauteController {
@@ -18,8 +21,14 @@ public class InternauteController {
     @Autowired
     private AbonneRepo abonneRepo;
 
+    @Autowired
+    private DomaineRepo domRepo;
+
     @GetMapping("/inscription")
     public String getInscription(Model model, HttpServletRequest request) {
+        List<Domaine> list = domRepo.findAllActive();
+        model.addAttribute("domaines",list);
+        System.out.println(list);
         return "form_inscription";
     }
 
@@ -30,6 +39,8 @@ public class InternauteController {
         String pseudo = request.getParameter("pseudo");
         String email = request.getParameter("email");
         String mdp = request.getParameter("password");
+//        List<Domaine> list = domRepo.findAllActive();
+//        model.addAttribute("domaines",list);
         Abonne abonne = new Abonne(nom, prenom, email, pseudo, mdp);
         abonneRepo.save(abonne);
         session.setAttribute("abn_id",abonne.getAbn_id());

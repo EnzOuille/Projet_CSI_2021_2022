@@ -58,6 +58,36 @@
             </div>
         </div>
 
+        <!-- Select Basic -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="domaine_1">Sélectionner premier domaine :</label>
+            <div class="col-md-4">
+                <select id="domaine_1" name="domaine_1" class="form-control">
+                    <option th:each="domaine : ${domaines}" th:value="${domaine.dom_id}" th:utext="${domaine.dom_nom}"/>
+                </select>
+            </div>
+        </div>
+
+        <!-- Select Basic -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="domaine_2">Sélectionner deuxième domaine :</label>
+            <div class="col-md-4">
+                <select id="domaine_2" name="domaine_2" class="form-control">
+                    <option th:each="domaine : ${domaines}" th:value="${domaine.dom_id}" th:utext="${domaine.dom_nom}"/>
+                </select>
+            </div>
+        </div>
+
+        <!-- Select Basic -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="domaine_3">Sélectionner troisième domaine :</label>
+            <div class="col-md-4">
+                <select id="domaine_3" name="domaine_3" class="form-control">
+                    <option th:each="domaine : ${domaines}" th:value="${domaine.dom_id}" th:utext="${domaine.dom_nom}"/>
+                </select>
+            </div>
+        </div>
+
         <!-- Button (Double) -->
         <div class="form-group">
             <label class="col-md-4 control-label" for="submit"></label>
