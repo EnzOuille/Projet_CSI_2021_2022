@@ -4,46 +4,101 @@
     <meta charset="UTF-8">
     <title>Consulter News</title>
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
-    <link th:href="@{/bootstrap/js/bootstrap.min.js}" rel="script" media="screen"/>
 </head>
 <body>
-<h1 class="text-center">Menu des news</h1>
-<div class="col-6" th:if="${type} == 'internaute'">
-    <div id="contentLast3" style="display: none" th:text="${last3_json}"></div>
-    <label for="selectCat">Choissisez une catégorie</label>
-    <select class="form-select" id="selectCat">
-        <option value="none">Aucune sélection</option>
-        <th:block th:each="entry, stat : ${last3}">
-            <option th:value="${entry.key}" th:text="${entry.key}"></option>
-        </th:block>
-    </select>
-    <div class="d-none deck_news_cat" th:each="entry, stat : ${last3}" th:id="|deck_${entry.key}|">
-        <h1 class="text-center" th:text="| Catégorie : ${entry.key}|"></h1>
-        <div class="card-deck">
-            <th:block th:each="news : ${entry.value}">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${news.new_id}"></h5>
-                        <p class="card-text" th:text="${news.new_texte}"></p>
-                    </div>
+<h1 class="text-center">Les news : </h1>
+<div class="col-12" th:if="${type} == 'internaute'">
+    <!--    Affichage des news par catégorie-->
+    <button class="btn btn-primary w-100 mb-2" type="button" data-toggle="collapse" data-target="#collapse1"
+            aria-expanded="false" aria-controls="collapse1">
+        News par catégories
+    </button>
+    <div class="collapse" id="collapse1">
+        <div class="card card-body">
+            <label for="selectCat">Choissisez une catégorie :</label>
+            <select class="form-select" id="selectCat">
+                <option value="none">Aucune sélection</option>
+                <th:block th:each="entry, stat : ${last3_categories}">
+                    <option th:value="${entry.key}" th:text="${entry.key}"></option>
+                </th:block>
+            </select>
+            <div class="d-none deck_news_cat" th:each="entry, stat : ${last3}" th:id="|deck_cat${entry.key}|">
+                <h1 class="text-center" th:text="| Catégorie : ${entry.key}|"></h1>
+                <div class="card-deck">
+                    <th:block th:each="news : ${entry.value}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${news.new_id}"></h5>
+                                <p class="card-text" th:text="${news.new_texte}"></p>
+                            </div>
+                        </div>
+                    </th:block>
                 </div>
-            </th:block>
+            </div>
+            <script type="application/javascript">
+                var select = document.querySelector("#selectCat");
+                select.addEventListener("change", function () {
+                    list = document.querySelectorAll(".deck_news_cat");
+                    for (var i = 0; i < list.length; ++i) {
+                        list[i].classList.remove('d-block');
+                        list[i].classList.add('d-none');
+                    }
+                    if (select.value !== "none") {
+                        document.querySelector("#deck_cat" + select.value).classList.remove("d-none");
+                        document.querySelector("#deck_cat" + select.value).classList.add("d-block");
+                    }
+                })
+            </script>
         </div>
     </div>
-    <script type="application/javascript">
-        var select = document.querySelector("#selectCat");
-        select.addEventListener("change", function () {
-            list = document.querySelectorAll(".deck_news_cat");
-            for (var i = 0; i < list.length; ++i) {
-                list[i].classList.remove('d-block');
-                list[i].classList.add('d-none');
-            }
-            if (select.value !== "none") {
-                document.querySelector("#deck_" + select.value).classList.remove("d-none");
-                document.querySelector("#deck_" + select.value).classList.add("d-block");
-            }
-        })
-    </script>
+    <!-- Fin Affichage des news par catégorie-->
+    <!--    Affichage des news par mots-clés -->
+    <button class="btn btn-primary w-100 mb-2" type="button" data-toggle="collapse" data-target="#collapse2"
+            aria-expanded="false" aria-controls="collapse2">
+        News par mots-clés
+    </button>
+    <div class="collapse" id="collapse2">
+        <div class="card card-body">
+            <label for="selectCat">Choissisez un mot-clé :</label>
+            <select class="form-select" id="selectKey">
+                <option value="none">Aucune sélection</option>
+                <th:block th:each="entry, stat : ${last3_keywords}">
+                    <option th:value="${entry.key}" th:text="${entry.key}"></option>
+                </th:block>
+            </select>
+            <div class="d-none deck_news_key" th:each="entry, stat : ${last3_keywords}" th:id="|deck_key${entry.key}|">
+                <h1 class="text-center" th:text="| Mot-Clé : ${entry.key}|"></h1>
+                <div class="card-deck">
+                    <th:block th:each="news : ${entry.value}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${news.new_id}"></h5>
+                                <p class="card-text" th:text="${news.new_texte}"></p>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+            <script type="application/javascript">
+                var select = document.querySelector("#selectKey");
+                select.addEventListener("change", function () {
+                    list = document.querySelectorAll(".deck_news_key");
+                    for (var i = 0; i < list.length; ++i) {
+                        list[i].classList.remove('d-block');
+                        list[i].classList.add('d-none');
+                    }
+                    if (select.value !== "none") {
+                        document.querySelector("#deck_key" + select.value).classList.remove("d-none");
+                        document.querySelector("#deck_key_" + select.value).classList.add("d-block");
+                    }
+                })
+            </script>
+        </div>
+    </div>
+    <!-- Fin Affichage des news par mots-clés -->
 </div>
+<script th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.14.1/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
 </body>
 </html>

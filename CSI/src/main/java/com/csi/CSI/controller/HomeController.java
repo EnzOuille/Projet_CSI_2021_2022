@@ -2,9 +2,11 @@ package com.csi.CSI.controller;
 
 import com.csi.CSI.objets.Abonne;
 import com.csi.CSI.objets.Domaine;
+import com.csi.CSI.objets.MotCle;
 import com.csi.CSI.objets.News;
 import com.csi.CSI.repositories.AbonneRepo;
 import com.csi.CSI.repositories.DomaineRepo;
+import com.csi.CSI.repositories.MotCleRepo;
 import com.csi.CSI.repositories.NewsRepo;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class HomeController {
 
     @Autowired
     private DomaineRepo domRepo;
+
+    @Autowired
+    private MotCleRepo keyRepo;
 
     @GetMapping("/")
     public String getHome(Model model, HttpServletRequest request, HttpSession session) {
@@ -53,17 +58,13 @@ public class HomeController {
         if (temp != null) {
             abn_id = temp.toString();
         }
-        String typeCompte = "internaute";
         if (!abn_id.equals("")) {
             Abonne abonne = abnRepo.getAbonneById(Integer.getInteger(abn_id));
             if (abonne.isAbn_admin()) {
-                typeCompte = "admin";
                 model.addAttribute("type","admin");
             } else if (abonne.isAbn_confiance()) {
-                typeCompte = "confiance";
                 model.addAttribute("type","confiance");
             } else {
-                typeCompte = "abonne";
                 model.addAttribute("type","abonne");
             }
         } else {
@@ -71,13 +72,17 @@ public class HomeController {
             List<Domaine> cats = domRepo.findAllActive();
             HashMap<String, List<News>> news_list = new HashMap<>();
             for (Domaine cat : cats){
-                List<News> last3 = newsRepo.findNewsByCategory((int) cat.getDom_id());
+                List<News> last3 = newsRepo.findNewsByCategoryLast3((int) cat.getDom_id());
                 news_list.put(cat.getDom_nom(),last3);
             }
-            JSONObject jsonObj = new JSONObject(news_list);
-            model.addAttribute("last3",news_list);
-            model.addAttribute("last3_json",jsonObj.toString());
-
+            model.addAttribute("last3_categories",news_list);
+            List<MotCle> keywords = keyRepo.findAll();
+            news_list = new HashMap<>();
+            for (MotCle key : keywords){
+                List<News> last3 = newsRepo.findNewsByKeywordLast3((int) key.getMtc_id());
+                news_list.put(key.getMtc_nom(),last3);
+            }
+            model.addAttribute("last3_keywords",news_list);
         }
         return "consulting_news";
     }
