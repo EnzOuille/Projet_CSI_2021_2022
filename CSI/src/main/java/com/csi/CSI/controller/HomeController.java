@@ -6,6 +6,7 @@ import com.csi.CSI.objets.News;
 import com.csi.CSI.repositories.AbonneRepo;
 import com.csi.CSI.repositories.DomaineRepo;
 import com.csi.CSI.repositories.NewsRepo;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,7 +48,6 @@ public class HomeController {
 
     @GetMapping("/news")
     public String list_news_internaute(Model model, HttpServletRequest request, HttpSession session) {
-        System.out.println("Méthode GET News");
         Object temp = session.getAttribute("abn_id");
         String abn_id = "";
         if (temp != null) {
@@ -71,11 +71,13 @@ public class HomeController {
             List<Domaine> cats = domRepo.findAllActive();
             HashMap<String, List<News>> news_list = new HashMap<>();
             for (Domaine cat : cats){
-                System.out.println(cat.getDom_nom());
                 List<News> last3 = newsRepo.findNewsByCategory((int) cat.getDom_id());
                 news_list.put(cat.getDom_nom(),last3);
             }
+            JSONObject jsonObj = new JSONObject(news_list);
             model.addAttribute("last3",news_list);
+            model.addAttribute("last3_json",jsonObj.toString());
+
         }
         return "consulting_news";
     }
