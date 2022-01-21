@@ -3,12 +3,12 @@ package com.csi.CSI.objets;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "domaine")
 @Data
-public class Domaine {
+public class Domaine implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
