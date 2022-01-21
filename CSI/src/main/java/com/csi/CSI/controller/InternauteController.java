@@ -34,7 +34,6 @@ public class InternauteController {
     public String getInscription(Model model, HttpServletRequest request) {
         List<Domaine> list = domRepo.findAllActive();
         model.addAttribute("domaines",list);
-        System.out.println(list);
         return "form_inscription";
     }
 

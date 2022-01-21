@@ -20,6 +20,15 @@ public class Domaine implements Serializable {
     @Column
     private String dom_etat;
 
+    public Domaine() {
+
+    }
+
+    public Domaine(String nom) {
+        this.dom_nom=nom;
+        this.dom_etat="en attente";
+    }
+
     public long getDom_id() {
         return dom_id;
     }
