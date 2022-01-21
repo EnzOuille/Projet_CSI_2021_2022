@@ -6,10 +6,30 @@
     <title>Title</title>
 </head>
 <body>
-
-<div class="jumbotron">
-    <h1 class="display-3">Création d'un nouveau domaine réalisé avec succès !</h1>
-    <section class="lead" th:utext="${domaine_nom}"></section>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills float-right">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/deconnexion">Se déconnecter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/creer_domaine">Créer domaine</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Autres idées ?</a>
+                </li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Fake News</h3>
+    </div>
+    <div class="jumbotron">
+        <h1 class="display-3">Création d'un nouveau domaine réalisé avec succès !</h1>
+        <section class="lead" th:utext="${domaine_nom}"></section>
+    </div>
 </div>
 </body>
 </html>
