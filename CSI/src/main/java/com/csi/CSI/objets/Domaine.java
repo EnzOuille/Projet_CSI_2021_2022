@@ -3,12 +3,12 @@ package com.csi.CSI.objets;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "domaine")
 @Data
-public class Domaine {
+public class Domaine implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,6 +19,15 @@ public class Domaine {
 
     @Column
     private String dom_etat;
+
+    public Domaine() {
+
+    }
+
+    public Domaine(String nom) {
+        this.dom_nom=nom;
+        this.dom_etat="en attente";
+    }
 
     public long getDom_id() {
         return dom_id;
