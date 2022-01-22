@@ -7,98 +7,108 @@
     <title>Inscriptions</title>
 </head>
 <body>
-<form class="form-horizontal" method="post" action="#">
-    <fieldset>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills float-right">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Fake News</h3>
+    </div>
+    <form class="form-horizontal" method="post" action="#">
+        <fieldset>
 
-        <!-- Form Name -->
-        <legend>Inscription</legend>
+            <!-- Form Name -->
+            <legend>Inscription</legend>
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="nom">Saisir nom</label>
-            <div class="col-md-4">
-                <input id="nom" name="nom" type="text" placeholder="Dupont" class="form-control input-md" required="">
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="nom">Saisir nom</label>
+                <div class="col-md-4">
+                    <input id="nom" name="nom" type="text" placeholder="Dupont" class="form-control input-md" required="">
 
+                </div>
             </div>
-        </div>
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="prenom">Saisir prénom :</label>
-            <div class="col-md-4">
-                <input id="prenom" name="prenom" type="text" placeholder="Jacques" class="form-control input-md" required="">
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="prenom">Saisir prénom :</label>
+                <div class="col-md-4">
+                    <input id="prenom" name="prenom" type="text" placeholder="Jacques" class="form-control input-md" required="">
 
+                </div>
             </div>
-        </div>
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="pseudo">Saisir pseudo :</label>
-            <div class="col-md-4">
-                <input id="pseudo" name="pseudo" type="text" placeholder="xXdupontXx" class="form-control input-md" required="">
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="pseudo">Saisir pseudo :</label>
+                <div class="col-md-4">
+                    <input id="pseudo" name="pseudo" type="text" placeholder="xXdupontXx" class="form-control input-md" required="">
 
+                </div>
             </div>
-        </div>
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="password">Saisir mot de passe : </label>
-            <div class="col-md-4">
-                <input id="password" name="password" type="password" class="form-control input-md" required="">
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="password">Saisir mot de passe : </label>
+                <div class="col-md-4">
+                    <input id="password" name="password" type="password" class="form-control input-md" required="">
 
+                </div>
             </div>
-        </div>
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="email">Saisir email : </label>
-            <div class="col-md-4">
-                <input id="email" name="email" type="text" placeholder="dupont.jacques@outlook.com" class="form-control input-md" required="">
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Saisir email : </label>
+                <div class="col-md-4">
+                    <input id="email" name="email" type="text" placeholder="dupont.jacques@outlook.com" class="form-control input-md" required="">
 
+                </div>
             </div>
-        </div>
 
-        <!-- Select Basic -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="domaine_1">Sélectionner premier domaine :</label>
-            <div class="col-md-4">
-                <select id="domaine_1" name="domaine_1" class="form-control">
-                    <option th:each="domaine : ${domaines}" th:value="${domaine.dom_id}" th:utext="${domaine.dom_nom}"/>
-                </select>
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="domaine_1">Sélectionner premier domaine :</label>
+                <div class="col-md-4">
+                    <select id="domaine_1" name="domaine_1" class="form-control">
+                        <option th:each="domaine : ${domaines}" th:value="${domaine.dom_id}" th:utext="${domaine.dom_nom}"/>
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <!-- Select Basic -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="domaine_2">Sélectionner deuxième domaine :</label>
-            <div class="col-md-4">
-                <select id="domaine_2" name="domaine_2" class="form-control">
-                    <option th:each="domaine : ${domaines}" th:value="${domaine.dom_id}" th:utext="${domaine.dom_nom}"/>
-                </select>
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="domaine_2">Sélectionner deuxième domaine :</label>
+                <div class="col-md-4">
+                    <select id="domaine_2" name="domaine_2" class="form-control">
+                        <option th:each="domaine : ${domaines}" th:value="${domaine.dom_id}" th:utext="${domaine.dom_nom}"/>
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <!-- Select Basic -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="domaine_3">Sélectionner troisième domaine :</label>
-            <div class="col-md-4">
-                <select id="domaine_3" name="domaine_3" class="form-control">
-                    <option th:each="domaine : ${domaines}" th:value="${domaine.dom_id}" th:utext="${domaine.dom_nom}"/>
-                </select>
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="domaine_3">Sélectionner troisième domaine :</label>
+                <div class="col-md-4">
+                    <select id="domaine_3" name="domaine_3" class="form-control">
+                        <option th:each="domaine : ${domaines}" th:value="${domaine.dom_id}" th:utext="${domaine.dom_nom}"/>
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <!-- Button (Double) -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="submit"></label>
-            <div class="col-md-8">
-                <button id="submit" name="submit" class="btn btn-success">S'inscrire</button>
-                <button id="cancel" name="cancel" class="btn btn-danger">Annuler</button>
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="submit"></label>
+                <div class="col-md-8">
+                    <button id="submit" name="submit" class="btn btn-success">S'inscrire</button>
+                </div>
             </div>
-        </div>
 
-    </fieldset>
-</form>
-
+        </fieldset>
+    </form>
+</div>
 </body>
 </html>

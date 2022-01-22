@@ -48,13 +48,9 @@ public class InternauteController {
         Abonne abo = abonneRepo.save(abonne);
         ArrayList<DomainePrivilegie> listDomToSave = new ArrayList<>();
         for (String s : List.of("domaine_1","domaine_2","domaine_3")) {
-            System.out.println(request.getParameter(s));
-            System.out.println(abo.getAbn_id());
             listDomToSave.add(new DomainePrivilegie(abo.getAbn_id(),Long.parseLong(request.getParameter(s))));
         }
-        System.out.println(listDomToSave);
         domainePrivilegieRepo.saveAll(listDomToSave);
-
         session.setAttribute("abn_id",abonne.getAbn_id());
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("http://localhost:9001/");
