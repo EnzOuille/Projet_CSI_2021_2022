@@ -1,10 +1,7 @@
 package com.csi.CSI.controller;
 
 import com.csi.CSI.objets.*;
-import com.csi.CSI.repositories.AbonneRepo;
-import com.csi.CSI.repositories.DomaineRepo;
-import com.csi.CSI.repositories.MotCleRepo;
-import com.csi.CSI.repositories.NewsRepo;
+import com.csi.CSI.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +12,15 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class HomeController {
 
     @Autowired
     private NewsRepo newsRepo;
+
+    @Autowired
+    private ArchivageNewsRepo archRepo;
 
     @Autowired
     private AbonneRepo abnRepo;
@@ -36,6 +35,7 @@ public class HomeController {
     public String getHome(Model model, HttpServletRequest request, HttpSession session) {
         try {
             String id = session.getAttribute("abn_id").toString();
+            System.out.println("HOME " + id);
             Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(id));
             if (abonne.isAbn_admin()) {
                 return "home_admin";
@@ -51,13 +51,14 @@ public class HomeController {
 
     @GetMapping("/news")
     public String list_news_internaute(Model model, HttpServletRequest request, HttpSession session) {
-        Object temp = session.getAttribute("abn_id");
-        String abn_id = "";
-        if (temp != null) {
-            abn_id = temp.toString();
+        String abn_id = "" ;
+        try{
+            abn_id = session.getAttribute("abn_id").toString();
+        }catch (Exception e){
+            System.out.println(e.toString());
         }
         if (!abn_id.equals("")) {
-            Abonne abonne = abnRepo.getAbonneById(Integer.getInteger(abn_id));
+            Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(abn_id));
             if (abonne.isAbn_admin()) {
                 model.addAttribute("type", "admin");
             } else if (abonne.isAbn_confiance()) {
@@ -67,17 +68,27 @@ public class HomeController {
                 List<News> news = newsRepo.findAllActiveNews();
                 List<NewsDisplay> disp_news = new ArrayList<>();
                 for (News temp_new : news) {
-                    Optional<Abonne> abonne1 = abnRepo.findById(String.valueOf(temp_new.getNew_abn_id()));
-                    Optional<MotCle> mtc1 = keyRepo.findById(String.valueOf(temp_new.getNew_mtc_1()));
-                    Optional<MotCle> mtc2 = keyRepo.findById(String.valueOf(temp_new.getNew_mtc_2()));
-                    Optional<MotCle> mtc3 = keyRepo.findById(String.valueOf(temp_new.getNew_mtc_3()));
-                    Optional<Domaine> dom = domRepo.findById(String.valueOf(temp_new.getNew_dom_id()));
-                    if (abonne1.isPresent() && mtc1.isPresent() && mtc2.isPresent() && mtc3.isPresent() && dom.isPresent()) {
-                        NewsDisplay newDisp = new NewsDisplay(temp_new, abonne1.get().getAbn_nom() + " " + abonne1.get().getAbn_prenom(), mtc1.get().getMtc_nom(), mtc2.get().getMtc_nom(), mtc3.get().getMtc_nom(), dom.get().getDom_nom());
-                        disp_news.add(newDisp);
-                    }
+                    Abonne abonne1 = abnRepo.getAbonneById((int) temp_new.getNew_abn_id());
+                    MotCle mtc1 = keyRepo.getMotCleById(temp_new.getNew_mtc_1());
+                    MotCle mtc2 = keyRepo.getMotCleById(temp_new.getNew_mtc_2());
+                    MotCle mtc3 = keyRepo.getMotCleById(temp_new.getNew_mtc_3());
+                    Domaine dom = domRepo.getDomaineById((int) temp_new.getNew_dom_id());
+                    NewsDisplay newDisp = new NewsDisplay(temp_new, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), dom.getDom_nom());
+                    disp_news.add(newDisp);
                 }
-                model.addAttribute("news", "abonne");
+                model.addAttribute("news", disp_news);
+                List<ArchivageNews> archive_news = archRepo.findAll();
+                List<NewsDisplay> list_archive_news = new ArrayList<>();
+                for (ArchivageNews temp_new : archive_news){
+                    Abonne abonne1 = abnRepo.getAbonneById((int) temp_new.getArc_abn_id());
+                    MotCle mtc1 = keyRepo.getMotCleById(temp_new.getArc_mtc_1());
+                    MotCle mtc2 = keyRepo.getMotCleById(temp_new.getArc_mtc_2());
+                    MotCle mtc3 = keyRepo.getMotCleById(temp_new.getArc_mtc_3());
+                    Domaine dom = domRepo.getDomaineById((int) temp_new.getArc_dom_id());
+                    NewsDisplay newDisp = new NewsDisplay(temp_new, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), dom.getDom_nom());
+                    list_archive_news.add(newDisp);
+                }
+                model.addAttribute("news_archive", list_archive_news);
             }
         } else {
             model.addAttribute("type", "internaute");

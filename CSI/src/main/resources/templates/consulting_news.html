@@ -6,8 +6,18 @@
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
+<div class="header clearfix col-12">
+    <nav>
+        <ul class="nav nav-pills float-right">
+            <li class="nav-item">
+                <a class="nav-link active" href="/">Accueil <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </nav>
+    <h3 class="text-muted">Fake News</h3>
+</div>
 <h1 class="text-center">Les news : </h1>
-<div class="col-12 mb-2" th:if="${type} == 'internaute'">
+<div class="col-10 m-auto" th:if="${type} == 'internaute'">
     <!-- Affichage des trois premières news par catégorie-->
     <button class="btn btn-primary w-100 mb-2" type="button" data-toggle="collapse" data-target="#collapse1"
             aria-expanded="false" aria-controls="collapse1">
@@ -101,12 +111,13 @@
     </div>
     <!-- Fin Affichage des news par mots-clés -->
 </div>
-<div class="col-12 mb-2" th:if="${type} == 'abonne'">
+<div class="col-10 m-auto" th:if="${type} == 'abonne'">
     <button class="btn btn-primary w-100 mb-2" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
         Toutes les news
     </button>
     <div class="collapse mb-2" id="collapse4">
-        <table>
+        <input id="myInput" type="text" placeholder="Search..">
+        <table id="table_news" class="table table-striped">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -121,15 +132,62 @@
                 </tr>
             </thead>
             <tbody>
-                <th:block th:each="new : ${news}">
+                <th:block th:each="entry : ${news}">
                     <tr>
-                        <th th:text="new.id"></th>
+                        <th th:text="${entry.id}"></th>
+                        <th th:text="${entry.texte}"></th>
+                        <th th:text="${entry.date_creation}"></th>
+                        <th th:text="${entry.etat}"></th>
+                        <th th:text="${entry.abn}"></th>
+                        <th th:text="${entry.mtc1}"></th>
+                        <th th:text="${entry.mtc2}"></th>
+                        <th th:text="${entry.mtc3}"></th>
+                        <th th:text="${entry.dom}"></th>
                     </tr>
                 </th:block>
             </tbody>
         </table>
     </div>
+
+    <button class="btn btn-primary w-100 mb-2" type="button" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+        Toutes les news archivées
+    </button>
+    <div class="collapse mb-2" id="collapse5">
+        <input id="myInput2" type="text" placeholder="Search..">
+        <table id="table_archive_news" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Contenu</th>
+                <th>Date</th>
+                <th>Etat</th>
+                <th>Créateur</th>
+                <th>Mot-Clé 1</th>
+                <th>Mot-Clé 2</th>
+                <th>Mot-Clé 3</th>
+                <th>Catégorie</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="entry : ${news_archive}">
+                <tr>
+                    <th th:text="${entry.id}"></th>
+                    <th th:text="${entry.texte}"></th>
+                    <th th:text="${entry.date_creation}"></th>
+                    <th th:text="${entry.etat}"></th>
+                    <th th:text="${entry.abn}"></th>
+                    <th th:text="${entry.mtc1}"></th>
+                    <th th:text="${entry.mtc2}"></th>
+                    <th th:text="${entry.mtc3}"></th>
+                    <th th:text="${entry.dom}"></th>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
 </div>
+<script type="text/javascript" th:src="@{/jquery/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.js}"></script>
 <th:block th:if="${type} == 'internaute'">
     <script type="application/javascript">
         document.querySelector("#selectCatThree").addEventListener("change", function () {
@@ -174,11 +232,23 @@
 </th:block>
 <th:block th:if="${type} =='abonne'">
     <script type="application/javascript">
-
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#table_news tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+        $(document).ready(function(){
+            $("#myInput2").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#table_archive_news tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
     </script>
 </th:block>
-<script th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
-<script th:src="@{/webjars/popper.js/1.14.1/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
 </body>
 </html>

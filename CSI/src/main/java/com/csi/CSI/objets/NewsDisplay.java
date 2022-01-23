@@ -33,4 +33,17 @@ public class NewsDisplay {
         this.abn = abn;
         this.dom = dom;
     }
+
+    public NewsDisplay(ArchivageNews temp, String mtc1, String mtc2, String mtc3, String abn, String dom) {
+        this.id = temp.getArc_id();
+        this.texte = temp.getArc_texte();
+        this.date_creation = temp.getArc_date_archivage();
+        this.etat = temp.getArc_etat();
+        this.mtc1 = mtc1;
+        this.mtc2 = mtc2;
+        this.mtc3 = mtc3;
+        this.abn = abn;
+        this.dom = dom;
+    }
+
 }

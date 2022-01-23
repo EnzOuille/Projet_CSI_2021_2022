@@ -7,6 +7,7 @@ import com.csi.CSI.repositories.AbonneRepo;
 import com.csi.CSI.repositories.DomainePrivilegieRepo;
 import com.csi.CSI.repositories.DomaineRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,11 +49,8 @@ public class InternauteController {
         Abonne abo = abonneRepo.save(abonne);
         ArrayList<DomainePrivilegie> listDomToSave = new ArrayList<>();
         for (String s : List.of("domaine_1","domaine_2","domaine_3")) {
-            System.out.println(request.getParameter(s));
-            System.out.println(abo.getAbn_id());
             listDomToSave.add(new DomainePrivilegie(abo.getAbn_id(),Long.parseLong(request.getParameter(s))));
         }
-        System.out.println(listDomToSave);
         domainePrivilegieRepo.saveAll(listDomToSave);
 
         session.setAttribute("abn_id",abonne.getAbn_id());

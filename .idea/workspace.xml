@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d352450f-abf7-4a9b-9cb7-5fde829066fe" name="Changes" comment="">
+    <list default="true" id="1ab347de-b0e5-4d93-af3e-4ba24bdb0d30" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/controller/InternauteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/controller/InternauteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/objets/ArchivageNews.java" beforeDir="false" afterPath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/objets/ArchivageNews.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/objets/NewsDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/objets/NewsDisplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/repositories/MotCleRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/CSI/src/main/java/com/csi/CSI/repositories/MotCleRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSI/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CSI/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSI/src/main/resources/templates/consulting_news.html" beforeDir="false" afterPath="$PROJECT_DIR$/CSI/src/main/resources/templates/consulting_news.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSI/src/main/resources/templates/home_abonne.html" beforeDir="false" afterPath="$PROJECT_DIR$/CSI/src/main/resources/templates/home_abonne.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +43,7 @@
     </option>
   </component>
   <component name="ProjectId" id="23pDSGgThOaC8kBFbPQhSXbg3Wu" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
