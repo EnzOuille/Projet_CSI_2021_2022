@@ -4,7 +4,7 @@
     <!-- See configuration in WebMvConfig.java -->
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
     <meta charset="UTF-8">
-    <title>Ajout News</title>
+    <title>Modification News</title>
 </head>
 <body>
 <div class="container">
@@ -30,13 +30,14 @@
     <form class="form-horizontal" method="post" action="#">
         <fieldset>
             <!-- Form Name -->
-            <legend>Ajout d'une news</legend>
+            <legend>Modification d'une news</legend>
 
             <!-- Textarea -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="newTexte">Contenu</label>
                 <div class="col-md-4">
-                    <textarea class="form-control" id="newTexte" name="texte" placeholder="..." required=""></textarea>
+                <textarea class="form-control" id="newTexte" name="texte" required=""
+                          th:text="${news.new_texte}"></textarea>
                 </div>
             </div>
 
@@ -44,18 +45,18 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="newDomaine">Domaine</label>
                 <div class="col-md-4">
-                    <input id="newDomaine" name="domaine" type="text" placeholder="..." class="form-control input-md"
-                           required="">
+                    <input id="newDomaine" name="domaine" type="text" class="form-control input-md" required=""
+                           th:value="${domaine.dom_nom}">
 
                 </div>
             </div>
 
             <!-- Text input-->
-            <div class="form-group">
+            <div class=" form-group">
                 <label class="col-md-4 control-label" for="newMotClef1">Mot clef 1</label>
                 <div class="col-md-4">
-                    <input id="newMotClef1" name="motClef1" type="text" placeholder="..." class="form-control input-md"
-                           required="">
+                    <input id="newMotClef1" name="motClef1" type="text" class="form-control input-md"
+                           required="" th:value="${mtc_1.mtc_nom}">
 
                 </div>
             </div>
@@ -64,8 +65,8 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="newMotClef2">Mot clef 2</label>
                 <div class="col-md-4">
-                    <input id="newMotClef2" name="motClef2" type="text" placeholder="..." class="form-control input-md"
-                           required="">
+                    <input id="newMotClef2" name="motClef2" type="text" class="form-control input-md"
+                           required="" th:value="${mtc_2.mtc_nom}">
 
                 </div>
             </div>
@@ -74,8 +75,8 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="newMotClef3">Mot Clef 3</label>
                 <div class="col-md-4">
-                    <input id="newMotClef3" name="motClef3" type="text" placeholder="..." class="form-control input-md"
-                           required="">
+                    <input id="newMotClef3" name="motClef3" type="text" class="form-control input-md"
+                           required="" th:value="${mtc_3.mtc_nom}">
 
                 </div>
             </div>

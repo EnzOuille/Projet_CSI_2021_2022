@@ -38,12 +38,12 @@ public class AbonneController {
     private AEvalueRepo aEvalueRepo;
 
     @GetMapping("/ajout_news")
-    public String getInscription(Model model, HttpServletRequest request) {
+    public String getAjoutNews(Model model, HttpServletRequest request) {
         return "form_ajout_news";
     }
 
     @PostMapping("/ajout_news")
-    public String postInscription(Model model, HttpServletRequest request) {
+    public String postAjoutNews(Model model, HttpServletRequest request) {
         String domaine = request.getParameter("domaine");
         if (domaineRepo.getDomaineBy(domaine) == null) {
             model.addAttribute("domaine", domaine);
@@ -82,6 +82,38 @@ public class AbonneController {
             List<Abonne> admins = abonneRepo.getAllAdmin();
             return admins.get(rand.nextInt(admins.size())).getAbn_id();
         }
+    }
+
+    @GetMapping("/modification_news")
+    public String getModificationNews(Model model, HttpServletRequest request) {
+        News news = newsRepo.findNewsById(20);
+        Domaine domaine = domaineRepo.getDomaineById(news.getNew_dom_id());
+        MotCle mtc_1 = motCleRepo.getMotCleById(news.getNew_mtc_1());
+        MotCle mtc_2 = motCleRepo.getMotCleById(news.getNew_mtc_2());
+        MotCle mtc_3 = motCleRepo.getMotCleById(news.getNew_mtc_3());
+        model.addAttribute("news", news);
+        model.addAttribute("domaine", domaine);
+        model.addAttribute("mtc_1", mtc_1);
+        model.addAttribute("mtc_2", mtc_2);
+        model.addAttribute("mtc_3", mtc_3);
+        return "form_modification_news";
+    }
+
+    @PostMapping("/modification_news")
+    public String postModificationNews(Model model, HttpServletRequest request) {
+        News news = newsRepo.findNewsById(20);
+        String domaine = request.getParameter("domaine");
+        if (domaineRepo.getDomaineBy(domaine) == null) {
+            model.addAttribute("domaine", domaine);
+            return "result_domaine_inexistant";
+        }
+        String texte = request.getParameter("texte");
+        long motClef1 = verificationKeyWord(request.getParameter("motClef1"));
+        long motClef2 = verificationKeyWord(request.getParameter("motClef2"));
+        long motClef3 = verificationKeyWord(request.getParameter("motClef3"));
+        news.update(texte, domaineRepo.getDomaineBy(domaine).getDom_id(), motClef1, motClef2, motClef3);
+        newsRepo.save(news);
+        return "result_ajout_news";
     }
 
     @GetMapping("/deconnexion")

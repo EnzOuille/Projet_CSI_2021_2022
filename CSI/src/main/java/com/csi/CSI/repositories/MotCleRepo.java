@@ -9,5 +9,8 @@ public interface MotCleRepo extends JpaRepository<MotCle, String>, JpaSpecificat
 
     @Query(value = "select * from motsclefs where mtc_nom= ?1", nativeQuery = true)
     MotCle getMotCleBy(String mot);
+
+    @Query(value = "select * from motsclefs where mtc_id= ?1", nativeQuery = true)
+    MotCle getMotCleById(long id);
 }
 

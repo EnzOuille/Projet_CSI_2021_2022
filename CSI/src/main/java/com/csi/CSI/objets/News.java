@@ -126,4 +126,12 @@ public class News implements Serializable {
         this.new_dom_id = domaine;
         this.new_id = new_id;
     }
+
+    public void update(String texte, long domaine, long motCle, long motCle2, long motCle3) {
+        this.new_texte = texte;
+        this.new_mtc_1 = motCle;
+        this.new_mtc_2 = motCle2;
+        this.new_mtc_3 = motCle3;
+        this.new_dom_id = domaine;
+    }
 }
