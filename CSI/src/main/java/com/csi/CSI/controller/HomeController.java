@@ -108,6 +108,7 @@ public class HomeController {
                 model.addAttribute("type", "admin");
                 return "consulting_news_admin";
             } else if (abonne.isAbn_confiance()) {
+
                 model.addAttribute("type", "confiance");
                 return "consulting_news_confiance";
             } else {
