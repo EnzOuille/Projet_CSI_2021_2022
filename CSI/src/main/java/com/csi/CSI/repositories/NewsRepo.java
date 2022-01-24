@@ -34,5 +34,8 @@ public interface NewsRepo extends JpaRepository<News, String>, JpaSpecificationE
 
     @Query(value = "SELECT * FROM News WHERE new_abn_id = ?1 AND current_date - new_date_creation < 10 ORDER BY \"new_date_creation\"", nativeQuery = true)
     List<News> findNewsByAbonne(int abonne);
+
+    @Query(value = "SELECT * FROM News WHERE new_id = ?1", nativeQuery = true)
+    News findNewsById(long id);
 }
 
