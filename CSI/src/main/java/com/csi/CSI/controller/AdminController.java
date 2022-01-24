@@ -47,6 +47,8 @@ public class AdminController {
             }
         } catch (NullPointerException e) {
             return "home_internaute";
+        } catch (Exception e) {
+            return "form_creer_domaine";
         }
     }
 }
