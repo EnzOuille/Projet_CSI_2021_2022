@@ -29,6 +29,9 @@ public class HomeController {
     private DomaineRepo domRepo;
 
     @Autowired
+    private DomainePrivilegieRepo domPrefRepo;
+
+    @Autowired
     private MotCleRepo keyRepo;
 
     @GetMapping("/")
@@ -108,6 +111,27 @@ public class HomeController {
                 model.addAttribute("type", "confiance");
                 return "consulting_news_confiance";
             } else {
+                List<News> news_abonne = newsRepo.findNewsByAbonne(Integer.parseInt(abn_id));
+                List<NewsDisplay> res_list = new ArrayList<>();
+                for(News temp : news_abonne){
+                    Abonne abonne1 = abnRepo.getAbonneById((int) temp.getNew_abn_id());
+                    MotCle mtc1 = keyRepo.getMotCleById(temp.getNew_mtc_1());
+                    MotCle mtc2 = keyRepo.getMotCleById(temp.getNew_mtc_2());
+                    MotCle mtc3 = keyRepo.getMotCleById(temp.getNew_mtc_3());
+                    Domaine dom = domRepo.getDomaineById((int) temp.getNew_dom_id());
+                    NewsDisplay newDisp = new NewsDisplay(temp, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), dom.getDom_nom());
+                    res_list.add(newDisp);
+                }
+                model.addAttribute("news_abonne", res_list);
+                List<DomainePrivilegie> doms = domPrefRepo.findDomainesByAbonne(Integer.parseInt(abn_id));
+                List<News> news_dpl = new ArrayList<>();
+                for (DomainePrivilegie dpl : doms){
+                    List<News> temp_news_dpl = newsRepo.findNewsByCategoryLast3((int) dpl.getDpl_dom_id());
+                    for (News temp : temp_news_dpl){
+                        news_dpl.add(temp);
+                    }
+                }
+                model.addAttribute("news_dpl", news_dpl);
                 model.addAttribute("type", "abonne");
                 return "consulting_news_abonne";
             }
