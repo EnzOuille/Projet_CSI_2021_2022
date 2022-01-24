@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
@@ -39,12 +41,12 @@ public class AbonneController {
     private AEvalueRepo aEvalueRepo;
 
     @GetMapping("/ajout_news")
-    public String getAjoutNews(Model model, HttpServletRequest request) {
+    public String getAjoutNews(Model model, HttpServletRequest request, HttpSession session) {
         return "form_ajout_news";
     }
 
     @PostMapping("/ajout_news")
-    public String postAjoutNews(Model model, HttpServletRequest request) {
+    public String postAjoutNews(Model model, HttpServletRequest request, HttpSession session) {
         String domaine = request.getParameter("domaine");
         if (domaineRepo.getDomaineBy(domaine) == null) {
             model.addAttribute("domaine", domaine);
@@ -54,7 +56,7 @@ public class AbonneController {
         long motClef1 = verificationKeyWord(request.getParameter("motClef1"));
         long motClef2 = verificationKeyWord(request.getParameter("motClef2"));
         long motClef3 = verificationKeyWord(request.getParameter("motClef3"));
-        long abn_id = 1;
+        long abn_id = Long.parseLong(session.getAttribute("abn_id").toString());
         ObjetEvalue objetEvalue = new ObjetEvalue();
         objetEvalueRepo.save(objetEvalue);
         News news = new News(objetEvalue.getObe_id(), abn_id, texte, domaineRepo.getDomaineBy(domaine).getDom_id(), motClef1, motClef2, motClef3);
@@ -86,8 +88,8 @@ public class AbonneController {
     }
 
     @GetMapping("/modification_news")
-    public String getModificationNews(Model model, HttpServletRequest request) {
-        News news = newsRepo.findNewsById(20);
+    public String getModificationNews(Model model, HttpServletRequest request, HttpSession session, @RequestParam long new_id) {
+        News news = newsRepo.findNewsById(new_id);
         Domaine domaine = domaineRepo.getDomaineById(news.getNew_dom_id());
         MotCle mtc_1 = motCleRepo.getMotCleById(news.getNew_mtc_1());
         MotCle mtc_2 = motCleRepo.getMotCleById(news.getNew_mtc_2());
@@ -101,8 +103,8 @@ public class AbonneController {
     }
 
     @PostMapping("/modification_news")
-    public String postModificationNews(Model model, HttpServletRequest request) {
-        News news = newsRepo.findNewsById(20);
+    public String postModificationNews(Model model, HttpServletRequest request, HttpSession session, @RequestParam long new_id) {
+        News news = newsRepo.findNewsById(new_id);
         String domaine = request.getParameter("domaine");
         if (domaineRepo.getDomaineBy(domaine) == null) {
             model.addAttribute("domaine", domaine);
@@ -118,8 +120,8 @@ public class AbonneController {
     }
 
     @GetMapping("/etudier_news")
-    public String getEtudierNews(Model model, HttpServletRequest request) {
-        News news = newsRepo.findNewsById(53);
+    public String getEtudierNews(Model model, HttpServletRequest request, @RequestParam long new_id) {
+        News news = newsRepo.findNewsById(new_id);
         Domaine domaine = domaineRepo.getDomaineById(news.getNew_dom_id());
         MotCle mtc_1 = motCleRepo.getMotCleById(news.getNew_mtc_1());
         MotCle mtc_2 = motCleRepo.getMotCleById(news.getNew_mtc_2());
@@ -133,12 +135,12 @@ public class AbonneController {
     }
 
     @PostMapping("/etudier_news")
-    public String postEtudierNews(Model model, HttpServletRequest request) {
-        News news = newsRepo.findNewsById(53);
-        AEvalue aEvalue = aEvalueRepo.getAEvalueByNews(53);
+    public String postEtudierNews(Model model, HttpServletRequest request, @RequestParam long new_id) {
+        News news = newsRepo.findNewsById(new_id);
+        AEvalue aEvalue = aEvalueRepo.getAEvalueByNews(new_id);
         String justification = request.getParameter("justification");
         String statut = request.getParameter("statut");
-        aEvalue.update(53, justification);
+        aEvalue.update(new_id, justification);
         aEvalueRepo.save(aEvalue);
         news.setNew_etat(statut);
         newsRepo.save(news);

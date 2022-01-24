@@ -74,7 +74,7 @@ public class AEvalue {
     public AEvalue() {
     }
 
-    public void update(int new_id, String justification) {
+    public void update(long new_id, String justification) {
         java.util.Date utilDate = new java.util.Date();
         this.eval_objet = new_id;
         this.eval_justification = justification;
