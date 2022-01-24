@@ -54,7 +54,7 @@ public class HomeController {
 
     @GetMapping("/news")
     public String list_news_internaute(Model model, HttpServletRequest request, HttpSession session) {
-        String abn_id = "" ;
+        String abn_id = "";
         List<Domaine> cats = domRepo.findAllActive();
         HashMap<String, List<News>> news_list_3 = new HashMap<>();
         HashMap<String, List<News>> news_list = new HashMap<>();
@@ -87,7 +87,7 @@ public class HomeController {
         model.addAttribute("news", disp_news);
         List<ArchivageNews> archive_news = archRepo.findAll();
         List<NewsDisplay> list_archive_news = new ArrayList<>();
-        for (ArchivageNews temp_new : archive_news){
+        for (ArchivageNews temp_new : archive_news) {
             Abonne abonne1 = abnRepo.getAbonneById((int) temp_new.getArc_abn_id());
             MotCle mtc1 = keyRepo.getMotCleById(temp_new.getArc_mtc_1());
             MotCle mtc2 = keyRepo.getMotCleById(temp_new.getArc_mtc_2());
@@ -97,43 +97,46 @@ public class HomeController {
             list_archive_news.add(newDisp);
         }
         model.addAttribute("news_archive", list_archive_news);
-        try{
+        try {
             abn_id = session.getAttribute("abn_id").toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
         }
         if (!abn_id.equals("")) {
             Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(abn_id));
+            List<News> news_abonne = newsRepo.findNewsByAbonne(Integer.parseInt(abn_id));
+            List<NewsDisplay> res_list = new ArrayList<>();
+            for (News temp : news_abonne) {
+                Abonne abonne1 = abnRepo.getAbonneById((int) temp.getNew_abn_id());
+                MotCle mtc1 = keyRepo.getMotCleById(temp.getNew_mtc_1());
+                MotCle mtc2 = keyRepo.getMotCleById(temp.getNew_mtc_2());
+                MotCle mtc3 = keyRepo.getMotCleById(temp.getNew_mtc_3());
+                Domaine dom = domRepo.getDomaineById((int) temp.getNew_dom_id());
+                NewsDisplay newDisp = new NewsDisplay(temp, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), dom.getDom_nom());
+                res_list.add(newDisp);
+            }
+            model.addAttribute("news_abonne", res_list);
+            List<DomainePrivilegie> doms = domPrefRepo.findDomainesByAbonne(Integer.parseInt(abn_id));
+            List<News> news_dpl = new ArrayList<>();
+            for (DomainePrivilegie dpl : doms) {
+                List<News> temp_news_dpl = newsRepo.findNewsByCategoryLast3((int) dpl.getDpl_dom_id());
+                news_dpl.addAll(temp_news_dpl);
+            }
+            model.addAttribute("news_dpl", news_dpl);
+            model.addAttribute("type", "abonne");
             if (abonne.isAbn_admin()) {
+                List<Domaine> list_dom = domRepo.getDomToStudy();
+                model.addAttribute("dom_study", list_dom);
+                List<News> news_to_study = newsRepo.findNewsToStudy();
+                model.addAttribute("news_study", news_to_study);
                 model.addAttribute("type", "admin");
                 return "consulting_news_admin";
             } else if (abonne.isAbn_confiance()) {
-
+                List<News> news_to_study = newsRepo.findNewsToStudy();
+                model.addAttribute("news_study", news_to_study);
                 model.addAttribute("type", "confiance");
                 return "consulting_news_confiance";
             } else {
-                List<News> news_abonne = newsRepo.findNewsByAbonne(Integer.parseInt(abn_id));
-                List<NewsDisplay> res_list = new ArrayList<>();
-                for(News temp : news_abonne){
-                    Abonne abonne1 = abnRepo.getAbonneById((int) temp.getNew_abn_id());
-                    MotCle mtc1 = keyRepo.getMotCleById(temp.getNew_mtc_1());
-                    MotCle mtc2 = keyRepo.getMotCleById(temp.getNew_mtc_2());
-                    MotCle mtc3 = keyRepo.getMotCleById(temp.getNew_mtc_3());
-                    Domaine dom = domRepo.getDomaineById((int) temp.getNew_dom_id());
-                    NewsDisplay newDisp = new NewsDisplay(temp, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), dom.getDom_nom());
-                    res_list.add(newDisp);
-                }
-                model.addAttribute("news_abonne", res_list);
-                List<DomainePrivilegie> doms = domPrefRepo.findDomainesByAbonne(Integer.parseInt(abn_id));
-                List<News> news_dpl = new ArrayList<>();
-                for (DomainePrivilegie dpl : doms){
-                    List<News> temp_news_dpl = newsRepo.findNewsByCategoryLast3((int) dpl.getDpl_dom_id());
-                    for (News temp : temp_news_dpl){
-                        news_dpl.add(temp);
-                    }
-                }
-                model.addAttribute("news_dpl", news_dpl);
-                model.addAttribute("type", "abonne");
                 return "consulting_news_abonne";
             }
         } else {

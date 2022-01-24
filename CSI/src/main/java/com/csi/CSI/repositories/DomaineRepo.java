@@ -18,5 +18,8 @@ public interface DomaineRepo extends JpaRepository<Domaine, String>, JpaSpecific
 
     @Query(value = "select * from domaine where dom_etat = 'valide'", nativeQuery = true)
     List<Domaine> findAllActive();
+
+    @Query(value = "SELECT * FROM domaine WHERE dom_etat LIKE 'en attente'", nativeQuery = true)
+    List<Domaine> getDomToStudy();
 }
 
