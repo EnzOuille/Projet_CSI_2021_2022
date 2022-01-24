@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Consulter News Confiance</title>
+    <title>Consulter News Admin</title>
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
@@ -18,54 +18,6 @@
 </div>
 <h1 class="text-center">Les news : </h1>
 <div class="col-10 m-auto">
-    <button class="btn btn-primary w-100 mb-2" type="button" data-toggle="collapse" data-target="#collapse1"
-            aria-expanded="false" aria-controls="collapse2">
-        News de mes domaines privilégiés
-    </button>
-    <div class="collapse mb-2" id="collapse1">
-        <div class="card card-body">
-            <div class="card-deck">
-                <th:block th:each="news : ${news_dpl}">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${news.new_id}"></h5>
-                            <p class="card-text" th:text="${news.new_texte}"></p>
-                        </div>
-                    </div>
-                </th:block>
-            </div>
-        </div>
-    </div>
-
-    <button class="btn btn-primary w-100 mb-2" type="button" data-toggle="collapse" data-target="#collapse2"
-            aria-expanded="false" aria-controls="collapse2">
-        News par catégories
-    </button>
-    <div class="collapse mb-2" id="collapse2">
-        <div class="card card-body">
-            <label for="selectCat">Choissisez une catégorie :</label>
-            <select class="form-select" id="selectCat">
-                <option value="none">Aucune sélection</option>
-                <th:block th:each="entry, stat : ${news_categories}">
-                    <option th:value="${entry.key}" th:text="${entry.key}"></option>
-                </th:block>
-            </select>
-            <div class="d-none deck_news_cat" th:each="entry, stat : ${news_categories}"
-                 th:id="|deck_cat_${entry.key}|">
-                <h1 class="text-center" th:text="| Catégorie : ${entry.key}|"></h1>
-                <div class="card-deck">
-                    <th:block th:each="news : ${entry.value}">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title" th:text="${news.new_id}"></h5>
-                                <p class="card-text" th:text="${news.new_texte}"></p>
-                            </div>
-                        </div>
-                    </th:block>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <button class="btn btn-primary w-100 mb-2" type="button" data-toggle="collapse" data-target="#collapse4"
             aria-expanded="false" aria-controls="collapse4">
@@ -143,44 +95,6 @@
         </table>
     </div>
 
-    <button class="btn btn-primary w-100 mb-2" type="button" data-toggle="collapse" data-target="#collapse6"
-            aria-expanded="false" aria-controls="collapse5">
-        Toutes les news que j'ai posté
-    </button>
-    <div class="collapse mb-2" id="collapse6">
-        <input id="myInput3" type="text" placeholder="Search..">
-        <table id="table_abonne_news" class="table table-striped">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Contenu</th>
-                <th>Date</th>
-                <th>Etat</th>
-                <th>Créateur</th>
-                <th>Mot-Clé 1</th>
-                <th>Mot-Clé 2</th>
-                <th>Mot-Clé 3</th>
-                <th>Catégorie</th>
-            </tr>
-            </thead>
-            <tbody>
-            <th:block th:each="entry : ${news_abonne}">
-                <tr>
-                    <th th:text="${entry.id}"></th>
-                    <th th:text="${entry.texte}"></th>
-                    <th th:text="${entry.date_creation}"></th>
-                    <th th:text="${entry.etat}"></th>
-                    <th th:text="${entry.abn}"></th>
-                    <th th:text="${entry.mtc1}"></th>
-                    <th th:text="${entry.mtc2}"></th>
-                    <th th:text="${entry.mtc3}"></th>
-                    <th th:text="${entry.dom}"></th>
-                </tr>
-            </th:block>
-            </tbody>
-        </table>
-    </div>
-
     <button class="btn btn-primary w-100 mb-2" type="button" data-toggle="collapse" data-target="#collapse7"
             aria-expanded="false" aria-controls="collapse7">
         Les news à étudier
@@ -194,6 +108,27 @@
                             <div class="card-body">
                                 <h5 class="card-title" th:text="${news.new_id}"></h5>
                                 <p class="card-text" th:text="${news.new_texte}"></p>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary w-100 mb-2" type="button" data-toggle="collapse" data-target="#collapse8"
+            aria-expanded="false" aria-controls="collapse7">
+        Domaines à étudier
+    </button>
+    <div class="collapse mb-2" id="collapse8">
+        <div class="card card-body">
+            <div class="deck_news_cat">
+                <div class="card-deck">
+                    <th:block th:each="dom : ${dom_study}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${dom.dom_id}"></h5>
+                                <p class="card-text" th:text="${dom.dom_nom}"></p>
                             </div>
                         </div>
                     </th:block>

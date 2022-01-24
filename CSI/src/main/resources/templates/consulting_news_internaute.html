@@ -17,7 +17,7 @@
     <h3 class="text-muted">Fake News</h3>
 </div>
 <h1 class="text-center">Les news : </h1>
-<div class="col-10 m-auto" th:if="${type} == 'internaute'">
+<div class="col-10 m-auto">
     <button class="btn btn-primary w-100 mb-2" type="button" data-toggle="collapse" data-target="#collapse1"
             aria-expanded="false" aria-controls="collapse1">
         3 dernière news par catégories
@@ -108,7 +108,7 @@
 
 <script type="text/javascript" th:src="@{/jquery/jquery.js}"></script>
 <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.js}"></script>
-<th:block th:if="${type} == 'internaute'">
+<th:block>
     <script type="application/javascript">
         document.querySelector("#selectCatThree").addEventListener("change", function () {
             list = document.querySelectorAll(".deck_news_cat_3");
