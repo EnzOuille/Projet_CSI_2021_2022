@@ -29,6 +29,11 @@ public class Domaine implements Serializable {
         this.dom_etat="en attente";
     }
 
+    public Domaine(String nom, String etat) {
+        this.dom_nom=nom;
+        this.dom_etat=etat;
+    }
+
     public long getDom_id() {
         return dom_id;
     }
