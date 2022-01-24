@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import org.springframework.web.servlet.view.RedirectView;
@@ -75,7 +76,7 @@ public class AbonneController {
 
     private long getEvaluateur(long abn_id) {
         Random rand = new Random();
-        if (abonneRepo.getAllTrustedAbonne(abn_id) != null) {
+        if (abonneRepo.getAllTrustedAbonne(abn_id) != null && abonneRepo.getAllTrustedAbonne(abn_id).size() > 0) {
             List<Abonne> abonnes = abonneRepo.getAllTrustedAbonne(abn_id);
             return abonnes.get(rand.nextInt(abonnes.size())).getAbn_id();
         } else {
@@ -114,6 +115,46 @@ public class AbonneController {
         news.update(texte, domaineRepo.getDomaineBy(domaine).getDom_id(), motClef1, motClef2, motClef3);
         newsRepo.save(news);
         return "result_ajout_news";
+    }
+
+    @GetMapping("/etudier_news")
+    public String getEtudierNews(Model model, HttpServletRequest request) {
+        News news = newsRepo.findNewsById(53);
+        Domaine domaine = domaineRepo.getDomaineById(news.getNew_dom_id());
+        MotCle mtc_1 = motCleRepo.getMotCleById(news.getNew_mtc_1());
+        MotCle mtc_2 = motCleRepo.getMotCleById(news.getNew_mtc_2());
+        MotCle mtc_3 = motCleRepo.getMotCleById(news.getNew_mtc_3());
+        model.addAttribute("news", news);
+        model.addAttribute("domaine", domaine);
+        model.addAttribute("mtc_1", mtc_1);
+        model.addAttribute("mtc_2", mtc_2);
+        model.addAttribute("mtc_3", mtc_3);
+        return "form_etudier_news";
+    }
+
+    @PostMapping("/etudier_news")
+    public String postEtudierNews(Model model, HttpServletRequest request) {
+        News news = newsRepo.findNewsById(53);
+        AEvalue aEvalue = aEvalueRepo.getAEvalueByNews(53);
+        String justification = request.getParameter("justification");
+        String statut = request.getParameter("statut");
+        aEvalue.update(53, justification);
+        aEvalueRepo.save(aEvalue);
+        news.setNew_etat(statut);
+        newsRepo.save(news);
+        verificationAbnConfiance(news);
+        model.addAttribute("statut", statut);
+        return "result_etudier_news";
+    }
+
+    private void verificationAbnConfiance(News news) {
+        Abonne abonne = abonneRepo.getAbonneById(news.getNew_abn_id());
+        abonne.setAbn_nb_news(abonne.getAbn_nb_news() + 1);
+        if (Objects.equals(news.getNew_etat(), "valide")) {
+            abonne.setAbn_nb_news_valid(abonne.getAbn_nb_news_valid() + 1);
+        }
+        abonne.verifConf();
+        abonneRepo.save(abonne);
     }
 
     @GetMapping("/deconnexion")

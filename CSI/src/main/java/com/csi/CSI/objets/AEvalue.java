@@ -15,7 +15,7 @@ public class AEvalue {
     private long eval_id;
 
     @Column
-    private long evaluateur_id;
+    private long eval_abn_id;
 
     @Column
     private long eval_objet;
@@ -34,12 +34,12 @@ public class AEvalue {
         this.eval_id = eval_id;
     }
 
-    public long getEvaluateur_id() {
-        return evaluateur_id;
+    public long getEval_abn_id() {
+        return eval_abn_id;
     }
 
-    public void setEvaluateur_id(long evaluateur_id) {
-        this.evaluateur_id = evaluateur_id;
+    public void setEval_abn_id(long evaluateur_id) {
+        this.eval_abn_id = evaluateur_id;
     }
 
     public long getEval_objet() {
@@ -67,10 +67,17 @@ public class AEvalue {
     }
 
     public AEvalue(long evaluateur_id, long new_id) {
-        this.evaluateur_id = evaluateur_id;
+        this.eval_abn_id = evaluateur_id;
         this.eval_objet = new_id;
     }
 
     public AEvalue() {
+    }
+
+    public void update(int new_id, String justification) {
+        java.util.Date utilDate = new java.util.Date();
+        this.eval_objet = new_id;
+        this.eval_justification = justification;
+        this.eval_date_justification = new Date(utilDate.getTime());
     }
 }

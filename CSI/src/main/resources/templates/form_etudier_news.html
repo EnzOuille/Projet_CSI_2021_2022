@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- See configuration in WebMvConfig.java -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <meta charset="UTF-8">
+    <title>Etudier new</title>
+</head>
+<body>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills float-right">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/deconnexion">Se déconnecter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/creer_domaine">Créer domaine</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Autres idées ?</a>
+                </li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Fake News</h3>
+    </div>
+    <div class="container">
+        <div class="row marketing">
+            <div class="col-lg-6">
+                <h5>Contenu</h5>
+                <p th:text="${news.new_texte}"></p>
+                <h5>Domaine</h5>
+                <p th:text="${domaine.dom_nom}"></p>
+                <h5>Mot Clef 1</h5>
+                <p th:text="${mtc_1.mtc_nom}"></p>
+                <h5>Mot Clef 2</h5>
+                <p th:text="${mtc_2.mtc_nom}"></p>
+                <h5>Mot Clef 3</h5>
+                <p th:text="${mtc_3.mtc_nom}"></p>
+            </div>
+        </div>
+        <form class="form-horizontal" method="post" action="#">
+            <fieldset>
+                <!-- Form Name -->
+                <legend>Etude d'une news</legend>
+
+                <!-- Textarea -->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="justification">Justification</label>
+                    <div class="col-md-4">
+                            <textarea class="form-control" id="justification" name="justification"
+                                      required=""></textarea>
+                    </div>
+                </div>
+
+                <!-- Select Basic -->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="statut">Choisissez le statut de la new</label>
+                    <div class="col-md-4">
+                        <select id="statut" name="statut" class="form-control">
+                            <option value="valide">Valide</option>
+                            <option value="fausse">Fausse</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Button -->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="newValidation"></label>
+                    <div class="col-md-4">
+                        <button id="newValidation" name="validation" class="btn btn-primary">Valider</button>
+                        <button id="newCancel" name="cancel" class="btn btn-danger">Annuler</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</body>
+</html>

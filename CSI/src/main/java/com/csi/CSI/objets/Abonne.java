@@ -63,7 +63,7 @@ public class Abonne implements Serializable {
         this.abn_nb_news = 0;
         this.abn_nb_news_valid = 0;
         this.abn_conf = false;
-        this.abn_mdp=abn_mdp;
+        this.abn_mdp = abn_mdp;
     }
 
     public long getAbn_id() {
@@ -160,5 +160,15 @@ public class Abonne implements Serializable {
 
     public void setAbn_conf(boolean abn_conf) {
         this.abn_conf = abn_conf;
+    }
+
+    public void verifConf() {
+        if (this.abn_nb_news >= 3 && ((float) this.abn_nb_news / this.abn_nb_news_valid) >= 0.8) {
+            this.abn_conf = true;
+            this.abn_confiance = true;
+        }else{
+            this.abn_conf = false;
+            this.abn_confiance = false;
+        }
     }
 }

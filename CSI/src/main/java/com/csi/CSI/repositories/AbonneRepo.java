@@ -11,15 +11,15 @@ public interface AbonneRepo extends CrudRepository<Abonne, String> {
     @Query(value="select * from abonne where abn_pseudo= ?1 and abn_mdp = ?2 limit 1", nativeQuery = true)
     Abonne getAbonneByLoginMdp(String pseudo, String mdp);
 
-    @Query(value="select * from abonne where is_confiance = true and abn_id!= ?1", nativeQuery = true)
+    @Query(value="select * from abonne where abn_confiance = true and abn_id!= ?1", nativeQuery = true)
     List<Abonne> getAllTrustedAbonne(long id);
 
-    @Query(value="select * from abonne where is_admin = true", nativeQuery = true)
+    @Query(value="select * from abonne where abn_admin = true", nativeQuery = true)
     List<Abonne> getAllAdmin();
 
 //    @Query(value="SELECT * from abonne where abn_id= ?1 ");
 
     @Query(value="SELECT * from abonne where abn_id= ?1 limit 1", nativeQuery = true)
-    Abonne getAbonneById(int abn_id);
+    Abonne getAbonneById(long abn_id);
 }
 
