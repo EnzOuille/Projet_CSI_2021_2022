@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Consulter News Internaute</title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div class="header clearfix col-12">
+    <nav>
+        <ul class="nav nav-pills float-right">
+            <li class="nav-item">
+                <a class="nav-link active" href="/">Accueil <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </nav>
+    <h3 class="text-muted">Fake News</h3>
+</div>
+<h1 class="text-center">Les news : </h1>
+<div class="col-10 m-auto" th:if="${type} == 'internaute'">
+    <button class="btn btn-primary w-100 mb-2" type="button" data-toggle="collapse" data-target="#collapse1"
+            aria-expanded="false" aria-controls="collapse1">
+        3 dernière news par catégories
+    </button>
+    <div class="collapse mb-2" id="collapse1">
+        <div class="card card-body">
+            <label for="selectCatThree">Choissisez une catégorie :</label>
+            <select class="form-select" id="selectCatThree">
+                <option value="none">Aucune sélection</option>
+                <th:block th:each="entry, stat : ${last3_categories}">
+                    <option th:value="${entry.key}" th:text="${entry.key}"></option>
+                </th:block>
+            </select>
+            <div class="d-none deck_news_cat_3" th:each="entry, stat : ${last3_categories}"
+                 th:id="|deck_cat_3_${entry.key}|">
+                <h1 class="text-center" th:text="| Catégorie : ${entry.key}|"></h1>
+                <div class="card-deck">
+                    <th:block th:each="news : ${entry.value}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${news.new_id}"></h5>
+                                <p class="card-text" th:text="${news.new_texte}"></p>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary w-100 mb-2" type="button" data-toggle="collapse" data-target="#collapse2"
+            aria-expanded="false" aria-controls="collapse2">
+        News par catégories
+    </button>
+    <div class="collapse mb-2" id="collapse2">
+        <div class="card card-body">
+            <label for="selectCat">Choissisez une catégorie :</label>
+            <select class="form-select" id="selectCat">
+                <option value="none">Aucune sélection</option>
+                <th:block th:each="entry, stat : ${news_categories}">
+                    <option th:value="${entry.key}" th:text="${entry.key}"></option>
+                </th:block>
+            </select>
+            <div class="d-none deck_news_cat" th:each="entry, stat : ${news_categories}"
+                 th:id="|deck_cat_${entry.key}|">
+                <h1 class="text-center" th:text="| Catégorie : ${entry.key}|"></h1>
+                <div class="card-deck">
+                    <th:block th:each="news : ${entry.value}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${news.new_id}"></h5>
+                                <p class="card-text" th:text="${news.new_texte}"></p>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary w-100 mb-2" type="button" data-toggle="collapse" data-target="#collapse3"
+            aria-expanded="false" aria-controls="collapse3">
+        News par mots-clés
+    </button>
+    <div class="collapse mb-2" id="collapse3">
+        <div class="card card-body">
+            <label for="selectCat">Choissisez un mot-clé :</label>
+            <select class="form-select" id="selectKey">
+                <option value="none">Aucune sélection</option>
+                <th:block th:each="entry, stat : ${news_keywords}">
+                    <option th:value="${entry.key}" th:text="${entry.key}"></option>
+                </th:block>
+            </select>
+            <div class="d-none deck_news_key" th:each="entry, stat : ${news_keywords}" th:id="|deck_key${entry.key}|">
+                <h1 class="text-center" th:text="| Mot-Clé : ${entry.key}|"></h1>
+                <div class="card-deck">
+                    <th:block th:each="news : ${entry.value}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${news.new_id}"></h5>
+                                <p class="card-text" th:text="${news.new_texte}"></p>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/jquery/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.js}"></script>
+<th:block th:if="${type} == 'internaute'">
+    <script type="application/javascript">
+        document.querySelector("#selectCatThree").addEventListener("change", function () {
+            list = document.querySelectorAll(".deck_news_cat_3");
+            for (var i = 0; i < list.length; ++i) {
+                list[i].classList.remove('d-block');
+                list[i].classList.add('d-none');
+            }
+            if (document.querySelector("#selectCatThree").value !== "none") {
+                document.querySelector("#deck_cat_3_" + document.querySelector("#selectCatThree").value).classList.remove("d-none");
+                document.querySelector("#deck_cat_3_" + document.querySelector("#selectCatThree").value).classList.add("d-block");
+            }
+        })
+    </script>
+    <script type="application/javascript">
+        document.querySelector("#selectCat").addEventListener("change", function () {
+            list = document.querySelectorAll(".deck_news_cat");
+            for (var i = 0; i < list.length; ++i) {
+                list[i].classList.remove('d-block');
+                list[i].classList.add('d-none');
+            }
+            if (document.querySelector("#selectCat").value !== "none") {
+                document.querySelector("#deck_cat_" + document.querySelector("#selectCat").value).classList.remove("d-none");
+                document.querySelector("#deck_cat_" + document.querySelector("#selectCat").value).classList.add("d-block");
+            }
+        })
+    </script>
+    <script type="application/javascript">
+        var select = document.querySelector("#selectKey");
+        document.querySelector("#selectKey").addEventListener("change", function () {
+            list = document.querySelectorAll(".deck_news_key");
+            for (var i = 0; i < list.length; ++i) {
+                list[i].classList.remove('d-block');
+                list[i].classList.add('d-none');
+            }
+            if (document.querySelector("#selectKey").value !== "none") {
+                document.querySelector("#deck_key" + document.querySelector("#selectKey").value).classList.remove("d-none");
+                document.querySelector("#deck_key_" + document.querySelector("#selectKey").value).classList.add("d-block");
+            }
+        })
+    </script>
+</th:block>
+</body>
+</html>
