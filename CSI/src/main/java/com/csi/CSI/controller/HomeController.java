@@ -103,14 +103,17 @@ public class HomeController {
             Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(abn_id));
             if (abonne.isAbn_admin()) {
                 model.addAttribute("type", "admin");
+                return "consulting_news_admin";
             } else if (abonne.isAbn_confiance()) {
                 model.addAttribute("type", "confiance");
+                return "consulting_news_confiance";
             } else {
                 model.addAttribute("type", "abonne");
+                return "consulting_news_abonne";
             }
         } else {
             model.addAttribute("type", "internaute");
+            return "consulting_news_internaute";
         }
-        return "consulting_news";
     }
 }
