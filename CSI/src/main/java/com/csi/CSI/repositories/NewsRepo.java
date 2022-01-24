@@ -12,16 +12,27 @@ public interface NewsRepo extends JpaRepository<News, String>, JpaSpecificationE
     @Query(
             value = "SELECT * FROM News INNER JOIN Domaine D on News.new_dom_id = D.dom_id WHERE dom_id = ?1 AND current_date - new_date_creation < 10 ORDER BY \"new_date_creation\" LIMIT 3", nativeQuery = true
     )
+    List<News> findNewsByCategoryLast3(int category);
+
+    @Query(
+            value = "SELECT * FROM News INNER JOIN Domaine D on News.new_dom_id = D.dom_id WHERE dom_id = ?1 AND current_date - new_date_creation < 10 ORDER BY \"new_date_creation\"", nativeQuery = true
+    )
     List<News> findNewsByCategory(int category);
 
     @Query(
-            value = "SELECT * FROM news WHERE current_date - new_date_creation < 10 ORDER BY \"new_date_creation\" desc LIMIT 3;", nativeQuery = true
+        value = "SELECT * FROM News WHERE new_mtc_1 = ?1 OR new_mtc_2 = ?1 OR new_mtc_3 = ?1 AND current_date - new_date_creation < 10 ORDER BY \"new_date_creation\" desc LIMIT 3", nativeQuery=true
     )
-    List<News> last3();
+    List<News> findNewsByKeywordLast3(int keyword);
 
     @Query(
-            value = "SELECT * FROM News WHERE new_id= ?1", nativeQuery = true
+        value = "SELECT * FROM News WHERE new_mtc_1 = ?1 OR new_mtc_2 = ?1 OR new_mtc_3 = ?1 AND current_date - new_date_creation < 10 ORDER BY \"new_date_creation\" desc", nativeQuery=true
     )
-    News findNewsById(int id);
+    List<News> findNewsByKeyword(int keyword);
+
+    @Query(value = "SELECT * FROM News WHERE current_date - new_date_creation < 10 ORDER BY \"new_date_creation\"", nativeQuery = true)
+    List<News> findAllActiveNews();
+
+    @Query(value = "SELECT * FROM News WHERE new_abn_id = ?1 AND current_date - new_date_creation < 10 ORDER BY \"new_date_creation\"", nativeQuery = true)
+    List<News> findNewsByAbonne(int abonne);
 }
 

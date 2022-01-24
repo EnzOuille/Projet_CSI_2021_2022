@@ -28,13 +28,13 @@ public class ArchivageNews implements Serializable {
     private long arc_abn_id;
 
     @Column
-    private long new_mtc_1;
+    private long arc_mtc_1;
 
     @Column
-    private long new_mtc_2;
+    private long arc_mtc_2;
 
     @Column
-    private long new_mtc_3;
+    private long arc_mtc_3;
 
     @Column
     private long arc_dom_id;
@@ -79,28 +79,28 @@ public class ArchivageNews implements Serializable {
         this.arc_abn_id = arc_abn_id;
     }
 
-    public long getNew_mtc_1() {
-        return new_mtc_1;
+    public long getArc_mtc_1() {
+        return arc_mtc_1;
     }
 
-    public void setNew_mtc_1(long new_mtc_1) {
-        this.new_mtc_1 = new_mtc_1;
+    public void setArc_mtc_1(long arc_mtc_1) {
+        this.arc_mtc_1 = arc_mtc_1;
     }
 
-    public long getNew_mtc_2() {
-        return new_mtc_2;
+    public long getArc_mtc_2() {
+        return arc_mtc_2;
     }
 
-    public void setNew_mtc_2(long new_mtc_2) {
-        this.new_mtc_2 = new_mtc_2;
+    public void setArc_mtc_2(long arc_mtc_2) {
+        this.arc_mtc_2 = arc_mtc_2;
     }
 
-    public long getNew_mtc_3() {
-        return new_mtc_3;
+    public long getArc_mtc_3() {
+        return arc_mtc_3;
     }
 
-    public void setNew_mtc_3(long new_mtc_3) {
-        this.new_mtc_3 = new_mtc_3;
+    public void setArc_mtc_3(long arc_mtc_3) {
+        this.arc_mtc_3 = arc_mtc_3;
     }
 
     public long getArc_dom_id() {

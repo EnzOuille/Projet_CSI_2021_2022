@@ -7,6 +7,7 @@ import com.csi.CSI.repositories.AbonneRepo;
 import com.csi.CSI.repositories.DomainePrivilegieRepo;
 import com.csi.CSI.repositories.DomaineRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
