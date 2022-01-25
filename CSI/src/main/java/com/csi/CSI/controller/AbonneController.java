@@ -31,6 +31,9 @@ public class AbonneController {
     private DomaineRepo domaineRepo;
 
     @Autowired
+    private DomainePrivilegieRepo domainePrivilegieRepo;
+
+    @Autowired
     private MotCleRepo motCleRepo;
 
     @Autowired
@@ -164,10 +167,86 @@ public class AbonneController {
         abonneRepo.save(abonne);
     }
 
-    @PostMapping("/delete_news")
+    @GetMapping("/profil")
+    public String getProfil(Model model, HttpServletRequest request, @RequestParam long abonne_id) {
+        Abonne abonne = abonneRepo.getAbonneById(abonne_id);
+        model.addAttribute("abonne_nom", abonne.getAbn_nom());
+        model.addAttribute("abonne_prenom", abonne.getAbn_prenom());
+        model.addAttribute("abonne_pseudo", abonne.getAbn_pseudo());
+        model.addAttribute("abonne_email", abonne.getAbn_email());
+        model.addAttribute("abonne_password", abonne.getAbn_mdp());
+        model.addAttribute("abonne_url_profil", "/profil?abonne_id=" + abonne_id);
+
+        List<DomainePrivilegie> listDomainePrivilegie = domainePrivilegieRepo.findDomainesByAbonne((int)abonne.getAbn_id());
+        Domaine domaine1 = domaineRepo.getDomaineById(listDomainePrivilegie.get(0).getDpl_dom_id());
+        Domaine domaine2 = domaineRepo.getDomaineById(listDomainePrivilegie.get(1).getDpl_dom_id());
+        Domaine domaine3 = domaineRepo.getDomaineById(listDomainePrivilegie.get(2).getDpl_dom_id());
+        model.addAttribute("domaine_1",domaine1);
+        model.addAttribute("domaine_2",domaine2);
+        model.addAttribute("domaine_3",domaine3);
+
+        List<Domaine> listDomaine1 = domaineRepo.findAllActive();
+        List<Domaine> listDomaine2 = domaineRepo.findAllActive();
+        List<Domaine> listDomaine3 = domaineRepo.findAllActive();
+
+        listDomaine1.remove(domaine1);
+        listDomaine2.remove(domaine2);
+        listDomaine3.remove(domaine3);
+
+        model.addAttribute("domaines1",listDomaine1);
+        model.addAttribute("domaines2",listDomaine2);
+        model.addAttribute("domaines3",listDomaine3);
+        return "form_modification_profil";
+    }
+
+    @PostMapping("/profil")
+    public String postProfil(Model model, HttpServletRequest request, @RequestParam long abonne_id) {
+        Abonne abonne = abonneRepo.getAbonneById(abonne_id);
+        String abonne_nom = request.getParameter("abonne_nom");
+        String abonne_prenom = request.getParameter("abonne_prenom");
+        String abonne_pseudo = request.getParameter("abonne_pseudo");
+        String abonne_email = request.getParameter("abonne_email");
+        String abonne_password = request.getParameter("abonne_password");
+
+        abonne.setAbn_nom(abonne_nom);
+        abonne.setAbn_prenom(abonne_prenom);
+        abonne.setAbn_pseudo(abonne_pseudo);
+        abonne.setAbn_email(abonne_email);
+        abonne.setAbn_mdp(abonne_password);
+        abonneRepo.save(abonne);
+
+        List<DomainePrivilegie> listDomainePrivilegie = domainePrivilegieRepo.findDomainesByAbonne((int)abonne_id);
+
+        Long abonne_domaine1 = Long.valueOf(request.getParameter("abonne_domaine_1"));
+        Long abonne_domaine2 = Long.valueOf(request.getParameter("abonne_domaine_2"));
+        Long abonne_domaine3 = Long.valueOf(request.getParameter("abonne_domaine_3"));
+
+        if(listDomainePrivilegie.get(0).getDpl_dom_id() != abonne_domaine1) {
+            DomainePrivilegie domaine = domainePrivilegieRepo.findDomaineByAbonneAndDomaine(abonne_id, listDomainePrivilegie.get(0).getDpl_dom_id());
+            domaine.setDpl_dom_id(abonne_domaine1);
+            domainePrivilegieRepo.save(domaine);
+        }
+        if(listDomainePrivilegie.get(1).getDpl_dom_id() != abonne_domaine2) {
+            DomainePrivilegie domaine = domainePrivilegieRepo.findDomaineByAbonneAndDomaine(abonne_id, listDomainePrivilegie.get(1).getDpl_dom_id());
+            domaine.setDpl_dom_id(abonne_domaine2);
+            domainePrivilegieRepo.save(domaine);
+        }
+        if(listDomainePrivilegie.get(2).getDpl_dom_id() != abonne_domaine3) {
+            DomainePrivilegie domaine = domainePrivilegieRepo.findDomaineByAbonneAndDomaine(abonne_id, listDomainePrivilegie.get(2).getDpl_dom_id());
+            domaine.setDpl_dom_id(abonne_domaine3);
+            domainePrivilegieRepo.save(domaine);
+        }
+
+        return getProfil(model, request, abonne_id);
+    }
+    @GetMapping("/delete_news")
+
     public RedirectView deleteNews(Model model, HttpServletRequest request, @RequestParam long id) {
         News news = newsRepo.findNewsById(id);
+        AEvalue aevalue = aEvalueRepo.getAEvalueByNews(id);
+        aEvalueRepo.delete(aevalue);
         newsRepo.delete(news);
+        
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("http://localhost:9001/");
         return redirectView;

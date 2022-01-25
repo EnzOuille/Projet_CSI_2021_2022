@@ -4,18 +4,37 @@
     <meta charset="UTF-8">
     <title>Consulter News Abonne</title>
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
-    
+    <link rel="icon" href="../../../../favicon.ico">
+    <link href="../../css/editor.css" rel="stylesheet">
+    <link href="narrow-jumbotron.css" rel="stylesheet">
 </head>
 <body>
-<div class="header clearfix col-12">
-    <nav>
-        <ul class="nav nav-pills float-right">
-            <li class="nav-item">
-                <a class="nav-link active" href="/">Accueil <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-    </nav>
-    <h3 class="text-muted">Fake News</h3>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills float-right">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/deconnexion">Se deconnecter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ajout_news">Créer une news</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/creer_domaine">Créer domaine</a>
+                </li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Fake News</h3>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-3">Bienvenue sur notre site !</h1>
+        <p class="lead">Vous pouvez consulter les news selon leurs catégories et mots clefs.</p>
+        <p class="lead">PORTAIL ABONNE.</p>
+    </div>
 </div>
 <h1 class="text-center">Les news : </h1>
 <div class="col-10 m-auto">
@@ -29,7 +48,7 @@
                 <th:block th:each="news : ${news_dpl}">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title" th:text="${news.new_id}"></h5>
+                            <h3 class="card-title" th:text="${news.new_id}"></h3>
                             <p class="card-text" th:text="${news.new_texte}"></p>
                         </div>
                     </div>
@@ -162,12 +181,14 @@
                 <th>Mot-Clé 2</th>
                 <th>Mot-Clé 3</th>
                 <th>Catégorie</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
             </tr>
             </thead>
             <tbody>
             <th:block th:each="entry : ${news_abonne}">
                 <tr>
-                    <th><a th:href="|@{/modification_news/?new_id=}${entry.id}|" th:text="${entry.id}"></a></th>
+                    <th th:text="${entry.id}"></th>
                     <th th:text="${entry.texte}"></th>
                     <th th:text="${entry.date_creation}"></th>
                     <th th:text="${entry.etat}"></th>
@@ -176,13 +197,22 @@
                     <th th:text="${entry.mtc2}"></th>
                     <th th:text="${entry.mtc3}"></th>
                     <th th:text="${entry.dom}"></th>
+                    <th><a th:href="|@{/modification_news/?new_id=}${entry.id}|">Modifier</a></th>
+                    <th:block th:if="${entry.etat} == 'en attente'">
+                        <th><a th:href="|@{/delete_news?id=}${entry.id}|">Supprimer</a></th>
+                    </th:block>
+                    <th:block th:if="${entry.etat} != 'en attente'">
+                        <th>Non Supprimable</th>
+                    </th:block>
                 </tr>
             </th:block>
             </tbody>
         </table>
     </div>
+    <footer class="footer">
+        <p>© IDMC - M1 Miage : 2021-2022</p>
+    </footer>
 </div>
-
 <script type="text/javascript" th:src="@{/jquery/jquery.js}"></script>
 <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.js}"></script>
 <th:block>
