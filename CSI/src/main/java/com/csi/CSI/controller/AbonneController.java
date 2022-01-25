@@ -2,6 +2,7 @@ package com.csi.CSI.controller;
 
 import com.csi.CSI.objets.*;
 import com.csi.CSI.repositories.*;
+import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +37,9 @@ public class AbonneController {
 
     @Autowired
     private AEvalueRepo aEvalueRepo;
+
+    @Autowired
+    private VariableGlobaleRepo varRepo;
 
     @GetMapping("/ajout_news")
     public String getAjoutNews(Model model, HttpServletRequest request, HttpSession session) {
@@ -86,7 +90,7 @@ public class AbonneController {
 
     @GetMapping("/modification_news")
     public String getModificationNews(Model model, HttpServletRequest request, HttpSession session, @RequestParam long new_id) {
-        News news = newsRepo.findNewsById(new_id);
+        News news = newsRepo.findNewsById(new_id, (int) varRepo.getVariableJ().getVgl_valeur());
         Domaine domaine = domaineRepo.getDomaineById(news.getNew_dom_id());
         MotCle mtc_1 = motCleRepo.getMotCleById(news.getNew_mtc_1());
         MotCle mtc_2 = motCleRepo.getMotCleById(news.getNew_mtc_2());
@@ -101,7 +105,7 @@ public class AbonneController {
 
     @PostMapping("/modification_news")
     public String postModificationNews(Model model, HttpServletRequest request, HttpSession session, @RequestParam long new_id) {
-        News news = newsRepo.findNewsById(new_id);
+        News news = newsRepo.findNewsById(new_id, (int) varRepo.getVariableJ().getVgl_valeur());
         String domaine = request.getParameter("domaine");
         if (domaineRepo.getDomaineBy(domaine) == null) {
             model.addAttribute("domaine", domaine);
@@ -118,7 +122,7 @@ public class AbonneController {
 
     @GetMapping("/etudier_news")
     public String getEtudierNews(Model model, HttpServletRequest request, @RequestParam long new_id) {
-        News news = newsRepo.findNewsById(new_id);
+        News news = newsRepo.findNewsById(new_id, (int) varRepo.getVariableJ().getVgl_valeur());
         Domaine domaine = domaineRepo.getDomaineById(news.getNew_dom_id());
         MotCle mtc_1 = motCleRepo.getMotCleById(news.getNew_mtc_1());
         MotCle mtc_2 = motCleRepo.getMotCleById(news.getNew_mtc_2());
@@ -133,7 +137,7 @@ public class AbonneController {
 
     @PostMapping("/etudier_news")
     public String postEtudierNews(Model model, HttpServletRequest request, @RequestParam long new_id) {
-        News news = newsRepo.findNewsById(new_id);
+        News news = newsRepo.findNewsById(new_id, (int) varRepo.getVariableJ().getVgl_valeur());
         AEvalue aEvalue = aEvalueRepo.getAEvalueByNews(new_id);
         String justification = request.getParameter("justification");
         String statut = request.getParameter("statut");

@@ -4,7 +4,7 @@
     <!-- See configuration in WebMvConfig.java -->
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
     <meta charset="UTF-8">
-    <title>Etudier new</title>
+    <title>Etudier domaine</title>
 </head>
 <body>
 <div class="container">
@@ -21,6 +21,9 @@
                     <a class="nav-link" href="/creer_domaine">Créer domaine</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/ajout_news">Créer une news</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#">Autres idées ?</a>
                 </li>
             </ul>
@@ -30,52 +33,33 @@
     <div class="container">
         <div class="row marketing">
             <div class="col-lg-6">
-                <h5>Contenu</h5>
-                <p th:text="${news.new_texte}"></p>
-                <h5>Domaine</h5>
-                <p th:text="${domaine.dom_nom}"></p>
-                <h5>Mot Clef 1</h5>
-                <p th:text="${mtc_1.mtc_nom}"></p>
-                <h5>Mot Clef 2</h5>
-                <p th:text="${mtc_2.mtc_nom}"></p>
-                <h5>Mot Clef 3</h5>
-                <p th:text="${mtc_3.mtc_nom}"></p>
+                <h5>Nom du domaine</h5>
+                <p th:text="${dom_nom}"></p>
+                <h5>Etat du domaine</h5>
+                <p th:text="${dom_etat}"></p>
             </div>
         </div>
         <form class="form-horizontal" method="post" action="#">
             <fieldset>
                 <!-- Form Name -->
-                <legend>Etude d'une news</legend>
-
-                <!-- Textarea -->
-
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="justification">Justification</label>
-                    <div class="col-md-4">
-                            <textarea class="form-control" id="justification" name="justification"
-                                      required=""></textarea>
-                    </div>
-                </div>
+                <legend>Etude d'un domaine</legend>
 
                 <!-- Select Basic -->
-
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="statut">Choisissez le statut de la new</label>
+                    <label class="col-md-4 control-label" for="statut">Choisissez le statut du domaine</label>
                     <div class="col-md-4">
                         <select id="statut" name="statut" class="form-control">
                             <option value="valide">Valide</option>
-                            <option value="fausse">Fausse</option>
+                            <option value="non valide">Invalide</option>
                         </select>
                     </div>
                 </div>
 
                 <!-- Button -->
-
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="newValidation"></label>
+                    <label class="col-md-4 control-label" for="domaineValidation"></label>
                     <div class="col-md-4">
-                        <button id="newValidation" type="submit" name="validation" class="btn btn-primary">Valider</button>
-                        <button id="newCancel" type="reset" name="cancel" class="btn btn-danger">Annuler</button>
+                        <button id="domaineValidation" type="submit" name="validation" class="btn btn-primary">Valider</button>
                     </div>
                 </div>
             </fieldset>

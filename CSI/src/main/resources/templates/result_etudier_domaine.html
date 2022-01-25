@@ -3,7 +3,7 @@
 <head>
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Etudier domaine</title>
 </head>
 <body>
 <div class="container">
@@ -23,9 +23,6 @@
                     <a class="nav-link" href="/ajout_news">Créer une news</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/changer_variable">Changer variable</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#">Autres idées ?</a>
                 </li>
             </ul>
@@ -33,8 +30,10 @@
         <h3 class="text-muted">Fake News</h3>
     </div>
     <div class="jumbotron">
-        <h1 class="display-3">Création d'un nouveau domaine réalisé avec succès !</h1>
-        <section class="lead" th:utext="${domaine_nom}"></section>
+        <h1 class="display-3">Etude du domaine réalisée avec succès !</h1>
+        <h2>L'état du domaine va passer à
+            <td th:text="${statut}"/>
+        </h2>
     </div>
 </div>
 </body>

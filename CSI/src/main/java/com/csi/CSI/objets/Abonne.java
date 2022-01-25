@@ -13,7 +13,7 @@ import java.sql.Date;
 public class Abonne implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long abn_id;
 
     @Column
@@ -52,6 +52,20 @@ public class Abonne implements Serializable {
 
     public Abonne(String nom, String prenom, String email, String pseudo, String abn_mdp) {
         java.util.Date utilDate = new java.util.Date();
+        this.abn_nom = nom;
+        this.abn_prenom = prenom;
+        this.abn_email = email;
+        this.abn_pseudo = pseudo;
+        this.abn_date_inscrit = new Date(utilDate.getTime());
+        this.abn_nb_news = 0;
+        this.abn_nb_news_valid = 0;
+        this.abn_conf = false;
+        this.abn_mdp = abn_mdp;
+    }
+
+    public Abonne(Long id, String nom, String prenom, String email, String pseudo, String abn_mdp) {
+        java.util.Date utilDate = new java.util.Date();
+        this.abn_id=id;
         this.abn_nom = nom;
         this.abn_prenom = prenom;
         this.abn_email = email;
