@@ -5,16 +5,13 @@ import com.csi.CSI.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
@@ -157,6 +154,15 @@ public class AbonneController {
         }
         abonne.verifConf();
         abonneRepo.save(abonne);
+    }
+
+    @PostMapping("/delete_news")
+    public RedirectView deleteNews(Model model, HttpServletRequest request, @RequestParam long id) {
+        News news = newsRepo.findNewsById(id);
+        newsRepo.delete(news);
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://localhost:9001/");
+        return redirectView;
     }
 
     @GetMapping("/deconnexion")
