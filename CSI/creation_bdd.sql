@@ -76,7 +76,7 @@ CREATE TABLE AEvalue
     eval_abn_id          int NOT NULL,
     eval_objet int NOT NULL,
     eval_justification     VARCHAR(300) DEFAULT NULL,
-    eval_date_justifcation date         DEFAULT NULL,
+    eval_date_justification date         DEFAULT NULL,
     CONSTRAINT fk_aevalue_evaluateur FOREIGN KEY (eval_abn_id) REFERENCES Abonne(abn_id),
     CONSTRAINT fk_aevalue_objet FOREIGN KEY (eval_objet) REFERENCES ObjetEvalue(obe_id)
 );
