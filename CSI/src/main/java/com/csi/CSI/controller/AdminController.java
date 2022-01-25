@@ -3,6 +3,7 @@ package com.csi.CSI.controller;
 import com.csi.CSI.objets.*;
 import com.csi.CSI.repositories.AbonneRepo;
 import com.csi.CSI.repositories.DomaineRepo;
+import com.csi.CSI.repositories.NewsRepo;
 import com.csi.CSI.repositories.VariableGlobaleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class AdminController {
 
     @Autowired
     DomaineRepo domaineRepo;
+
+    @Autowired
+    NewsRepo newsRepo;
 
     @Autowired
     AbonneRepo abnRepo;
@@ -74,6 +79,27 @@ public class AdminController {
         domaineRepo.save(domaine);
         model.addAttribute("statut", statut);
         return "result_etudier_domaine";
+    }
+
+    @GetMapping("/modif_categorie_news")
+    public String getModifCategorieNew(Model model, HttpServletRequest request,@RequestParam long news_id) {
+        News news = newsRepo.findNewsById(news_id);
+        List<Domaine> list = domaineRepo.findAllActive();
+        Domaine domaine = domaineRepo.getDomaineOnlyById(news.getNew_dom_id());
+        model.addAttribute("dom_nom",domaine.getDom_nom());
+        model.addAttribute("domaines",list);
+        return "form_modif_categorie_news";
+    }
+
+    @PostMapping("/modif_categorie_news")
+    public String postModifCategorieNew(Model model, HttpServletRequest request,@RequestParam long news_id) {
+        News news = newsRepo.findNewsById(news_id);
+        Long statut = Long.valueOf(request.getParameter("statut"));
+        Domaine domaine = domaineRepo.getDomaineById(statut);
+        news.setNew_dom_id(domaine.getDom_id());
+        newsRepo.save(news);
+        model.addAttribute("statut", domaine.getDom_nom());
+        return "result_modif_categorie_news";
     }
 
     @GetMapping("/changer_variable")

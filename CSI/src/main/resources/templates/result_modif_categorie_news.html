@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <meta charset="UTF-8">
+    <title>Modification catégorie news</title>
+</head>
+<body>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills float-right">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/deconnexion">Se déconnecter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/creer_domaine">Créer domaine</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ajout_news">Créer une news</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Autres idées ?</a>
+                </li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Fake News</h3>
+    </div>
+    <div class="jumbotron">
+        <h1 class="display-3">Modification de la catégorie réalisée avec succès !</h1>
+        <h2>La catégorie de la news va passer à
+            <td th:text="${statut}"/>
+        </h2>
+    </div>
+</div>
+</body>
+</html>
