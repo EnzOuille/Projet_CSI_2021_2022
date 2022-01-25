@@ -4,6 +4,7 @@ import com.csi.CSI.objets.*;
 import com.csi.CSI.repositories.*;
 import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +49,8 @@ public class AbonneController {
 
     @PostMapping("/ajout_news")
     public String postAjoutNews(Model model, HttpServletRequest request, HttpSession session) {
+        Abonne abonne = abonneRepo.getAbonneById(Long.parseLong(session.getAttribute("abn_id").toString()));
+        abonne.setAbn_nb_news(abonne.getAbn_nb_news() + 1);
         String domaine = request.getParameter("domaine");
         if (domaineRepo.getDomaineBy(domaine) == null) {
             model.addAttribute("domaine", domaine);
@@ -57,13 +60,14 @@ public class AbonneController {
         long motClef1 = verificationKeyWord(request.getParameter("motClef1"));
         long motClef2 = verificationKeyWord(request.getParameter("motClef2"));
         long motClef3 = verificationKeyWord(request.getParameter("motClef3"));
-        long abn_id = Long.parseLong(session.getAttribute("abn_id").toString());
+        long abn_id = abonne.getAbn_id();
         ObjetEvalue objetEvalue = new ObjetEvalue();
         objetEvalueRepo.save(objetEvalue);
         News news = new News(objetEvalue.getObe_id(), abn_id, texte, domaineRepo.getDomaineBy(domaine).getDom_id(), motClef1, motClef2, motClef3);
         newsRepo.save(news);
         AEvalue aEvalue = new AEvalue(this.getEvaluateur(abn_id), objetEvalue.getObe_id());
         aEvalueRepo.save(aEvalue);
+        abonneRepo.save(abonne);
         return "result_ajout_news";
     }
 
@@ -152,11 +156,11 @@ public class AbonneController {
 
     private void verificationAbnConfiance(News news) {
         Abonne abonne = abonneRepo.getAbonneById(news.getNew_abn_id());
-        abonne.setAbn_nb_news(abonne.getAbn_nb_news() + 1);
         if (Objects.equals(news.getNew_etat(), "valide")) {
             abonne.setAbn_nb_news_valid(abonne.getAbn_nb_news_valid() + 1);
         }
-        abonne.verifConf();
+        abonne.verifConf((int) varRepo.getVariableN().getVgl_valeur(), (int) varRepo.getVariableV().getVgl_valeur()
+                , newsRepo.findNewsNotStudy((int) news.getNew_abn_id(), (int) varRepo.getVariableJ().getVgl_valeur()).size());
         abonneRepo.save(abonne);
     }
 

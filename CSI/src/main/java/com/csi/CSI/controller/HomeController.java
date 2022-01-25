@@ -3,6 +3,7 @@ package com.csi.CSI.controller;
 import com.csi.CSI.objets.*;
 import com.csi.CSI.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,9 +64,9 @@ public class HomeController {
         HashMap<String, List<News>> news_list_3 = new HashMap<>();
         HashMap<String, List<News>> news_list = new HashMap<>();
         for (Domaine cat : cats) {
-            List<News> last3 = newsRepo.findNewsByCategoryLast3((int) cat.getDom_id(),n);
+            List<News> last3 = newsRepo.findNewsByCategoryLast3((int) cat.getDom_id(), n);
             news_list_3.put(cat.getDom_nom(), last3);
-            List<News> news = newsRepo.findNewsByCategory((int) cat.getDom_id(),n);
+            List<News> news = newsRepo.findNewsByCategory((int) cat.getDom_id(), n);
             news_list.put(cat.getDom_nom(), news);
         }
         model.addAttribute("news_categories", news_list);
@@ -73,7 +74,7 @@ public class HomeController {
         List<MotCle> keywords = keyRepo.findAll();
         HashMap<String, List<News>> news_keywords = new HashMap<>();
         for (MotCle key : keywords) {
-            List<News> news_key = newsRepo.findNewsByKeyword((int) key.getMtc_id(),n);
+            List<News> news_key = newsRepo.findNewsByKeyword((int) key.getMtc_id(), n);
             news_keywords.put(key.getMtc_nom(), news_key);
         }
         model.addAttribute("news_keywords", news_keywords);
@@ -108,7 +109,7 @@ public class HomeController {
             }
             model.addAttribute("news_archive", list_archive_news);
             Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(abn_id));
-            List<News> news_abonne = newsRepo.findNewsByAbonne(Integer.parseInt(abn_id),n);
+            List<News> news_abonne = newsRepo.findNewsByAbonne(Integer.parseInt(abn_id), n);
             List<NewsDisplay> res_list = new ArrayList<>();
             for (News temp : news_abonne) {
                 Abonne abonne1 = abnRepo.getAbonneById((int) temp.getNew_abn_id());
@@ -123,7 +124,7 @@ public class HomeController {
             List<DomainePrivilegie> doms = domPrefRepo.findDomainesByAbonne(Integer.parseInt(abn_id));
             List<News> news_dpl = new ArrayList<>();
             for (DomainePrivilegie dpl : doms) {
-                List<News> temp_news_dpl = newsRepo.findNewsByCategoryLast3((int) dpl.getDpl_dom_id(),n);
+                List<News> temp_news_dpl = newsRepo.findNewsByCategoryLast3((int) dpl.getDpl_dom_id(), n);
                 news_dpl.addAll(temp_news_dpl);
             }
             model.addAttribute("news_dpl", news_dpl);
@@ -147,5 +148,15 @@ public class HomeController {
             model.addAttribute("type", "internaute");
             return "consulting_news_internaute";
         }
+    }
+
+    @Scheduled(cron = "0 0 1-7 * * *")
+    public void archivageNews() {
+        List<News> newsList = newsRepo.getOldNews((int) varRepo.getVariableJ().getVgl_valeur());
+        newsList.forEach(news -> {
+            ArchivageNews archivageNews = new ArchivageNews(news);
+            archRepo.save(archivageNews);
+            newsRepo.delete(news);
+        });
     }
 }

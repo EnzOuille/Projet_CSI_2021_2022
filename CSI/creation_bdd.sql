@@ -62,7 +62,7 @@ CREATE TABLE ArchivageNews
     arc_mtc_2         INT NOT NULL,
     arc_mtc_3         INT NOT NULL,
     arc_dom_id         INT NOT NULL,
-    CONSTRAINT fk_news_id FOREIGN KEY (arc_id) REFERENCES ObjetEvalue (obe_id),
+    CONSTRAINT fk_archivagenews_id FOREIGN KEY (arc_id) REFERENCES ObjetEvalue (obe_id),
     CONSTRAINT fk_archivagenews_abn FOREIGN KEY (arc_abn_id) REFERENCES Abonne (abn_id),
     CONSTRAINT fk_archivagenews_mtc1 FOREIGN KEY (arc_mtc_1) REFERENCES MotsClefs (mtc_id),
     CONSTRAINT fk_archivagenews_mtc2 FOREIGN KEY (arc_mtc_2) REFERENCES MotsClefs (mtc_id),
@@ -109,24 +109,24 @@ insert into VariableGlobale (vgl_id,vgl_nom,vgl_valeur) values (3,'J',10);
 
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (13, 'Melisenda', 'Janek', 'mjanekc@washington.edu', 'mjanekc', 'y51WADh3eF', false, '2021-08-04', 87, 25, true);
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (16, 'Loralyn', 'McCrow', 'lmccrowf@scientificamerican.com', 'lmccrowf', 'HoMhYs', false, '2021-06-18', 95, 86, true);
-INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (18, 'Rosetta', 'Dolby', 'rdolbyh@guardian.co.uk', 'rdolbyh', '8BAtuD36', false, '2021-09-20', 48, 72, true);
+INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (18, 'Rosetta', 'Dolby', 'rdolbyh@guardian.co.uk', 'rdolbyh', '8BAtuD36', false, '2021-09-20', 72, 48, false);
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (1, 'Lori', 'Bacchus', 'lbacchus0@google.com.au', 'lbacchus0', 'TFoR7msPOOA', true, '2021-07-13', 97, 89, false);
-INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (15, 'Elwood', 'Purtell', 'epurtelle@networkadvertising.org', 'epurtelle', 'IpWqkv9RDHTv', true, '2021-03-14', 66, 75, false);
+INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (15, 'Elwood', 'Purtell', 'epurtelle@networkadvertising.org', 'epurtelle', 'IpWqkv9RDHTv', true, '2021-03-14', 75, 66, true);
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (3, 'Terence', 'Walter', 'twalter2@bluehost.com', 'twalter2', 'uZZ0IDI2nt', true, '2021-06-07', 89, 19, false);
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (17, 'Joell', 'Couve', 'jcouveg@dailymail.co.uk', 'jcouveg', 'P7OZFk', false, '2021-03-11', 99, 32, true);
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (2, 'Consalve', 'Sprouls', 'csprouls1@wikipedia.org', 'csprouls1', 'Q4uZixk', true, '2021-08-16', 62, 40, false);
-INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (14, 'Rozalie', 'Tomaszewski', 'rtomaszewskid@ucoz.com', 'rtomaszewskid', 'JX6m8G', false, '2021-11-15', 26, 29, true);
-INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (4, 'Kinnie', 'Evreux', 'kevreux3@skyrock.com', 'kevreux3', 'eomIUEEMFB', false, '2021-07-07', 34, 50, false);
+INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (14, 'Rozalie', 'Tomaszewski', 'rtomaszewskid@ucoz.com', 'rtomaszewskid', 'JX6m8G', false, '2021-11-15', 29, 26, true);
+INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (4, 'Kinnie', 'Evreux', 'kevreux3@skyrock.com', 'kevreux3', 'eomIUEEMFB', false, '2021-07-07', 50, 34, false);
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (5, 'Cristobal', 'Reddyhoff', 'creddyhoff4@berkeley.edu', 'creddyhoff4', 'QAdpxIXryQ', false, '2021-12-08', 63, 40, false);
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (6, 'Dorene', 'Feirn', 'dfeirn5@goo.gl', 'dfeirn5', 'nNMCd5iM', false, '2021-02-17', 35, 25, false);
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (7, 'Augusto', 'Brugger', 'abrugger6@businessinsider.com', 'abrugger6', 'HTSpgsP', false, '2021-06-12', 89, 2, false);
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (8, 'Port', 'Cammock', 'pcammock7@zimbio.com', 'pcammock7', 'VfJTLsGDeI', false, '2021-12-03', 89, 26, false);
-INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (9, 'Scottie', 'Gulk', 'sgulk8@time.com', 'sgulk8', '3ZRxYLdJvV', false, '2021-09-01', 52, 71, false);
-INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (10, 'Bessy', 'Kermode', 'bkermode9@cocolog-nifty.com', 'bkermode9', '56KVNoWKT0VC', false, '2021-05-07', 10, 54, false);
+INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (9, 'Scottie', 'Gulk', 'sgulk8@time.com', 'sgulk8', '3ZRxYLdJvV', false, '2021-09-01', 71, 52, false);
+INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (10, 'Bessy', 'Kermode', 'bkermode9@cocolog-nifty.com', 'bkermode9', '56KVNoWKT0VC', false, '2021-05-07', 54, 10, false);
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (11, 'Jacynth', 'Tucsell', 'jtucsella@japanpost.jp', 'jtucsella', 'lprzxBRMmL', false, '2021-11-23', 87, 74, false);
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (12, 'Giustina', 'Raggatt', 'graggattb@goo.ne.jp', 'graggattb', 'HwUVW85f', false, '2021-12-22', 31, 16, false);
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (19, 'Stinky', 'Thoms', 'sthomsi@hexun.com', 'sthomsi', 'mtRylJy', false, '2021-07-01', 40, 30, false);
-INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (20, 'Carena', 'Beckmann', 'cbeckmannj@altervista.org', 'cbeckmannj', 'vmj2bRE', false, '2021-03-06', 51, 95, false);
+INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (20, 'Carena', 'Beckmann', 'cbeckmannj@altervista.org', 'cbeckmannj', 'vmj2bRE', false, '2021-03-06', 95, 51, false);
 
 
 INSERT INTO public.domaine (dom_id, dom_nom, dom_etat) VALUES (1, 'Industrial', 'en attente');
@@ -276,27 +276,47 @@ INSERT INTO public.objetevalue (obe_id) VALUES (17);
 INSERT INTO public.objetevalue (obe_id) VALUES (18);
 INSERT INTO public.objetevalue (obe_id) VALUES (19);
 INSERT INTO public.objetevalue (obe_id) VALUES (20);
+INSERT INTO public.objetevalue (obe_id) VALUES (21);
+INSERT INTO public.objetevalue (obe_id) VALUES (22);
+INSERT INTO public.objetevalue (obe_id) VALUES (23);
+INSERT INTO public.objetevalue (obe_id) VALUES (24);
+INSERT INTO public.objetevalue (obe_id) VALUES (25);
+INSERT INTO public.objetevalue (obe_id) VALUES (26);
+INSERT INTO public.objetevalue (obe_id) VALUES (27);
+INSERT INTO public.objetevalue (obe_id) VALUES (28);
+INSERT INTO public.objetevalue (obe_id) VALUES (29);
+INSERT INTO public.objetevalue (obe_id) VALUES (30);
+INSERT INTO public.objetevalue (obe_id) VALUES (31);
+INSERT INTO public.objetevalue (obe_id) VALUES (32);
+INSERT INTO public.objetevalue (obe_id) VALUES (33);
+INSERT INTO public.objetevalue (obe_id) VALUES (34);
+INSERT INTO public.objetevalue (obe_id) VALUES (35);
+INSERT INTO public.objetevalue (obe_id) VALUES (36);
+INSERT INTO public.objetevalue (obe_id) VALUES (37);
+INSERT INTO public.objetevalue (obe_id) VALUES (38);
+INSERT INTO public.objetevalue (obe_id) VALUES (39);
+INSERT INTO public.objetevalue (obe_id) VALUES (40);
 
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (17, 'Front-line coherent productivity', '2021-05-30', 'validee', 6, 10, 2, 5, 10);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (6, 'Exclusive content-based data-warehouse', '2021-11-06', 'non validee', 11, 15, 16, 9, 9);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (4, 'Vision-oriented fault-tolerant project', '2021-03-23', 'non validee', 1, 11, 12, 18, 19);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (9, 'Reduced human-resource forecast', '2021-02-27', 'non validee', 10, 18, 17, 13, 17);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (20, 'Cloned web-enabled instruction set', '2021-12-29', 'validee', 6, 10, 6, 12, 13);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (2, 'Up-sized solution-oriented model', '2021-08-08', 'non validee', 18, 5, 13, 9, 19);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (14, 'Focused 3rd generation software', '2021-05-14', 'validee', 8, 10, 17, 10, 4);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (8, 'Ameliorated discrete matrix', '2021-02-09', 'fausse', 8, 4, 8, 20, 19);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (12, 'Enterprise-wide methodical approach', '2021-07-07', 'validee', 10, 18, 8, 7, 20);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (15, 'Integrated client-server task-force', '2021-09-04', 'validee', 11, 19, 4, 17, 19);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (16, 'Optimized systematic application', '2021-02-08', 'fausse', 3, 20, 15, 16, 3);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (3, 'Intuitive fresh-thinking alliance', '2021-09-28', 'validee', 10, 15, 20, 20, 16);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (7, 'Customer-focused exuding framework', '2021-05-08', 'non validee', 6, 2, 5, 9, 11);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (1, 'Fundamental global policy', '2021-05-04', 'validee', 6, 6, 11, 6, 5);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (5, 'Stand-alone optimizing paradigm', '2021-06-14', 'validee', 8, 9, 2, 13, 9);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (19, 'Seamless 5th generation projection', '2021-06-11', 'non validee', 18, 18, 20, 2, 4);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (18, 'Focused content-based model', '2021-03-24', 'non validee', 18, 2, 18, 19, 11);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (13, 'Organic empowering Graphical User Interface', '2021-02-19', 'fausse', 10, 12, 19, 6, 11);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (11, 'Devolved background firmware', '2021-11-20', 'fausse', 5, 6, 20, 12, 13);
-INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (10, 'Object-based web-enabled leverage', '2021-08-06', 'fausse', 4, 6, 13, 20, 4);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (37, 'Front-line coherent productivity', '2021-05-30', 'validee', 6, 10, 2, 5, 10);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (26, 'Exclusive content-based data-warehouse', '2021-11-06', 'non validee', 11, 15, 16, 9, 9);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (24, 'Vision-oriented fault-tolerant project', '2021-03-23', 'non validee', 1, 11, 12, 18, 19);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (29, 'Reduced human-resource forecast', '2021-02-27', 'non validee', 10, 18, 17, 13, 17);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (40, 'Cloned web-enabled instruction set', '2021-12-29', 'validee', 6, 10, 6, 12, 13);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (22, 'Up-sized solution-oriented model', '2021-08-08', 'non validee', 18, 5, 13, 9, 19);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (34, 'Focused 3rd generation software', '2021-05-14', 'validee', 8, 10, 17, 10, 4);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (28, 'Ameliorated discrete matrix', '2021-02-09', 'fausse', 8, 4, 8, 20, 19);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (32, 'Enterprise-wide methodical approach', '2021-07-07', 'validee', 10, 18, 8, 7, 20);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (35, 'Integrated client-server task-force', '2021-09-04', 'validee', 11, 19, 4, 17, 19);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (36, 'Optimized systematic application', '2021-02-08', 'fausse', 3, 20, 15, 16, 3);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (23, 'Intuitive fresh-thinking alliance', '2021-09-28', 'validee', 10, 15, 20, 20, 16);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (27, 'Customer-focused exuding framework', '2021-05-08', 'non validee', 6, 2, 5, 9, 11);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (21, 'Fundamental global policy', '2021-05-04', 'validee', 6, 6, 11, 6, 5);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (25, 'Stand-alone optimizing paradigm', '2021-06-14', 'validee', 8, 9, 2, 13, 9);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (39, 'Seamless 5th generation projection', '2021-06-11', 'non validee', 18, 18, 20, 2, 4);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (38, 'Focused content-based model', '2021-03-24', 'non validee', 18, 2, 18, 19, 11);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (33, 'Organic empowering Graphical User Interface', '2021-02-19', 'fausse', 10, 12, 19, 6, 11);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (31, 'Devolved background firmware', '2021-11-20', 'fausse', 5, 6, 20, 12, 13);
+INSERT INTO public.archivagenews (arc_id, arc_texte, arc_date_archivage, arc_etat, arc_abn_id, arc_mtc_1, arc_mtc_2, arc_mtc_3, arc_dom_id) VALUES (30, 'Object-based web-enabled leverage', '2021-08-06', 'fausse', 4, 6, 13, 20, 4);
 
 
 

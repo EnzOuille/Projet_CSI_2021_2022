@@ -12,7 +12,6 @@ import java.sql.Date;
 public class ArchivageNews implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long arc_id;
 
     @Column
@@ -109,5 +108,22 @@ public class ArchivageNews implements Serializable {
 
     public void setArc_dom_id(long arc_dom_id) {
         this.arc_dom_id = arc_dom_id;
+    }
+
+    public ArchivageNews() {
+
+    }
+
+    public ArchivageNews(News news) {
+        java.util.Date utilDate = new java.util.Date();
+        this.arc_id = news.getNew_id();
+        this.arc_texte = news.getNew_texte();
+        this.arc_date_archivage = new Date(utilDate.getTime());
+        this.arc_etat = news.getNew_etat();
+        this.arc_abn_id = news.getNew_abn_id();
+        this.arc_mtc_1 = news.getNew_mtc_1();
+        this.arc_mtc_2 = news.getNew_mtc_2();
+        this.arc_mtc_3 = news.getNew_mtc_3();
+        this.arc_dom_id = news.getNew_dom_id();
     }
 }

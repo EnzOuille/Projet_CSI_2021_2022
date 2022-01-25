@@ -65,7 +65,7 @@ public class Abonne implements Serializable {
 
     public Abonne(Long id, String nom, String prenom, String email, String pseudo, String abn_mdp) {
         java.util.Date utilDate = new java.util.Date();
-        this.abn_id=id;
+        this.abn_id = id;
         this.abn_nom = nom;
         this.abn_prenom = prenom;
         this.abn_email = email;
@@ -166,11 +166,7 @@ public class Abonne implements Serializable {
         this.abn_conf = abn_conf;
     }
 
-    public void verifConf() {
-        if (this.abn_nb_news >= 3 && ((float) this.abn_nb_news / this.abn_nb_news_valid) >= 0.8) {
-            this.abn_conf = true;
-        }else{
-            this.abn_conf = false;
-        }
+    public void verifConf(long N, long V, int nbNotStudy) {
+        this.abn_conf = this.abn_nb_news >= N && this.abn_nb_news_valid / ((float) (this.abn_nb_news - nbNotStudy)) * 100 >= V;
     }
 }
