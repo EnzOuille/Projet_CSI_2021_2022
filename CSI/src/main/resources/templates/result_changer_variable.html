@@ -25,15 +25,19 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/changer_variable">Changer variable</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Autres idées ?</a>
-                </li>
             </ul>
         </nav>
         <h3 class="text-muted">Fake News</h3>
     </div>
     <div class="jumbotron">
-        <h1 class="display-3">Changement de la variable globale réalisé avec succès !</h1>
+        <h1 class="display-3">Changement des variables globales réalisés avec succès !</h1><br>
+        <h2>Vos modifications : </h2>
+        <h4>N :</h4><br>
+        <p th:text="${n}"></p>
+        <h4>V :</h4><br>
+        <p th:text="${v}"></p>
+        <h4>J :</h4><br>
+        <p th:text="${j}"></p>
     </div>
 </div>
 </body>

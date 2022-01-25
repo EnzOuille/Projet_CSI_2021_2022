@@ -84,12 +84,9 @@ public class AdminController {
             VariableGlobale n = vglRepo.getVariableN();
             VariableGlobale v = vglRepo.getVariableV();
             VariableGlobale j = vglRepo.getVariableJ();
-
             model.addAttribute("n",n.getVgl_valeur());
             model.addAttribute("j",j.getVgl_valeur());
             model.addAttribute("v",v.getVgl_valeur());
-            // recup VariableGloable n
-//            model.addAttribute("n.value",n.getValue());
             if (abonne.isAbn_admin()) {
                 return "form_changer_variable";
             } else {
@@ -108,6 +105,21 @@ public class AdminController {
             String id = session.getAttribute("abn_id").toString();
             Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(id));
             if (abonne.isAbn_admin()) {
+                String form_n = request.getParameter("n");
+                String form_v = request.getParameter("v");
+                String form_j = request.getParameter("j");
+                VariableGlobale n = vglRepo.getVariableN();
+                VariableGlobale v = vglRepo.getVariableV();
+                VariableGlobale j = vglRepo.getVariableJ();
+                n.setVgl_valeur(Long.parseLong(form_n));
+                v.setVgl_valeur(Long.parseLong(form_v));
+                j.setVgl_valeur(Long.parseLong(form_j));
+                vglRepo.save(n);
+                vglRepo.save(v);
+                vglRepo.save(j);
+                model.addAttribute("n",n.getVgl_valeur());
+                model.addAttribute("j",j.getVgl_valeur());
+                model.addAttribute("v",v.getVgl_valeur());
                 return "result_changer_variable";
             } else {
                 return "home_internaute";

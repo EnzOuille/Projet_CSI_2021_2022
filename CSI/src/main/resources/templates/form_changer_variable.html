@@ -6,6 +6,30 @@
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
+
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills float-right">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/deconnexion">Se déconnecter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/creer_domaine">Créer domaine</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/changer_variable">Changer variable</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Autres idées ?</a>
+                </li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Fake News</h3>
+    </div>
 <form class="form-horizontal" method="post" action="">
     <fieldset>
         <!-- Form Name -->
@@ -14,31 +38,32 @@
         <div class="form-group">
             <label class="col-md-4 control-label" for="n">Saisir nouvelle valeur pour "N" :</label>
             <div class="col-md-4">
-                <input id="n" name="n" type="text" value="${n.value}" class="form-control input-md" required="">
+                <input id="n" name="n" type="text" th:value="${n}" class="form-control input-md" required="">
             </div>
         </div>
         <!-- Text input-->
         <div class="form-group">
             <label class="col-md-4 control-label" for="v">Saisir nouvelle valeur pour "V" :</label>
             <div class="col-md-4">
-                <input id="v" name="v" type="text" value="${v.value}" class="form-control input-md" required="">
+                <input id="v" name="v" type="text" th:value="${v}" class="form-control input-md" required="">
             </div>
         </div>
         <!-- Text input-->
         <div class="form-group">
             <label class="col-md-4 control-label" for="j">Saisir nouvelle valeur pour "J" :</label>
             <div class="col-md-4">
-                <input id="j" name="j" type="text" value="${j.value}" class="form-control input-md" required="">
+                <input id="j" name="j" type="text" th:value="${j}" class="form-control input-md" required="">
             </div>
         </div>
         <!-- Button (Double) -->
         <div class="form-group">
             <label class="col-md-4 control-label" for="submit"></label>
             <div class="col-md-8">
-                <button id="submit" name="submit" class="btn btn-success">Ajouter</button>
+                <button id="submit" name="submit" class="btn btn-success">Modifier</button>
             </div>
         </div>
     </fieldset>
 </form>
+</div>
 </body>
 </html>
