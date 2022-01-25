@@ -16,6 +16,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +47,8 @@ public class InternauteController {
         String pseudo = request.getParameter("pseudo");
         String email = request.getParameter("email");
         String mdp = request.getParameter("password");
-        Abonne abonne = new Abonne(nom, prenom, email, pseudo, mdp);
+        Abonne abn_temp = abonneRepo.getMaxId();
+        Abonne abonne = new Abonne(abn_temp.getAbn_id()+1,nom, prenom, email, pseudo, mdp);
         Abonne abo = abonneRepo.save(abonne);
         ArrayList<DomainePrivilegie> listDomToSave = new ArrayList<>();
         for (String s : List.of("domaine_1","domaine_2","domaine_3")) {
