@@ -41,7 +41,6 @@ public class AdminController {
         try {
             String id = session.getAttribute("abn_id").toString();
             Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(id));
-            System.out.println(abonne.isAbn_admin());
             if (abonne.isAbn_admin()) {
                 String nom = request.getParameter("domaine");
                 Domaine domaine = new Domaine(nom,"valide");

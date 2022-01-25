@@ -38,24 +38,6 @@ public class HomeController {
     private VariableGlobaleRepo varRepo;
 
     @GetMapping("/")
-    public String getHome(Model model, HttpServletRequest request, HttpSession session) {
-        try {
-            String id = session.getAttribute("abn_id").toString();
-            System.out.println("HOME " + id);
-            Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(id));
-            if (abonne.isAbn_admin()) {
-                return "home_admin";
-            } else if (abonne.isAbn_conf()) {
-                return "home_abonne_conf";
-            } else {
-                return "home_abonne";
-            }
-        } catch (NullPointerException e) {
-            return "home_internaute";
-        }
-    }
-
-    @GetMapping("/news")
     public String list_news_internaute(Model model, HttpServletRequest request, HttpSession session) {
         int n = (int) varRepo.getVariableJ().getVgl_valeur();
         String abn_id = "";
@@ -80,7 +62,7 @@ public class HomeController {
         try {
             abn_id = session.getAttribute("abn_id").toString();
         } catch (Exception e) {
-            System.out.println(e.toString());
+            abn_id = "";
         }
         if (!abn_id.equals("")) {
             List<News> news = newsRepo.findAllActiveNews(n);

@@ -4,17 +4,35 @@
     <meta charset="UTF-8">
     <title>Consulter News Internaute</title>
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <link rel="icon" href="../../../../favicon.ico">
+    <link href="../../css/editor.css" rel="stylesheet">
+    <link href="narrow-jumbotron.css" rel="stylesheet">
 </head>
 <body>
-<div class="header clearfix col-12">
-    <nav>
-        <ul class="nav nav-pills float-right">
-            <li class="nav-item">
-                <a class="nav-link active" href="/">Accueil <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-    </nav>
-    <h3 class="text-muted">Fake News</h3>
+
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills float-right">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/connexion">Se connecter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Autres idées ?</a>
+                </li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Fake News</h3>
+    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-3">Bienvenue sur notre site !</h1>
+        <p class="lead">Vous pouvez consulter les news selon leurs catégories et mots clefs.</p>
+        <p><a class="btn btn-lg btn-success" href="/inscription" role="button">S'inscrire</a></p>
+    </div>
 </div>
 <h1 class="text-center">Les news : </h1>
 <div class="col-10 m-auto">
@@ -104,8 +122,10 @@
             </div>
         </div>
     </div>
+    <footer class="footer">
+        <p>© IDMC - M1 Miage : 2021-2022</p>
+    </footer>
 </div>
-
 <script type="text/javascript" th:src="@{/jquery/jquery.js}"></script>
 <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.js}"></script>
 <th:block>
