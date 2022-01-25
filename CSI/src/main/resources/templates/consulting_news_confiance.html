@@ -198,7 +198,12 @@
                     <th th:text="${entry.mtc3}"></th>
                     <th th:text="${entry.dom}"></th>
                     <th><a th:href="|@{/modification_news/?new_id=}${entry.id}|">Modifier</a></th>
-                    <th><a th:href="|@{/delete_news?id=}${entry.id}|">Supprimer</a></th>
+                    <th:block th:if="${entry.etat} == 'en attente'">
+                        <th><a th:href="|@{/delete_news?id=}${entry.id}|">Supprimer</a></th>
+                    </th:block>
+                    <th:block th:if="${entry.etat} != 'en attente'">
+                        <th>Non Supprimable</th>
+                    </th:block>
                 </tr>
             </th:block>
             </tbody>
