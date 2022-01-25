@@ -1,7 +1,6 @@
 package com.csi.CSI.controller;
 
-import com.csi.CSI.objets.Abonne;
-import com.csi.CSI.objets.Domaine;
+import com.csi.CSI.objets.*;
 import com.csi.CSI.repositories.AbonneRepo;
 import com.csi.CSI.repositories.DomaineRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -50,5 +50,24 @@ public class AdminController {
         } catch (Exception e) {
             return "form_creer_domaine";
         }
+    }
+
+    @GetMapping("/etudier_domaine")
+    public String getEtudierDomaine(Model model, HttpServletRequest request,@RequestParam long domaine_id) {
+        Domaine domaine = domaineRepo.getDomaineOnlyById(domaine_id);
+        model.addAttribute("dom_id", domaine.getDom_id());
+        model.addAttribute("dom_nom", domaine.getDom_nom());
+        model.addAttribute("dom_etat", domaine.getDom_etat());
+        return "form_etudier_domaine";
+    }
+
+    @PostMapping("/etudier_domaine")
+    public String postEtudierDomaine(Model model, HttpServletRequest request,@RequestParam long domaine_id) {
+        Domaine domaine = domaineRepo.getDomaineOnlyById(domaine_id);
+        String statut = request.getParameter("statut");
+        domaine.setDom_etat(statut);
+        domaineRepo.save(domaine);
+        model.addAttribute("statut", statut);
+        return "result_etudier_domaine";
     }
 }
