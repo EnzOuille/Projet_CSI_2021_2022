@@ -167,7 +167,7 @@
             <tbody>
             <th:block th:each="entry : ${news_abonne}">
                 <tr>
-                    <th th:text="${entry.id}"></th>
+                    <th><a th:href="|@{/modification_news/?new_id=}${entry.id}|" th:text="${entry.id}"></a></th>
                     <th th:text="${entry.texte}"></th>
                     <th th:text="${entry.date_creation}"></th>
                     <th th:text="${entry.etat}"></th>

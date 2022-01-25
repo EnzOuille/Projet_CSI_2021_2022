@@ -166,7 +166,7 @@
             <tbody>
             <th:block th:each="entry : ${news_abonne}">
                 <tr>
-                    <th th:text="${entry.id}"></th>
+                    <th><a th:href="|@{/modification_news/?new_id=}${entry.id}|" th:text="${entry.id}"></th>
                     <th th:text="${entry.texte}"></th>
                     <th th:text="${entry.date_creation}"></th>
                     <th th:text="${entry.etat}"></th>
@@ -192,7 +192,7 @@
                     <th:block th:each="news : ${news_study}">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title" th:text="${news.new_id}"></h5>
+                                <h5 class="card-title"><a th:href="|@{/etudier_news/?new_id=}${news.new_id}|" th:text="${news.new_id}"></a></h5>
                                 <p class="card-text" th:text="${news.new_texte}"></p>
                             </div>
                         </div>

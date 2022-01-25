@@ -106,7 +106,7 @@
                     <th:block th:each="news : ${news_study}">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title" th:text="${news.new_id}"></h5>
+                                <h5 class="card-title"><a th:href="|@{/etudier_news/?new_id=}${news.new_id}|" th:text="${news.new_id}"></a></h5>
                                 <p class="card-text" th:text="${news.new_texte}"></p>
                             </div>
                         </div>
