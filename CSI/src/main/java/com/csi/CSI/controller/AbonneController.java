@@ -235,10 +235,12 @@ public class AbonneController {
 
         return getProfil(model, request, abonne_id);
     }
+    @GetMapping("/delete_news")
 
-    @PostMapping("/delete_news")
     public RedirectView deleteNews(Model model, HttpServletRequest request, @RequestParam long id) {
         News news = newsRepo.findNewsById(id);
+        AEvalue aevalue = aEvalueRepo.getAEvalueByNews(id);
+        aEvalueRepo.delete(aevalue);
         newsRepo.delete(news);
         
         RedirectView redirectView = new RedirectView();
