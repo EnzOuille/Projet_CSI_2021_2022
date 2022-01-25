@@ -71,4 +71,38 @@ public class AdminController {
         model.addAttribute("statut", statut);
         return "result_etudier_domaine";
     }
+
+    @GetMapping("/changer_variable")
+    public String getChangerVariable(Model model, HttpServletRequest request, HttpSession session) {
+        try {
+            String id = session.getAttribute("abn_id").toString();
+            Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(id));
+            if (abonne.isAbn_admin()) {
+                return "form_changer_variable";
+            } else {
+                return "home_internaute";
+            }
+        } catch (NullPointerException e) {
+            return "home_internaute";
+        } catch (Exception e) {
+            return "form_changer_variable";
+        }
+    }
+
+    @PostMapping("/changer_variable")
+    public String postChangerVariable(Model model, HttpServletRequest request, HttpSession session) {
+        try {
+            String id = session.getAttribute("abn_id").toString();
+            Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(id));
+            if (abonne.isAbn_admin()) {
+                return "result_changer_variable";
+            } else {
+                return "home_internaute";
+            }
+        } catch (NullPointerException e) {
+            return "home_internaute";
+        } catch (Exception e) {
+            return "form_changer_variable";
+        }
+    }
 }
