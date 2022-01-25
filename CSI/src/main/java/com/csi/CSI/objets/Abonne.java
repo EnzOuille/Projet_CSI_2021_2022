@@ -35,9 +35,6 @@ public class Abonne implements Serializable {
     private boolean abn_admin;
 
     @Column
-    private boolean abn_confiance;
-
-    @Column
     private java.sql.Date abn_date_inscrit;
 
     @Column
@@ -122,13 +119,6 @@ public class Abonne implements Serializable {
         this.abn_admin = abn_admin;
     }
 
-    public boolean isAbn_confiance() {
-        return abn_confiance;
-    }
-
-    public void setAbn_confiance(boolean abn_confiance) {
-        this.abn_confiance = abn_confiance;
-    }
 
     public Date getAbn_date_inscrit() {
         return abn_date_inscrit;
@@ -165,10 +155,8 @@ public class Abonne implements Serializable {
     public void verifConf() {
         if (this.abn_nb_news >= 3 && ((float) this.abn_nb_news / this.abn_nb_news_valid) >= 0.8) {
             this.abn_conf = true;
-            this.abn_confiance = true;
         }else{
             this.abn_conf = false;
-            this.abn_confiance = false;
         }
     }
 }

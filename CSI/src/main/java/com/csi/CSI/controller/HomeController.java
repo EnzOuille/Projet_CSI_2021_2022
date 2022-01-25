@@ -42,7 +42,7 @@ public class HomeController {
             Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(id));
             if (abonne.isAbn_admin()) {
                 return "home_admin";
-            } else if (abonne.isAbn_confiance()) {
+            } else if (abonne.isAbn_conf()) {
                 return "home_abonne_conf";
             } else {
                 return "home_abonne";
@@ -131,7 +131,7 @@ public class HomeController {
                 model.addAttribute("news_study", news_to_study);
                 model.addAttribute("type", "admin");
                 return "consulting_news_admin";
-            } else if (abonne.isAbn_confiance()) {
+            } else if (abonne.isAbn_conf()) {
                 List<News> news_to_study = newsRepo.findNewsToStudy();
                 model.addAttribute("news_study", news_to_study);
                 model.addAttribute("type", "confiance");

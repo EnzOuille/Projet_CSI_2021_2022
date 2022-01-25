@@ -16,6 +16,9 @@ public interface DomaineRepo extends JpaRepository<Domaine, String>, JpaSpecific
     @Query(value = "select * from domaine where dom_id= ?1 and dom_etat = 'valide'", nativeQuery = true)
     Domaine getDomaineById(long id);
 
+    @Query(value = "select * from domaine where dom_id= ?1", nativeQuery = true)
+    Domaine getDomaineOnlyById(long id);
+
     @Query(value = "select * from domaine where dom_etat = 'valide'", nativeQuery = true)
     List<Domaine> findAllActive();
 
