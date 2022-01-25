@@ -34,6 +34,9 @@ public class HomeController {
     @Autowired
     private MotCleRepo keyRepo;
 
+    @Autowired
+    private VariableGlobaleRepo varRepo;
+
     @GetMapping("/")
     public String getHome(Model model, HttpServletRequest request, HttpSession session) {
         try {
@@ -54,14 +57,15 @@ public class HomeController {
 
     @GetMapping("/news")
     public String list_news_internaute(Model model, HttpServletRequest request, HttpSession session) {
+        int n = (int) varRepo.getVariableJ().getVgl_valeur();
         String abn_id = "";
         List<Domaine> cats = domRepo.findAllActive();
         HashMap<String, List<News>> news_list_3 = new HashMap<>();
         HashMap<String, List<News>> news_list = new HashMap<>();
         for (Domaine cat : cats) {
-            List<News> last3 = newsRepo.findNewsByCategoryLast3((int) cat.getDom_id());
+            List<News> last3 = newsRepo.findNewsByCategoryLast3((int) cat.getDom_id(),n);
             news_list_3.put(cat.getDom_nom(), last3);
-            List<News> news = newsRepo.findNewsByCategory((int) cat.getDom_id());
+            List<News> news = newsRepo.findNewsByCategory((int) cat.getDom_id(),n);
             news_list.put(cat.getDom_nom(), news);
         }
         model.addAttribute("news_categories", news_list);
@@ -69,7 +73,7 @@ public class HomeController {
         List<MotCle> keywords = keyRepo.findAll();
         HashMap<String, List<News>> news_keywords = new HashMap<>();
         for (MotCle key : keywords) {
-            List<News> news_key = newsRepo.findNewsByKeyword((int) key.getMtc_id());
+            List<News> news_key = newsRepo.findNewsByKeyword((int) key.getMtc_id(),n);
             news_keywords.put(key.getMtc_nom(), news_key);
         }
         model.addAttribute("news_keywords", news_keywords);
@@ -79,7 +83,7 @@ public class HomeController {
             System.out.println(e.toString());
         }
         if (!abn_id.equals("")) {
-            List<News> news = newsRepo.findAllActiveNews();
+            List<News> news = newsRepo.findAllActiveNews(n);
             List<NewsDisplay> disp_news = new ArrayList<>();
             for (News temp_new : news) {
                 Abonne abonne1 = abnRepo.getAbonneById((int) temp_new.getNew_abn_id());
@@ -104,7 +108,7 @@ public class HomeController {
             }
             model.addAttribute("news_archive", list_archive_news);
             Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(abn_id));
-            List<News> news_abonne = newsRepo.findNewsByAbonne(Integer.parseInt(abn_id));
+            List<News> news_abonne = newsRepo.findNewsByAbonne(Integer.parseInt(abn_id),n);
             List<NewsDisplay> res_list = new ArrayList<>();
             for (News temp : news_abonne) {
                 Abonne abonne1 = abnRepo.getAbonneById((int) temp.getNew_abn_id());
@@ -119,7 +123,7 @@ public class HomeController {
             List<DomainePrivilegie> doms = domPrefRepo.findDomainesByAbonne(Integer.parseInt(abn_id));
             List<News> news_dpl = new ArrayList<>();
             for (DomainePrivilegie dpl : doms) {
-                List<News> temp_news_dpl = newsRepo.findNewsByCategoryLast3((int) dpl.getDpl_dom_id());
+                List<News> temp_news_dpl = newsRepo.findNewsByCategoryLast3((int) dpl.getDpl_dom_id(),n);
                 news_dpl.addAll(temp_news_dpl);
             }
             model.addAttribute("news_dpl", news_dpl);
@@ -127,12 +131,12 @@ public class HomeController {
             if (abonne.isAbn_admin()) {
                 List<Domaine> list_dom = domRepo.getDomToStudy();
                 model.addAttribute("dom_study", list_dom);
-                List<News> news_to_study = newsRepo.findNewsToStudy();
+                List<News> news_to_study = newsRepo.findNewsToStudy(n);
                 model.addAttribute("news_study", news_to_study);
                 model.addAttribute("type", "admin");
                 return "consulting_news_admin";
             } else if (abonne.isAbn_conf()) {
-                List<News> news_to_study = newsRepo.findNewsToStudy();
+                List<News> news_to_study = newsRepo.findNewsToStudy(n);
                 model.addAttribute("news_study", news_to_study);
                 model.addAttribute("type", "confiance");
                 return "consulting_news_confiance";
