@@ -3,6 +3,7 @@ package com.csi.CSI.controller;
 import com.csi.CSI.objets.*;
 import com.csi.CSI.repositories.AbonneRepo;
 import com.csi.CSI.repositories.DomaineRepo;
+import com.csi.CSI.repositories.VariableGlobaleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,9 @@ public class AdminController {
 
     @Autowired
     AbonneRepo abnRepo;
+
+    @Autowired
+    VariableGlobaleRepo vglRepo;
 
     @GetMapping("/creer_domaine")
     public String getCreerDomaine(Model model, HttpServletRequest request, HttpSession session) {
@@ -77,6 +81,15 @@ public class AdminController {
         try {
             String id = session.getAttribute("abn_id").toString();
             Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(id));
+            VariableGlobale n = vglRepo.getVariableN();
+            VariableGlobale v = vglRepo.getVariableV();
+            VariableGlobale j = vglRepo.getVariableJ();
+
+            model.addAttribute("n",n.getVgl_valeur());
+            model.addAttribute("j",j.getVgl_valeur());
+            model.addAttribute("v",v.getVgl_valeur());
+            // recup VariableGloable n
+//            model.addAttribute("n.value",n.getValue());
             if (abonne.isAbn_admin()) {
                 return "form_changer_variable";
             } else {

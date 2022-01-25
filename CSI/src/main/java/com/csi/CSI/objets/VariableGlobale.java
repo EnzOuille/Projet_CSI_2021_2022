@@ -26,4 +26,28 @@ public class VariableGlobale implements Serializable {
     public VariableGlobale() {
 
     }
+
+    public char getVgl_nom() {
+        return vgl_nom;
+    }
+
+    public long getVgl_id() {
+        return vgl_id;
+    }
+
+    public long getVgl_valeur() {
+        return vgl_valeur;
+    }
+
+    public void setVgl_id(long vgl_id) {
+        this.vgl_id = vgl_id;
+    }
+
+    public void setVgl_nom(char vgl_nom) {
+        this.vgl_nom = vgl_nom;
+    }
+
+    public void setVgl_valeur(long vgl_valeur) {
+        this.vgl_valeur = vgl_valeur;
+    }
 }
