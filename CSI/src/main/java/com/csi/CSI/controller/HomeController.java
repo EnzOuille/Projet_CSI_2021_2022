@@ -73,36 +73,36 @@ public class HomeController {
             news_keywords.put(key.getMtc_nom(), news_key);
         }
         model.addAttribute("news_keywords", news_keywords);
-        List<News> news = newsRepo.findAllActiveNews();
-        List<NewsDisplay> disp_news = new ArrayList<>();
-        for (News temp_new : news) {
-            Abonne abonne1 = abnRepo.getAbonneById((int) temp_new.getNew_abn_id());
-            MotCle mtc1 = keyRepo.getMotCleById(temp_new.getNew_mtc_1());
-            MotCle mtc2 = keyRepo.getMotCleById(temp_new.getNew_mtc_2());
-            MotCle mtc3 = keyRepo.getMotCleById(temp_new.getNew_mtc_3());
-            Domaine dom = domRepo.getDomaineById((int) temp_new.getNew_dom_id());
-            NewsDisplay newDisp = new NewsDisplay(temp_new, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), dom.getDom_nom());
-            disp_news.add(newDisp);
-        }
-        model.addAttribute("news", disp_news);
-        List<ArchivageNews> archive_news = archRepo.findAll();
-        List<NewsDisplay> list_archive_news = new ArrayList<>();
-        for (ArchivageNews temp_new : archive_news) {
-            Abonne abonne1 = abnRepo.getAbonneById((int) temp_new.getArc_abn_id());
-            MotCle mtc1 = keyRepo.getMotCleById(temp_new.getArc_mtc_1());
-            MotCle mtc2 = keyRepo.getMotCleById(temp_new.getArc_mtc_2());
-            MotCle mtc3 = keyRepo.getMotCleById(temp_new.getArc_mtc_3());
-            Domaine dom = domRepo.getDomaineById((int) temp_new.getArc_dom_id());
-            NewsDisplay newDisp = new NewsDisplay(temp_new, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), dom.getDom_nom());
-            list_archive_news.add(newDisp);
-        }
-        model.addAttribute("news_archive", list_archive_news);
         try {
             abn_id = session.getAttribute("abn_id").toString();
         } catch (Exception e) {
             System.out.println(e.toString());
         }
         if (!abn_id.equals("")) {
+            List<News> news = newsRepo.findAllActiveNews();
+            List<NewsDisplay> disp_news = new ArrayList<>();
+            for (News temp_new : news) {
+                Abonne abonne1 = abnRepo.getAbonneById((int) temp_new.getNew_abn_id());
+                MotCle mtc1 = keyRepo.getMotCleById(temp_new.getNew_mtc_1());
+                MotCle mtc2 = keyRepo.getMotCleById(temp_new.getNew_mtc_2());
+                MotCle mtc3 = keyRepo.getMotCleById(temp_new.getNew_mtc_3());
+                Domaine dom = domRepo.getDomaineById((int) temp_new.getNew_dom_id());
+                NewsDisplay newDisp = new NewsDisplay(temp_new, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), dom.getDom_nom());
+                disp_news.add(newDisp);
+            }
+            model.addAttribute("news", disp_news);
+            List<ArchivageNews> archive_news = archRepo.findAll();
+            List<NewsDisplay> list_archive_news = new ArrayList<>();
+            for (ArchivageNews temp_new : archive_news) {
+                Abonne abonne1 = abnRepo.getAbonneById((int) temp_new.getArc_abn_id());
+                MotCle mtc1 = keyRepo.getMotCleById(temp_new.getArc_mtc_1());
+                MotCle mtc2 = keyRepo.getMotCleById(temp_new.getArc_mtc_2());
+                MotCle mtc3 = keyRepo.getMotCleById(temp_new.getArc_mtc_3());
+                Domaine dom = domRepo.getDomaineById((int) temp_new.getArc_dom_id());
+                NewsDisplay newDisp = new NewsDisplay(temp_new, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), dom.getDom_nom());
+                list_archive_news.add(newDisp);
+            }
+            model.addAttribute("news_archive", list_archive_news);
             Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(abn_id));
             List<News> news_abonne = newsRepo.findNewsByAbonne(Integer.parseInt(abn_id));
             List<NewsDisplay> res_list = new ArrayList<>();
