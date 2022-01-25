@@ -97,6 +97,16 @@ CREATE TABLE DomainePrivilegie
     CONSTRAINT fk_domaine_abonne FOREIGN KEY (dpl_dom_id) REFERENCES Domaine(dom_id)
 );
 
+CREATE TABLE VariableGlobale (
+  vgl_id    INT not null PRIMARY KEY,
+  vgl_nom   char not null,
+  vgl_valeur    int not null
+);
+
+insert into VariableGlobale (vgl_id,vgl_nom,vgl_valeur) values (1,'N',10);
+insert into VariableGlobale (vgl_id,vgl_nom,vgl_valeur) values (2,'V',50);
+insert into VariableGlobale (vgl_id,vgl_nom,vgl_valeur) values (3,'J',10);
+
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (13, 'Melisenda', 'Janek', 'mjanekc@washington.edu', 'mjanekc', 'y51WADh3eF', false, '2021-08-04', 87, 25, true);
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (16, 'Loralyn', 'McCrow', 'lmccrowf@scientificamerican.com', 'lmccrowf', 'HoMhYs', false, '2021-06-18', 95, 86, true);
 INSERT INTO public.abonne (abn_id, abn_nom, abn_prenom, abn_email, abn_pseudo, abn_mdp, abn_admin, abn_date_inscrit, abn_nb_news, abn_nb_news_valid, abn_conf) VALUES (18, 'Rosetta', 'Dolby', 'rdolbyh@guardian.co.uk', 'rdolbyh', '8BAtuD36', false, '2021-09-20', 48, 72, true);
