@@ -239,13 +239,13 @@ public class AbonneController {
 
         return getProfil(model, request, abonne_id);
     }
-    @GetMapping("/delete_news")
 
+    @GetMapping("/delete_news")
     public RedirectView deleteNews(Model model, HttpServletRequest request, @RequestParam long id) {
         News news = newsRepo.findNewsById(id);
+        newsRepo.delete(news);
         AEvalue aevalue = aEvalueRepo.getAEvalueByNews(id);
         aEvalueRepo.delete(aevalue);
-        newsRepo.delete(news);
         
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("http://localhost:9001/");
