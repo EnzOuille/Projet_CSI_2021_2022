@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- See configuration in WebMvConfig.java -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <meta charset="UTF-8">
+    <title>Profil</title>
+</head>
+<body>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills float-right">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Fake News</h3>
+    </div>
+    <form class="form-horizontal" method="post" th:action="${abonne_url_profil}">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Profil</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="post_abonne_nom">Nom</label>
+                <div class="col-md-4">
+                    <input id="abonne_nom" name="abonne_nom" type="text" th:value="${abonne_nom}" class="form-control input-md" required="">
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="post_abonne_prenom">Prénom :</label>
+                <div class="col-md-4">
+                    <input id="abonne_prenom" name="abonne_prenom" type="text" th:value="${abonne_prenom}" class="form-control input-md" required="">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="post_abonne_pseudo">Pseudo :</label>
+                <div class="col-md-4">
+                    <input id="abonne_pseudo" name="abonne_pseudo" type="text" th:value="${abonne_pseudo}" class="form-control input-md" required="">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="post_abonne_password">Mot de passe : </label>
+                <div class="col-md-4">
+                    <input id="abonne_password" name="abonne_password" type="password" th:value="${abonne_password}" class="form-control input-md" required="">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="post_abonne_email">Email : </label>
+                <div class="col-md-4">
+                    <input id="abonne_email" name="abonne_email" type="text" th:value="${abonne_email}" class="form-control input-md" required="">
+
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="abonne_domaine_1">Premier domaine :</label>
+                <div class="col-md-4">
+                    <select id="domaine_1" name="abonne_domaine_1" class="form-control">
+                        <option th:each="domaine : ${domaine_1}" th:value="${domaine_1.dom_id}" th:utext="${domaine_1.dom_nom}" selected/>
+                        <option th:each="domaine : ${domaines1}" th:value="${domaine.dom_id}" th:utext="${domaine.dom_nom}"/>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="abonne_domaine_2">Deuxième domaine :</label>
+                <div class="col-md-4">
+                    <select id="domaine_2" name="abonne_domaine_2" class="form-control">
+                        <option th:each="domaine : ${domaine_2}" th:value="${domaine_2.dom_id}" th:utext="${domaine_2.dom_nom}" selected/>
+                        <option th:each="domaine : ${domaines2}" th:value="${domaine.dom_id}" th:utext="${domaine.dom_nom}"/>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="abonne_domaine_3">Troisième domaine :</label>
+                <div class="col-md-4">
+                    <select id="domaine_3" name="abonne_domaine_3" class="form-control">
+                        <option th:each="domaine : ${domaine_3}" th:value="${domaine_3.dom_id}" th:utext="${domaine_3.dom_nom}" selected/>
+                        <option th:each="domaine : ${domaines3}" th:value="${domaine.dom_id}" th:utext="${domaine.dom_nom}"/>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="submit"></label>
+                <div class="col-md-8">
+                    <button id="submit" name="submit" class="btn btn-success">Modifier</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>
