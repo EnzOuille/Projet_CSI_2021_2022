@@ -32,15 +32,16 @@ public class AdminController {
         try {
             String id = session.getAttribute("abn_id").toString();
             Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(id));
+            System.out.println(abonne.isAbn_admin());
             if (abonne.isAbn_admin()) {
                 String nom = request.getParameter("domaine");
-                Domaine domaine = new Domaine(nom);
+                Domaine domaine = new Domaine(nom,"valide");
                 domaineRepo.save(domaine);
                 model.addAttribute("domaine_nom", nom);
                 return "result_creer_domaine";
             } else {
                 String nom = request.getParameter("domaine");
-                Domaine domaine = new Domaine(nom,"en attente");
+                Domaine domaine = new Domaine(nom);
                 domaineRepo.save(domaine);
                 model.addAttribute("domaine_nom", nom);
                 return "result_creer_domaine";
