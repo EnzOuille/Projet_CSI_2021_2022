@@ -168,14 +168,15 @@ public class AbonneController {
     }
 
     @GetMapping("/profil")
-    public String getProfil(Model model, HttpServletRequest request, @RequestParam long abonne_id) {
-        Abonne abonne = abonneRepo.getAbonneById(abonne_id);
+    public String getProfil(Model model, HttpServletRequest request, HttpSession session) {
+        String abonne_id = session.getAttribute("abn_id").toString();
+        Abonne abonne = abonneRepo.getAbonneById(Integer.parseInt(abonne_id));
         model.addAttribute("abonne_nom", abonne.getAbn_nom());
         model.addAttribute("abonne_prenom", abonne.getAbn_prenom());
         model.addAttribute("abonne_pseudo", abonne.getAbn_pseudo());
         model.addAttribute("abonne_email", abonne.getAbn_email());
         model.addAttribute("abonne_password", abonne.getAbn_mdp());
-        model.addAttribute("abonne_url_profil", "/profil?abonne_id=" + abonne_id);
+        //model.addAttribute("abonne_url_profil", "/profil?abonne_id=" + abonne_id);
 
         List<DomainePrivilegie> listDomainePrivilegie = domainePrivilegieRepo.findDomainesByAbonne((int)abonne.getAbn_id());
         Domaine domaine1 = domaineRepo.getDomaineById(listDomainePrivilegie.get(0).getDpl_dom_id());
@@ -200,7 +201,8 @@ public class AbonneController {
     }
 
     @PostMapping("/profil")
-    public String postProfil(Model model, HttpServletRequest request, @RequestParam long abonne_id) {
+    public String postProfil(Model model, HttpServletRequest request, HttpSession session ) {
+        int abonne_id = Integer.parseInt(session.getAttribute("abn_id").toString());
         Abonne abonne = abonneRepo.getAbonneById(abonne_id);
         String abonne_nom = request.getParameter("abonne_nom");
         String abonne_prenom = request.getParameter("abonne_prenom");
@@ -215,7 +217,7 @@ public class AbonneController {
         abonne.setAbn_mdp(abonne_password);
         abonneRepo.save(abonne);
 
-        List<DomainePrivilegie> listDomainePrivilegie = domainePrivilegieRepo.findDomainesByAbonne((int)abonne_id);
+        List<DomainePrivilegie> listDomainePrivilegie = domainePrivilegieRepo.findDomainesByAbonne(abonne_id);
 
         Long abonne_domaine1 = Long.valueOf(request.getParameter("abonne_domaine_1"));
         Long abonne_domaine2 = Long.valueOf(request.getParameter("abonne_domaine_2"));
@@ -242,8 +244,7 @@ public class AbonneController {
             domaine_copie.setDpl_dom_id(abonne_domaine3);
             domainePrivilegieRepo.save(domaine_copie);
         }
-
-        return getProfil(model, request, abonne_id);
+        return "redirect:/";
     }
 
     @GetMapping("/delete_news")
