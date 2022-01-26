@@ -1,5 +1,6 @@
 package com.csi.CSI.repositories;
 
+import com.csi.CSI.objets.Domaine;
 import com.csi.CSI.objets.MotCle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -14,5 +15,8 @@ public interface MotCleRepo extends JpaRepository<MotCle, String>, JpaSpecificat
 
     @Query(value = "select * from motsclefs where mtc_id = ?1", nativeQuery = true)
     MotCle getMotCleById(long id);
+
+    @Query(value="SELECT * FROM motsclefs WHERE mtc_id=(SELECT max(mtc_id) FROM motsclefs) limit 1", nativeQuery = true)
+    MotCle getMaxId();
 }
 

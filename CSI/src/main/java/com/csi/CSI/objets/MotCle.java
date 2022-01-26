@@ -11,7 +11,7 @@ import java.sql.Date;
 public class MotCle {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private long mtc_id;
 
     @Column
@@ -33,8 +33,9 @@ public class MotCle {
         this.mtc_nom = mtc_nom;
     }
 
-    public MotCle(String texte) {
+    public MotCle(int id ,String texte) {
         this.mtc_nom = texte;
+        this.mtc_id = id;
     }
 
     public MotCle() {

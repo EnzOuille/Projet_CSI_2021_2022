@@ -1,5 +1,6 @@
 package com.csi.CSI.repositories;
 
+import com.csi.CSI.objets.Domaine;
 import com.csi.CSI.objets.News;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
