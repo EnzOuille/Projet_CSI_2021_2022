@@ -21,12 +21,12 @@ public interface NewsRepo extends JpaRepository<News, String>, JpaSpecificationE
     List<News> findNewsByCategory(int category, int n);
 
     @Query(
-        value = "SELECT * FROM News WHERE new_mtc_1 = ?1 OR new_mtc_2 = ?1 OR new_mtc_3 = ?1 AND current_date - new_date_creation < ?2 ORDER BY \"new_date_creation\" desc LIMIT 3", nativeQuery=true
+            value = "SELECT * FROM News WHERE new_mtc_1 = ?1 OR new_mtc_2 = ?1 OR new_mtc_3 = ?1 AND current_date - new_date_creation < ?2 ORDER BY \"new_date_creation\" desc LIMIT 3", nativeQuery = true
     )
     List<News> findNewsByKeywordLast3(int keyword, int n);
 
     @Query(
-        value = "SELECT * FROM News WHERE new_mtc_1 = ?1 OR new_mtc_2 = ?1 OR new_mtc_3 = ?1 AND current_date - new_date_creation < ?2 ORDER BY \"new_date_creation\" desc", nativeQuery=true
+            value = "SELECT * FROM News WHERE new_mtc_1 = ?1 OR new_mtc_2 = ?1 OR new_mtc_3 = ?1 AND current_date - new_date_creation < ?2 ORDER BY \"new_date_creation\" desc", nativeQuery = true
     )
     List<News> findNewsByKeyword(int keyword, int n);
 
@@ -44,5 +44,11 @@ public interface NewsRepo extends JpaRepository<News, String>, JpaSpecificationE
 
     @Query(value = "SELECT * FROM News WHERE new_id = ?1", nativeQuery = true)
     News findNewsById(long id);
+
+    @Query(value = "SELECT * FROM News WHERE new_abn_id = ?1 and current_date - new_date_creation < ?1 and new_etat LIKE 'en attente'", nativeQuery = true)
+    List<News> findNewsNotStudy(int abonne, int n);
+
+    @Query(value = "SELECT * FROM News WHERE current_date - new_date_creation > ?1", nativeQuery = true)
+    List<News> getOldNews(int n);
 }
 

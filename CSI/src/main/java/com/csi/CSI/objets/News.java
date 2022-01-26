@@ -118,7 +118,7 @@ public class News implements Serializable {
         java.util.Date utilDate = new java.util.Date();
         this.new_texte = texte;
         this.new_date_creation = new Date(utilDate.getTime());
-        this.new_etat = "non_validee";
+        this.new_etat = "en attente";
         this.new_abn_id = abn_id;
         this.new_mtc_1 = motCle;
         this.new_mtc_2 = motCle2;

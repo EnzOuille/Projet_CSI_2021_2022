@@ -24,7 +24,7 @@ public class AEvalue {
     private String eval_justification;
 
     @Column
-    private Date eval_date_justification;
+    private Date eval_date_justifcation;
 
     public long getEval_id() {
         return eval_id;
@@ -58,17 +58,19 @@ public class AEvalue {
         this.eval_justification = eval_justification;
     }
 
-    public Date getEval_date_justification() {
-        return eval_date_justification;
+    public Date getEval_date_justifcation() {
+        return eval_date_justifcation;
     }
 
-    public void setEval_date_justification(Date eval_date_justification) {
-        this.eval_date_justification = eval_date_justification;
+    public void setEval_date_justifcation(Date eval_date_justification) {
+        this.eval_date_justifcation = eval_date_justification;
     }
 
     public AEvalue(long evaluateur_id, long new_id) {
         this.eval_abn_id = evaluateur_id;
         this.eval_objet = new_id;
+        this.eval_justification = null;
+        this.eval_date_justifcation = null;
     }
 
     public AEvalue() {
@@ -78,6 +80,6 @@ public class AEvalue {
         java.util.Date utilDate = new java.util.Date();
         this.eval_objet = new_id;
         this.eval_justification = justification;
-        this.eval_date_justification = new Date(utilDate.getTime());
+        this.eval_date_justifcation = new Date(utilDate.getTime());
     }
 }
