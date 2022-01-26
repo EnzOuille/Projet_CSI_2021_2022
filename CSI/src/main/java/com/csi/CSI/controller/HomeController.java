@@ -3,7 +3,6 @@ package com.csi.CSI.controller;
 import com.csi.CSI.objets.*;
 import com.csi.CSI.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,6 +65,7 @@ public class HomeController {
             abn_id = "";
         }
         if (!abn_id.equals("")) {
+            model.addAttribute("abn_id",abn_id);
             List<News> news = newsRepo.findAllActiveNews(n);
             List<NewsDisplay> disp_news = new ArrayList<>();
             for (News temp_new : news) {
@@ -145,15 +145,5 @@ public class HomeController {
             model.addAttribute("type", "internaute");
             return "consulting_news_internaute";
         }
-    }
-
-    @Scheduled(cron = "0 0 1-7 * * *")
-    public void archivageNews() {
-        List<News> newsList = newsRepo.getOldNews((int) varRepo.getVariableJ().getVgl_valeur());
-        newsList.forEach(news -> {
-            ArchivageNews archivageNews = new ArchivageNews(news);
-            archRepo.save(archivageNews);
-            newsRepo.delete(news);
-        });
     }
 }

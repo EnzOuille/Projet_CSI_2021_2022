@@ -55,7 +55,8 @@ public class AdminController {
                 return "result_creer_domaine";
             }
         } catch (NullPointerException e) {
-            return "home_internaute";
+            session.setAttribute("abn_id","");
+            return "redirect:/";
         } catch (Exception e) {
             return "form_creer_domaine";
         }
@@ -115,10 +116,12 @@ public class AdminController {
             if (abonne.isAbn_admin()) {
                 return "form_changer_variable";
             } else {
-                return "home_internaute";
+                session.setAttribute("abn_id","");
+                return "redirect:/";
             }
         } catch (NullPointerException e) {
-            return "home_internaute";
+            session.setAttribute("abn_id","");
+            return "redirect:/";
         } catch (Exception e) {
             return "form_changer_variable";
         }
@@ -147,10 +150,12 @@ public class AdminController {
                 model.addAttribute("v",v.getVgl_valeur());
                 return "result_changer_variable";
             } else {
-                return "home_internaute";
+                session.setAttribute("abn_id","");
+                return "redirect:/";
             }
         } catch (NullPointerException e) {
-            return "home_internaute";
+            session.setAttribute("abn_id","");
+            return "redirect:/";
         } catch (Exception e) {
             return "form_changer_variable";
         }

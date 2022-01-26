@@ -246,7 +246,6 @@ public class AbonneController {
         newsRepo.delete(news);
         AEvalue aevalue = aEvalueRepo.getAEvalueByNews(id);
         aEvalueRepo.delete(aevalue);
-        
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl("http://localhost:9001/");
         return redirectView;
