@@ -223,18 +223,24 @@ public class AbonneController {
 
         if(listDomainePrivilegie.get(0).getDpl_dom_id() != abonne_domaine1) {
             DomainePrivilegie domaine = domainePrivilegieRepo.findDomaineByAbonneAndDomaine(abonne_id, listDomainePrivilegie.get(0).getDpl_dom_id());
-            domaine.setDpl_dom_id(abonne_domaine1);
-            domainePrivilegieRepo.save(domaine);
+            domainePrivilegieRepo.delete(domaine);
+            DomainePrivilegie domaine_copie = domaine;
+            domaine_copie.setDpl_dom_id(abonne_domaine1);
+            domainePrivilegieRepo.save(domaine_copie);
         }
         if(listDomainePrivilegie.get(1).getDpl_dom_id() != abonne_domaine2) {
             DomainePrivilegie domaine = domainePrivilegieRepo.findDomaineByAbonneAndDomaine(abonne_id, listDomainePrivilegie.get(1).getDpl_dom_id());
-            domaine.setDpl_dom_id(abonne_domaine2);
-            domainePrivilegieRepo.save(domaine);
+            DomainePrivilegie domaine_copie = domaine;
+            domainePrivilegieRepo.delete(domaine);
+            domaine_copie.setDpl_dom_id(abonne_domaine2);
+            domainePrivilegieRepo.save(domaine_copie);
         }
         if(listDomainePrivilegie.get(2).getDpl_dom_id() != abonne_domaine3) {
             DomainePrivilegie domaine = domainePrivilegieRepo.findDomaineByAbonneAndDomaine(abonne_id, listDomainePrivilegie.get(2).getDpl_dom_id());
-            domaine.setDpl_dom_id(abonne_domaine3);
-            domainePrivilegieRepo.save(domaine);
+            domainePrivilegieRepo.delete(domaine);
+            DomainePrivilegie domaine_copie = domaine;
+            domaine_copie.setDpl_dom_id(abonne_domaine3);
+            domainePrivilegieRepo.save(domaine_copie);
         }
 
         return getProfil(model, request, abonne_id);
