@@ -11,7 +11,7 @@ import java.sql.Date;
 public class ObjetEvalue {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private long obe_id;
 
     public long getObe_id() {
@@ -20,5 +20,13 @@ public class ObjetEvalue {
 
     public void setObe_id(long obe_id) {
         this.obe_id = obe_id;
+    }
+
+    public ObjetEvalue(int id){
+        this.obe_id = id;
+    }
+
+    public ObjetEvalue(){
+
     }
 }

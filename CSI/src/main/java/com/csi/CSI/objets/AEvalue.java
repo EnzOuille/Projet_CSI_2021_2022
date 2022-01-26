@@ -11,7 +11,7 @@ import java.sql.Date;
 public class AEvalue {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private long eval_id;
 
     @Column
@@ -24,7 +24,7 @@ public class AEvalue {
     private String eval_justification;
 
     @Column
-    private Date eval_date_justifcation;
+    private Date eval_date_justification;
 
     public long getEval_id() {
         return eval_id;
@@ -38,8 +38,8 @@ public class AEvalue {
         return eval_abn_id;
     }
 
-    public void setEval_abn_id(long evaluateur_id) {
-        this.eval_abn_id = evaluateur_id;
+    public void setEval_abn_id(long eval_abn_id) {
+        this.eval_abn_id = eval_abn_id;
     }
 
     public long getEval_objet() {
@@ -58,19 +58,20 @@ public class AEvalue {
         this.eval_justification = eval_justification;
     }
 
-    public Date getEval_date_justifcation() {
-        return eval_date_justifcation;
+    public Date getEval_date_justification() {
+        return eval_date_justification;
     }
 
-    public void setEval_date_justifcation(Date eval_date_justification) {
-        this.eval_date_justifcation = eval_date_justification;
+    public void setEval_date_justification(Date eval_date_justification) {
+        this.eval_date_justification = eval_date_justification;
     }
 
-    public AEvalue(long evaluateur_id, long new_id) {
+    public AEvalue(int id, long evaluateur_id, long new_id) {
+        this.eval_id = id;
         this.eval_abn_id = evaluateur_id;
         this.eval_objet = new_id;
         this.eval_justification = null;
-        this.eval_date_justifcation = null;
+        this.eval_date_justification = null;
     }
 
     public AEvalue() {
@@ -80,6 +81,6 @@ public class AEvalue {
         java.util.Date utilDate = new java.util.Date();
         this.eval_objet = new_id;
         this.eval_justification = justification;
-        this.eval_date_justifcation = new Date(utilDate.getTime());
+        this.eval_date_justification = new Date(utilDate.getTime());
     }
 }

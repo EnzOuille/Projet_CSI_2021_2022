@@ -66,11 +66,11 @@ public class AbonneController {
         long motClef2 = verificationKeyWord(request.getParameter("motClef2"));
         long motClef3 = verificationKeyWord(request.getParameter("motClef3"));
         long abn_id = abonne.getAbn_id();
-        ObjetEvalue objetEvalue = new ObjetEvalue();
+        ObjetEvalue objetEvalue = new ObjetEvalue((int)objetEvalueRepo.getMaxId().getObe_id()+1);
         objetEvalueRepo.save(objetEvalue);
         News news = new News(objetEvalue.getObe_id(), abn_id, texte, domaineRepo.getDomaineBy(domaine).getDom_id(), motClef1, motClef2, motClef3);
         newsRepo.save(news);
-        AEvalue aEvalue = new AEvalue(this.getEvaluateur(abn_id), objetEvalue.getObe_id());
+        AEvalue aEvalue = new AEvalue((int)aEvalueRepo.getMaxId().getEval_id()+1,news.getNew_abn_id(), objetEvalue.getObe_id());
         aEvalueRepo.save(aEvalue);
         abonneRepo.save(abonne);
         return "result_ajout_news";
@@ -78,7 +78,7 @@ public class AbonneController {
 
     private long verificationKeyWord(String keyWord) {
         if (motCleRepo.getMotCleBy(keyWord) == null) {
-            MotCle motCle = new MotCle(keyWord);
+            MotCle motCle = new MotCle((int)motCleRepo.getMaxId().getMtc_id()+1,keyWord);
             motCleRepo.save(motCle);
             return motCle.getMtc_id();
         } else {
