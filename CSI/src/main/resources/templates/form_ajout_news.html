@@ -37,6 +37,19 @@
                 </div>
             </div>
 
+            <!-- Select Basic -->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="domaine">Domaine</label>
+                <div class="col-md-4">
+                    <select id="domaine" name="domaine" class="form-control">
+                        <th:block th:each="domaine : ${domaines}">
+                            <option th:value="${domaine.dom_nom}" th:text="${domaine.dom_nom}"></option>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+
             <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="newDomaine">Domaine</label>

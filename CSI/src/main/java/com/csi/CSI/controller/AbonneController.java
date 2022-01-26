@@ -47,6 +47,8 @@ public class AbonneController {
 
     @GetMapping("/ajout_news")
     public String getAjoutNews(Model model, HttpServletRequest request, HttpSession session) {
+        List<Domaine> domaines = domaineRepo.findAllActive();
+        model.addAttribute("domaines", domaines);
         return "form_ajout_news";
     }
 
@@ -178,13 +180,13 @@ public class AbonneController {
         model.addAttribute("abonne_password", abonne.getAbn_mdp());
         //model.addAttribute("abonne_url_profil", "/profil?abonne_id=" + abonne_id);
 
-        List<DomainePrivilegie> listDomainePrivilegie = domainePrivilegieRepo.findDomainesByAbonne((int)abonne.getAbn_id());
+        List<DomainePrivilegie> listDomainePrivilegie = domainePrivilegieRepo.findDomainesByAbonne((int) abonne.getAbn_id());
         Domaine domaine1 = domaineRepo.getDomaineById(listDomainePrivilegie.get(0).getDpl_dom_id());
         Domaine domaine2 = domaineRepo.getDomaineById(listDomainePrivilegie.get(1).getDpl_dom_id());
         Domaine domaine3 = domaineRepo.getDomaineById(listDomainePrivilegie.get(2).getDpl_dom_id());
-        model.addAttribute("domaine_1",domaine1);
-        model.addAttribute("domaine_2",domaine2);
-        model.addAttribute("domaine_3",domaine3);
+        model.addAttribute("domaine_1", domaine1);
+        model.addAttribute("domaine_2", domaine2);
+        model.addAttribute("domaine_3", domaine3);
 
         List<Domaine> listDomaine1 = domaineRepo.findAllActive();
         List<Domaine> listDomaine2 = domaineRepo.findAllActive();
@@ -194,14 +196,14 @@ public class AbonneController {
         listDomaine2.remove(domaine2);
         listDomaine3.remove(domaine3);
 
-        model.addAttribute("domaines1",listDomaine1);
-        model.addAttribute("domaines2",listDomaine2);
-        model.addAttribute("domaines3",listDomaine3);
+        model.addAttribute("domaines1", listDomaine1);
+        model.addAttribute("domaines2", listDomaine2);
+        model.addAttribute("domaines3", listDomaine3);
         return "form_modification_profil";
     }
 
     @PostMapping("/profil")
-    public String postProfil(Model model, HttpServletRequest request, HttpSession session ) {
+    public String postProfil(Model model, HttpServletRequest request, HttpSession session) {
         int abonne_id = Integer.parseInt(session.getAttribute("abn_id").toString());
         Abonne abonne = abonneRepo.getAbonneById(abonne_id);
         String abonne_nom = request.getParameter("abonne_nom");
@@ -223,21 +225,21 @@ public class AbonneController {
         Long abonne_domaine2 = Long.valueOf(request.getParameter("abonne_domaine_2"));
         Long abonne_domaine3 = Long.valueOf(request.getParameter("abonne_domaine_3"));
 
-        if(listDomainePrivilegie.get(0).getDpl_dom_id() != abonne_domaine1) {
+        if (listDomainePrivilegie.get(0).getDpl_dom_id() != abonne_domaine1) {
             DomainePrivilegie domaine = domainePrivilegieRepo.findDomaineByAbonneAndDomaine(abonne_id, listDomainePrivilegie.get(0).getDpl_dom_id());
             domainePrivilegieRepo.delete(domaine);
             DomainePrivilegie domaine_copie = domaine;
             domaine_copie.setDpl_dom_id(abonne_domaine1);
             domainePrivilegieRepo.save(domaine_copie);
         }
-        if(listDomainePrivilegie.get(1).getDpl_dom_id() != abonne_domaine2) {
+        if (listDomainePrivilegie.get(1).getDpl_dom_id() != abonne_domaine2) {
             DomainePrivilegie domaine = domainePrivilegieRepo.findDomaineByAbonneAndDomaine(abonne_id, listDomainePrivilegie.get(1).getDpl_dom_id());
             DomainePrivilegie domaine_copie = domaine;
             domainePrivilegieRepo.delete(domaine);
             domaine_copie.setDpl_dom_id(abonne_domaine2);
             domainePrivilegieRepo.save(domaine_copie);
         }
-        if(listDomainePrivilegie.get(2).getDpl_dom_id() != abonne_domaine3) {
+        if (listDomainePrivilegie.get(2).getDpl_dom_id() != abonne_domaine3) {
             DomainePrivilegie domaine = domainePrivilegieRepo.findDomaineByAbonneAndDomaine(abonne_id, listDomainePrivilegie.get(2).getDpl_dom_id());
             domainePrivilegieRepo.delete(domaine);
             DomainePrivilegie domaine_copie = domaine;
