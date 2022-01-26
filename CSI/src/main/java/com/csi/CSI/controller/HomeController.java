@@ -45,9 +45,9 @@ public class HomeController {
         HashMap<String, List<News>> news_list_3 = new HashMap<>();
         HashMap<String, List<News>> news_list = new HashMap<>();
         for (Domaine cat : cats) {
-            List<News> last3 = newsRepo.findNewsByCategoryLast3((int) cat.getDom_id(),n);
+            List<News> last3 = newsRepo.findNewsByCategoryLast3((int) cat.getDom_id(), n);
             news_list_3.put(cat.getDom_nom(), last3);
-            List<News> news = newsRepo.findNewsByCategory((int) cat.getDom_id(),n);
+            List<News> news = newsRepo.findNewsByCategory((int) cat.getDom_id(), n);
             news_list.put(cat.getDom_nom(), news);
         }
         model.addAttribute("news_categories", news_list);
@@ -55,7 +55,7 @@ public class HomeController {
         List<MotCle> keywords = keyRepo.findAll();
         HashMap<String, List<News>> news_keywords = new HashMap<>();
         for (MotCle key : keywords) {
-            List<News> news_key = newsRepo.findNewsByKeyword((int) key.getMtc_id(),n);
+            List<News> news_key = newsRepo.findNewsByKeyword((int) key.getMtc_id(), n);
             news_keywords.put(key.getMtc_nom(), news_key);
         }
         model.addAttribute("news_keywords", news_keywords);
@@ -73,8 +73,13 @@ public class HomeController {
                 MotCle mtc2 = keyRepo.getMotCleById(temp_new.getNew_mtc_2());
                 MotCle mtc3 = keyRepo.getMotCleById(temp_new.getNew_mtc_3());
                 Domaine dom = domRepo.getDomaineById((int) temp_new.getNew_dom_id());
-                NewsDisplay newDisp = new NewsDisplay(temp_new, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), dom.getDom_nom());
-                disp_news.add(newDisp);
+                if (dom != null) {
+                    NewsDisplay newDisp = new NewsDisplay(temp_new, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), dom.getDom_nom());
+                    disp_news.add(newDisp);
+                }else{
+                    NewsDisplay newDisp = new NewsDisplay(temp_new, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), "Domaine En Attente");
+                    disp_news.add(newDisp);
+                }
             }
             model.addAttribute("news", disp_news);
             List<ArchivageNews> archive_news = archRepo.findAll();
@@ -85,12 +90,17 @@ public class HomeController {
                 MotCle mtc2 = keyRepo.getMotCleById(temp_new.getArc_mtc_2());
                 MotCle mtc3 = keyRepo.getMotCleById(temp_new.getArc_mtc_3());
                 Domaine dom = domRepo.getDomaineById((int) temp_new.getArc_dom_id());
-                NewsDisplay newDisp = new NewsDisplay(temp_new, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), dom.getDom_nom());
-                list_archive_news.add(newDisp);
+                if (dom != null) {
+                    NewsDisplay newDisp = new NewsDisplay(temp_new, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), dom.getDom_nom());
+                    list_archive_news.add(newDisp);
+                }else{
+                    NewsDisplay newDisp = new NewsDisplay(temp_new, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), "Domaine En Attente");
+                    list_archive_news.add(newDisp);
+                }
             }
             model.addAttribute("news_archive", list_archive_news);
             Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(abn_id));
-            List<News> news_abonne = newsRepo.findNewsByAbonne(Integer.parseInt(abn_id),n);
+            List<News> news_abonne = newsRepo.findNewsByAbonne(Integer.parseInt(abn_id), n);
             List<NewsDisplay> res_list = new ArrayList<>();
             for (News temp : news_abonne) {
                 Abonne abonne1 = abnRepo.getAbonneById((int) temp.getNew_abn_id());
@@ -98,14 +108,19 @@ public class HomeController {
                 MotCle mtc2 = keyRepo.getMotCleById(temp.getNew_mtc_2());
                 MotCle mtc3 = keyRepo.getMotCleById(temp.getNew_mtc_3());
                 Domaine dom = domRepo.getDomaineById((int) temp.getNew_dom_id());
-                NewsDisplay newDisp = new NewsDisplay(temp, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), dom.getDom_nom());
-                res_list.add(newDisp);
+                if (dom != null){
+                    NewsDisplay newDisp = new NewsDisplay(temp, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), dom.getDom_nom());
+                    res_list.add(newDisp);
+                }else{
+                    NewsDisplay newDisp = new NewsDisplay(temp, abonne1.getAbn_nom() + " " + abonne1.getAbn_prenom(), mtc1.getMtc_nom(), mtc2.getMtc_nom(), mtc3.getMtc_nom(), "Domaine En Attente");
+                    res_list.add(newDisp);
+                }
             }
             model.addAttribute("news_abonne", res_list);
             List<DomainePrivilegie> doms = domPrefRepo.findDomainesByAbonne(Integer.parseInt(abn_id));
             List<News> news_dpl = new ArrayList<>();
             for (DomainePrivilegie dpl : doms) {
-                List<News> temp_news_dpl = newsRepo.findNewsByCategoryLast3((int) dpl.getDpl_dom_id(),n);
+                List<News> temp_news_dpl = newsRepo.findNewsByCategoryLast3((int) dpl.getDpl_dom_id(), n);
                 news_dpl.addAll(temp_news_dpl);
             }
             model.addAttribute("news_dpl", news_dpl);
