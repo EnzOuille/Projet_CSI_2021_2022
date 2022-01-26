@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Domaine implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private long dom_id;
 
     @Column
@@ -34,6 +34,11 @@ public class Domaine implements Serializable {
         this.dom_etat=etat;
     }
 
+    public Domaine(int id, String nom, String etat){
+        this.dom_id = id;
+        this.dom_nom = nom;
+        this.dom_etat = etat;
+    }
     public long getDom_id() {
         return dom_id;
     }

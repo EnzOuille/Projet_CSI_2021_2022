@@ -1,5 +1,6 @@
 package com.csi.CSI.repositories;
 
+import com.csi.CSI.objets.Abonne;
 import com.csi.CSI.objets.Domaine;
 import com.csi.CSI.objets.MotCle;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,5 +25,8 @@ public interface DomaineRepo extends JpaRepository<Domaine, String>, JpaSpecific
 
     @Query(value = "SELECT * FROM domaine WHERE dom_etat LIKE 'en attente'", nativeQuery = true)
     List<Domaine> getDomToStudy();
+
+    @Query(value="SELECT * FROM domaine WHERE dom_id=(SELECT max(dom_id) FROM domaine) limit 1", nativeQuery = true)
+    Domaine getMaxId();
 }
 

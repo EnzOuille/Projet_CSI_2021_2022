@@ -43,13 +43,13 @@ public class AdminController {
             Abonne abonne = abnRepo.getAbonneById(Integer.parseInt(id));
             if (abonne.isAbn_admin()) {
                 String nom = request.getParameter("domaine");
-                Domaine domaine = new Domaine(nom,"valide");
+                Domaine domaine = new Domaine((int)domaineRepo.getMaxId().getDom_id()+1,nom,"valide");
                 domaineRepo.save(domaine);
                 model.addAttribute("domaine_nom", nom);
                 return "result_creer_domaine";
             } else {
                 String nom = request.getParameter("domaine");
-                Domaine domaine = new Domaine(nom);
+                Domaine domaine = new Domaine((int)domaineRepo.getMaxId().getDom_id()+1,nom,"en attente");
                 domaineRepo.save(domaine);
                 model.addAttribute("domaine_nom", nom);
                 return "result_creer_domaine";
@@ -58,7 +58,7 @@ public class AdminController {
             session.setAttribute("abn_id","");
             return "redirect:/";
         } catch (Exception e) {
-            return "form_creer_domaine";
+            return "redirect:/";
         }
     }
 
