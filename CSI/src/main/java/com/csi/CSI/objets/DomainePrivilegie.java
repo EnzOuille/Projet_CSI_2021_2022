@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Table(name = "domaineprivilegie")
 @Data
 public class DomainePrivilegie implements Serializable {
+
     @Id
     @Column
     private long dpl_abn_id;

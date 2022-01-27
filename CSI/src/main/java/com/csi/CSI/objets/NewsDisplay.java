@@ -22,7 +22,7 @@ public class NewsDisplay {
 
     public String dom;
 
-    public NewsDisplay(News temp, String mtc1, String mtc2, String mtc3, String abn, String dom) {
+    public NewsDisplay(News temp, String abn, String mtc1, String mtc2, String mtc3, String dom) {
         this.id = temp.getNew_id();
         this.texte = temp.getNew_texte();
         this.date_creation = temp.getNew_date_creation();
@@ -34,7 +34,7 @@ public class NewsDisplay {
         this.dom = dom;
     }
 
-    public NewsDisplay(ArchivageNews temp, String mtc1, String mtc2, String mtc3, String abn, String dom) {
+    public NewsDisplay(ArchivageNews temp, String abn, String mtc1, String mtc2, String mtc3, String dom) {
         this.id = temp.getArc_id();
         this.texte = temp.getArc_texte();
         this.date_creation = temp.getArc_date_archivage();
